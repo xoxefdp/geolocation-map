@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      #map {
+        padding: 10px;
+      }
+      #data-scheme {
+        background-color:rgba(255,255,255,0.6);
+        position: absolute;
+        bottom: 30px;
+        right: 10px;
+        z-index: 1000;
+        padding: 5px;
+        line-height: 0;
+      }
+      #latitude, #longitude, #altitude, #accuracy, #altitudeAccuracy, #heading, #speed, #coordsUpdatedTimes, #timestamp, #statusUpdate, #lastCoordsUpdate {
+        color: red;
+      }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+      integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+      crossorigin=""></script>
+    <script>
+      var currentPosition = null,
+        geoPermissionStatus = null,
+        countCoordsUpdate = 0,
+        mapElement = null,
+        mapRendered = false,
+        popup = null,
+        mapZoom = 17,
+        navListener = null,
+        mapMarker = null,
+        tracking = false,
+        latitude = null,
+        longitude = null,
+        altitude = null,
+        accuracy = null,
+        altitudeAccuracy = null,
+        heading = null,
+        speed = null,
+        timestamp = null,
+        statusUpdate = null,
+        coordsUpdatedTimes = null,
+        lastCoordsUpdate = null;
+
+      function _printCurrentPosition() {
+        // _printCoordsToBody( _getCurrentPosition() );
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            _setPosition(position);
+          }, (error) => {
+            console.log(error)
+          }
+        );
+      }
+
+      function _getCurrentPosition() {
+        return currentPosition;
+      }
+
+      function _setCurrentPosition(position) {
+        currentPosition = position;
+      }
+
+      function _printCoordsToBody(data) {
+        latitude.textContent = data.coords.latitude;
+        longitude.textContent = data.coords.longitude;
+        altitude.textContent = data.coords.altitude;
+        accuracy.textContent = data.coords.accuracy;
+        altitudeAccuracy.textContent = data.coords.altitudeAccuracy;
+        heading.textContent = data.coords.heading;
+        speed.textContent = data.coords.speed;
+        timestamp.textContent = data.timestamp;
+        // lastCoordsUpdate.textContent = 0;
+        coordsUpdatedTimes.textContent = countCoordsUpdate;
+      }
+
+      function _setPosition(position) {
+        countCoordsUpdate++;
+        _setCurrentPosition(position);
+        _printCoordsToBody( _getCurrentPosition() );
+      }
+
+      function _revealPosition(position) {
+        console.log(position);
+      }
+      function _positionDenied(error) {
+        console.log(error);
+      }
+
+      function updateCurrentBody(position) {
+        _revealPosition(position);
+        _setPosition(position);
+        // !mapRendered && renderMap(position.coords);
+        mapRendered && updateMap(position.coords);
+      }
+
+      // function to_degrees(radians) {
+      //   degreesConversionFactor = 180/Math.PI
+      //   return degreesConversionFactor * radians;
+      // }
+
+      // function to_radians(degrees) {
+      //   radiansConversionFactor = Math.PI/180
+      //   return radiansConversionFactor * degrees;
+      // }
+
+      function renderMap(coordinates) {
+        map = document.getElementById('map');
+        map.style.width = (window.innerWidth - 40) + 'px';
+        map.style.height = (window.innerHeight - 40) + 'px';
+
+        mapElement = L.map(map);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
+          foo: 'bar',
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+        }).addTo(mapElement);
+
+        mapMarker = L.marker([coordinates.latitude, coordinates.longitude]).addTo(mapElement);
+
+        popup = L.popup();
+        
+        mapElement.on('click', onMapClick);
+
+        updateMap(coordinates);
+
+        toggleMapButtonMessages();
+      }
+
+      function removeMap() {
+        mapMarker.remove();
+        mapElement.remove();
+        map.setAttribute('style', '');
+        map.className = '';
+        map.innerHTML = '';
+        toggleMapButtonMessages();
+      }
+
+      function toggleMap() {
+        mapRendered ? removeMap() : renderMap( _getCurrentPosition().coords );
+        mapRendered = !mapRendered;
+      }
+
+      function toggleMapButton() {
+        mapButton.style.display = mapButton.style.display == 'block' ? 'none' : ' block';
+      }
+
+
+      function toggleMapButtonMessages() {
+        showMap.style.display = showMap.style.display == 'block' ? 'none' : ' block';
+        hideMap.style.display = hideMap.style.display == 'block' ? 'none' : ' block';
+      }
+
+      function onMapClick(e) {
+        updateMap({latitude: e.latlng.lat, longitude: e.latlng.lng});
+        popup
+          .setLatLng(e.latlng)
+          .setContent("Coordinates: " + e.latlng.toString())
+          .openOn(mapElement);
+      }
+
+      function updateMap(coordinates) {
+        position = [coordinates.latitude, coordinates.longitude];
+        mapElement.setView(position, mapZoom);
+        mapMarker.setLatLng(position)
+      }
+
+      function enableTracking() {
+        toggleMapButton();
+        navListener = navigator.geolocation.watchPosition(updateCurrentBody, _positionDenied, null);
+        toggleTrackingButton();
+      }
+
+      function disableTracking() {
+        toggleMap();
+        toggleMapButton();
+        navListener = null;
+        toggleTrackingButton();
+      }
+
+      function toggleTracking() {
+        tracking ? disableTracking() : enableTracking();
+        tracking = !tracking;
+      }
+
+      function toggleTrackingButton() {
+        trackingOn.style.display = trackingOn.style.display == 'block' ? 'none' : ' block';
+        trackingOff.style.display = trackingOff.style.display == 'block' ? 'none' : ' block';
+      }
+
+      document.onreadystatechange = () => {
+        if (document.readyState === 'complete') {
+          latitude = document.getElementById('latitude'),
+          longitude = document.getElementById('longitude'),
+          altitude = document.getElementById('altitude'),
+          accuracy = document.getElementById('accuracy'),
+          altitudeAccuracy = document.getElementById('altitudeAccuracy'),
+          heading = document.getElementById('heading'),
+          speed = document.getElementById('speed'),
+          timestamp = document.getElementById('timestamp');
+          statusUpdate = document.getElementById('statusUpdate');
+          coordsUpdatedTimes = document.getElementById('coordsUpdatedTimes');
+          lastCoordsUpdate = document.getElementById('lastCoordsUpdate');
+
+          showMap = document.getElementById('showMap');
+          hideMap = document.getElementById('hideMap');
+
+          trackingOn = document.getElementById('trackingOn');
+          trackingOff = document.getElementById('trackingOff');
+
+          // navigator.permissions.query({name:'geolocation'}).then(function(result) {
+          //   // if (result.state == 'prompt') {
+          //   //   navigator.geolocation.getCurrentPosition(_revealPosition, _positionDenied, null);
+          //   // }
+
+          //   // result.onchange = function() {
+          //   //   console.log(result);
+          //   // }
+
+          //   geoPermissionStatus = result;
+          //   geoPermissionStatus.onchange = function() {
+          //     console.log(result);
+          //   }
+          // });
+
+          // if (navigator.geolocation) {
+          //   // alert('Geolocation supported');
+          //   console.log('Geolocation supported');
+          //   navListener = navigator.geolocation.watchPosition(updateCurrentBody, _positionDenied, null);
+          // } else {
+          //   // alert('Geolocation not supported');
+          //   console.log('Geolocation not supported');
+          // }
+
+          setInterval(() => {
+            statusUpdate.textContent = Date.now();
+            // console.log(geoPermissionStatus.state);
+            if (navigator.geolocation) {
+              // _printCurrentPosition();
+              lastCoordsUpdate.textContent = statusUpdate.textContent - timestamp.textContent;
+            }
+          }, 1000);
+        }
+        console.log(document.readyState);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="data-scheme">
+      <p>latitude: <span id="latitude"></span></p>
+      <p>longitude: <span id="longitude"></span></p>
+      <p>altitude: <span id="altitude"></span></p>
+      <p>accuracy: <span id="accuracy"></span></p>
+      <p>altitudeAccuracy: <span id="altitudeAccuracy"></span></p>
+      <p>heading: <span id="heading"></span></p>
+      <p>speed: <span id="speed"></span></p>
+      <p>coords updated times: <span id="coordsUpdatedTimes"></span></p>
+      <p>timestamp: <span id="timestamp"></span></p>
+      <p>status update: <span id="statusUpdate"></span></p>
+      <p>last coords update: <span id="lastCoordsUpdate"></span></p>
+      <div style="display:inline-block;">
+        <div style="display:inline-block;">
+          <button id="mapButton" style="display:none;" onclick="toggleMap();">
+            <span id="showMap" style="display:block;">Map: On</span>
+            <span id="hideMap" style="display:none;">Map: Off</span>
+          </button>
+        </div>
+        <div style="display:inline-block;">
+          <button id="trackingButton" onclick="toggleTracking();">
+            <span id="trackingOn" style="display:block;">Track: On</span>
+            <span id="trackingOff" style="display:none;">Track: Off</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
