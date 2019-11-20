@@ -1,7 +1,11 @@
-import '@babel/polyfill';
-// import {requestLogger as logger} from 'the-browser-logger';
+import '@babel/polyfill'
+import * as L from 'leaflet'
+import Vue from 'vue'
+import App from 'main/components/App'
 
-// if (DEBUG) {
-//   logger().debug('debug mode ON');
-//   logger().debug('initiating...');
-// }
+Vue.use(L)
+
+new Vue({
+  el: '#root',
+  components: { App }
+})
