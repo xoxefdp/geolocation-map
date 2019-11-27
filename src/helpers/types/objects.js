@@ -20,7 +20,7 @@ const isEmptyObject = (data) => {
   return empty;
 }
 
-export default {
+export {
   isObject,
   isEmptyObject
 }

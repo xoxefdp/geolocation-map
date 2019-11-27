@@ -7,7 +7,7 @@ const isEmpty = (data) => {
   return isEmptyArray(data) || isEmptyObject(data)
 }
 
-export default {
+export {
   isNull,
   isUndefined,
   isFunction,

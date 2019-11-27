@@ -6,7 +6,7 @@ const isEmptyArray = (data) => {
   return isArray(data) && data.length === 0
 }
 
-export default {
+export {
   isArray,
   isEmptyArray
 }

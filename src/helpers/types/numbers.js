@@ -11,7 +11,7 @@ const isFloat = (data) => {
   return isNumber(data) && data % 1 !== 0;
 }
 
-export default {
+export {
   isNumber,
   isInteger,
   isFloat
