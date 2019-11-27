@@ -245,7 +245,7 @@ function setHasToStringifyObjectsInLog(value) {
   hasToStringifyObjects = value
 }
 
-export default {
+export {
   Level,
   getInstance,
   destroyLogger,
