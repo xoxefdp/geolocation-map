@@ -30,14 +30,20 @@
 </template>
 
 <script>
-  import { getInstance as getLogger } from 'helpers/logger'
+  import { getInstance as getLoggerInstance } from 'helpers/logger'
+  import { isNull } from 'helpers/utilTypes'
   import geolocation from 'geolocation/geolocation'
+  import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
   import GeolocationEvent from 'geolocation/GeolocationEvents'
-  import { getFromStore } from 'systems/store'
   import broadcast from 'broadcast/broadcast'
+  import { interval } from 'helpers/time/timer'
 
   // import Map from 'components/app/Map'
   // import Controls from 'components/app/Controls'
+
+  const _getLogger = () => {
+    return getLoggerInstance(App.name);
+  }
 
   const App = {
     name: 'App',
@@ -67,30 +73,16 @@
 
         tracking: false,
         trackingText: 'Track: On',
+        trackingInterval: 'trackingInterval',
         mapRendered: false,
         mapButtonText: 'Map: On'
       }
     },
     methods: {
-      _printCurrentPosition() {
-        // _printCoordsToBody( _getCurrentPosition() )
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            _setPosition(position)
-          }, (error) => {
-            console.log(error)
-          }
-        )
-      },
-
       _getCurrentPosition() {
-        const currentPosition = getFromStore('storeGeo.currentPosition')
-        DEBUG && getLogger('App').debug('_getCurrentPosition()', currentPosition)
+        const currentPosition = getStoredCurrentPosition()
+        DEBUG && _getLogger().debug('_getCurrentPosition()', currentPosition)
         return currentPosition
-      },
-
-      _setCurrentPosition(position) {
-        this.currentPosition = position
       },
 
       _printCoordsToBody(data) {
@@ -108,23 +100,15 @@
 
       _setPosition(position) {
         this.countCoordsUpdate++
-        // this._setCurrentPosition(position)
         this._printCoordsToBody( position )
       },
 
-      _revealPosition(position) {
-        console.log(position)
-      },
-
-      _positionDenied(error) {
-        console.log(error)
-      },
-
-      updateCurrentBody(position) {
-        this._revealPosition(position)
+      updateCurrentBody(positionUpdate) {
+        DEBUG && _getLogger().debug('updateCurrentBody()')
+        const currentPosition = this._getCurrentPosition()
+        const isStored = currentPosition === positionUpdate
+        const position = isStored ? currentPosition : positionUpdate
         this._setPosition(position)
-        // !mapRendered && renderMap(position.coords)
-        // this.mapRendered && this.updateMap(position.coords)
       },
 
       renderMap(coordinates) {
@@ -150,32 +134,6 @@
         this.toggleMapButtonText()
       },
 
-      removeMap() {
-        this.mapMarker.remove()
-        this.mapElement.remove()
-        this.map.setAttribute('style', '')
-        this.map.className = ''
-        this.map.innerHTML = ''
-        this.toggleMapButtonText()
-      },
-
-      toggleMap() {
-        if (this.mapRendered) {
-          this.removeMap()
-        } else {
-          const position = this._getCurrentPosition()
-          DEBUG && getLogger('App').debug('toggleMap()', position)
-          const coords = position.coords
-          DEBUG && getLogger('App').debug('toggleMap()', coords)
-          this.renderMap( coords )
-        }
-      },
-
-      toggleMapButtonText() {
-        this.mapRendered = !this.mapRendered
-        this.mapButtonText = this.mapRendered ? 'Map: Off' : 'Map: On'
-      },
-
       onMapClick(e) {
         this.updateMap({latitude: e.latlng.lat, longitude: e.latlng.lng})
         this.popup
@@ -190,13 +148,36 @@
         this.mapMarker.setLatLng(position)
       },
 
+      removeMap(forceDisable = null) {
+        this.mapMarker.remove()
+        this.mapElement.remove()
+        this.map.setAttribute('style', '')
+        this.map.className = ''
+        this.map.innerHTML = ''
+        this.toggleMapButtonText(forceDisable)
+      },
+
+      toggleMap() {
+        if (this.mapRendered) {
+          this.removeMap()
+        } else {
+          const position = this._getCurrentPosition()
+          const coords = position.coords
+          this.renderMap( coords )
+        }
+      },
+
+      toggleMapButtonText(forceDisable = null) {
+        this.mapRendered = !!forceDisable ? !forceDisable : !this.mapRendered
+        this.mapButtonText = this.mapRendered ? 'Map: Off' : 'Map: On'
+      },
 
       enableTracking() {
         geolocation.startTracking()
       },
 
       disableTracking() {
-        // this.toggleMap()
+        // this.removeMap(true)
         geolocation.stopTracking()
       },
 
@@ -207,7 +188,19 @@
       toggleTrackingText() {
         this.tracking = !this.tracking
         this.trackingText = this.tracking ? 'Track: Off' : 'Track: On'
-      }
+      },
+
+      toggleTrackingInterval() {
+        const intervalCallback = function() {
+          console.log( Date.now() )
+        }
+
+        this.trackingInterval = isNull(this.trackingInterval)
+          ? interval.set(App.name, this.trackingInterval, () => { intervalCallback() }, 2000)
+          : interval.clear(App.name, this.trackingInterval)
+
+        this.toggleTrackingText()
+      },
     },
     beforeCreate: function() {
       console.log('beforeCreate')
@@ -222,9 +215,8 @@
       console.log('mounted')
 
       broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.updateCurrentBody)
-      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this.toggleTrackingText)
-      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this.toggleTrackingText)
-
+      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this.toggleTrackingInterval)
+      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this.toggleTrackingInterval)
 
       this.latitude = document.getElementById('latitude')
       this.longitude = document.getElementById('longitude')
@@ -237,18 +229,6 @@
       this.statusUpdate = document.getElementById('statusUpdate')
       this.coordsUpdatedTimes = document.getElementById('coordsUpdatedTimes')
       this.lastCoordsUpdate = document.getElementById('lastCoordsUpdate')
-
-      // setInterval(() => {
-      //   let date = Date.now()
-      //   console.log(date)
-      //   this.statusUpdate.textContent = date
-      //   // console.log(geoPermissionStatus.state)
-      //   if (geolocation._isSupported()) {
-      //     // _printCurrentPosition()
-      //     this.lastCoordsUpdate.textContent = this.statusUpdate.textContent - this.timestamp.textContent
-      //     // this._getCurrentPosition();
-      //   }
-      // }, 1000)
     },
     beforeUpdate: function() {
       console.log('beforeUpdate')
@@ -261,7 +241,10 @@
     },
     destroyed: function() {
       console.log('destroyed')
+
       broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+      broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED)
+      broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED)
     }
   }
 
