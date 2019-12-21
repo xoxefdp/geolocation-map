@@ -8,6 +8,13 @@ import BroadcastBase from 'broadcast/BroadcastBase'
  * @extends {BroadcastBase}
  */
 class StoreBroadcast extends BroadcastBase {
+  constructor() {
+    super()
+  }
+
+  /**
+   * @override
+   */
   _getLogger() {
     return getLoggerInstance('StoreBroadcast')
   }

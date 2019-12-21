@@ -1,5 +1,5 @@
 import { getInstance as getLoggerInstance } from 'helpers/logger'
-import { isString } from 'helpers/utilTypes'
+import { isString, isUndefined } from 'helpers/utilTypes'
 import values from 'lodash/values'
 
 /**
@@ -8,27 +8,43 @@ import values from 'lodash/values'
  */
 class BroadcastBase {
   constructor() {
+    this._id = 'Broadcast'
     this.emits = {}
     this.broadcastCallbacks = {}
     this.publishing = {
       emit: null,
-      callbacks: null
+      callbacks: null,
     }
+
+    // this._getLogger = this._getLogger.bind(this)
   }
+
+  /**
+   * Logger method
+   * @returns {String}
+   */
   _getLogger() {
-    return getLoggerInstance('Broadcast')
+    return getLoggerInstance(this._id)
   }
+
+  /**
+   * @param {*} callbacks
+   * @param {*} callback
+   * @param {*} arg
+   * @returns {*}
+   */
   _indexOfCallback(callbacks, callback, arg) {
     let ret = -1
     for (let i = 0, len = callbacks.length; i < len; i++) {
-      if (callbacks[i].callback === callback &&
-          (!arg || !callbacks[i].arg || callbacks[i].arg === arg)) {
+      if (callbacks[ i ].callback === callback &&
+          (!arg || !callbacks[ i ].arg || callbacks[ i ].arg === arg)) {
         ret = i
         break
       }
     }
     return ret
   }
+
   /**
    * Remove an item from the callbacks array
    * @param {Array} callbacks
@@ -37,28 +53,34 @@ class BroadcastBase {
    */
   _removeFromCallbacks(callbacks, callback, arg) {
     if (callbacks) {
-      let index = this._indexOfCallback(callbacks, callback, arg)
+      const index = this._indexOfCallback(callbacks, callback, arg)
       if (index >= 0) {
         callbacks.splice(index, 1)
       }
     }
   }
 
-  _executeCallback({arg, callback}, data, emit, source) {
+  /**
+   * @param {*} param0
+   * @param {*} data
+   * @param {*} emit
+   * @param {*} source
+   */
+  _executeCallback({ arg, callback }, data, emit, source) {
     try {
       if (arg) {
         callback.call(arg, data, {
           emitName: emit,
-          source: source
+          source: source,
         })
       } else {
         callback(data, {
           emitName: emit,
-          source: source
+          source: source,
         })
       }
     } catch (e) {
-      DEBUG && this._getLogger().error('_executeCallback() Error', emit, e)
+      DEBUG && this._getLogger().error('_executeCallback()', emit, e)
     }
   }
 
@@ -70,8 +92,8 @@ class BroadcastBase {
    */
   _executeCallbacks(callbacks, data, emit, source) {
     for (let i = 0; i < callbacks.length; i++) {
-      if (callbacks[i]) {
-        this._executeCallback(callbacks[i], data, emit, source)
+      if (callbacks[ i ]) {
+        this._executeCallback(callbacks[ i ], data, emit, source)
       }
     }
   }
@@ -90,20 +112,27 @@ class BroadcastBase {
     return ret
   }
 
+  /**
+   * @param {*} arg
+   * @param {*} emit
+   * @param {*} callback
+   * @param {*} source
+   * @returns {*}
+   */
   _subscribe(arg, emit, callback, source) {
-    if (!this.emits[emit]) {
-      this.emits[emit] = {
-        AllSources: []
+    if (!this.emits[ emit ]) {
+      this.emits[ emit ] = {
+        AllSources: [],
       }
     }
-    if (!this.emits[emit][source]) {
-      this.emits[emit][source] = []
+    if (!this.emits[ emit ][ source ]) {
+      this.emits[ emit ][ source ] = []
     }
-    if (this._indexOfCallback(this.emits[emit].AllSources, callback, arg) === -1 &&
-      this._indexOfCallback(this.emits[emit][source], callback, arg) === -1) {
-      this.emits[emit][source].push({
+    if (this._indexOfCallback(this.emits[ emit ].AllSources, callback, arg) === -1 &&
+      this._indexOfCallback(this.emits[ emit ][ source ], callback, arg) === -1) {
+      this.emits[ emit ][ source ].push({
         arg,
-        callback
+        callback,
       })
     }
     return emit
@@ -123,7 +152,7 @@ class BroadcastBase {
       callback,
       source
 
-    if (isString(args[0])) {
+    if (isString(args[ 0 ])) {
       [emit, callback, source] = args
     } else {
       [arg, emit, callback, source] = args
@@ -151,21 +180,21 @@ class BroadcastBase {
       emit,
       callback
 
-    if (isString(args[0])) {
+    if (isString(args[ 0 ])) {
       [emit, callback] = args
     } else {
       [arg, emit, callback] = args
     }
     DEBUG && this._getLogger().debug('unsubscribe()', emit, arg ? arg.UID : '')
-    if (this.emits[emit]) {
-      for (let callbacks of values(this.emits[emit])) {
+    if (this.emits[ emit ]) {
+      for (const callbacks of values(this.emits[ emit ])) {
         this._removeFromCallbacks(callbacks, callback, arg)
       }
     }
     if (this.publishing.emit === emit && this.publishing.callbacks) {
-      let i = this._indexOfCallback(this.publishing.callbacks, callback, arg)
+      const i = this._indexOfCallback(this.publishing.callbacks, callback, arg)
       if (i >= 0) {
-        this.publishing.callbacks[i] = null
+        this.publishing.callbacks[ i ] = null
       }
     }
   }
@@ -175,7 +204,7 @@ class BroadcastBase {
    * @return {Boolean}
    */
   hasSubscribers(emit) {
-    return typeof this.emits[emit] !== 'undefined'
+    return isUndefined(this.emits[ emit ])
   }
 
   /**
@@ -184,9 +213,9 @@ class BroadcastBase {
    * @param {String} source
    */
   publish(emit, data, source) {
-    if (this.emits[emit]) {
-      let callbacks,
-        sources = ['AllSources']
+    if (this.emits[ emit ]) {
+      let callbacks
+      const sources = ['AllSources']
 
       if (source) {
         sources.push(source)
@@ -195,7 +224,7 @@ class BroadcastBase {
 
       this.publishing.emit = emit
       for (let i = 0, srcLen = sources.length; i < srcLen; i++) {
-        callbacks = this.emits[emit][sources[i]]
+        callbacks = this.emits[ emit ][ sources [ i ] ]
         if (callbacks && callbacks.length) {
           // Clone the array of callbacks, in case one subscriber is removed
           // during this operation, avoid other subscribers to get notified
@@ -219,7 +248,7 @@ class BroadcastBase {
     this.broadcastCallbacks = {}
     this.publishing = {
       emit: null,
-      callbacks: null
+      callbacks: null,
     }
   }
 }
