@@ -18,5 +18,5 @@ export {
   isNull,
   isUndefined,
   isFunction,
-  isString
+  isString,
 }

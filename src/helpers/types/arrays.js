@@ -8,5 +8,5 @@ const isEmptyArray = (data) => {
 
 export {
   isArray,
-  isEmptyArray
+  isEmptyArray,
 }

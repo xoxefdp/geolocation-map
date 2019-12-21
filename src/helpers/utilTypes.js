@@ -19,5 +19,5 @@ export {
   isEmptyArray,
   isObject,
   isEmptyObject,
-  isEmpty
+  isEmpty,
 }

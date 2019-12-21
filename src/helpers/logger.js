@@ -14,7 +14,7 @@ const Level = {
   WARNING: 3,
   ERROR: 4,
   BOT: 5,
-  NONE: 6
+  NONE: 6,
 }
 
 let hasToStringifyObjects = true
@@ -40,30 +40,30 @@ function stringifyFixingCycles(value) {
 }
 
 function logStringify(method, value) {
-  let lines = value.split('\n')
+  const lines = value.split('\n')
   for (let i = 0, len = Math.min(lines.length, MAX_LINES_LOG_STRINGIFY); i < len; i++) {
-    console[method]('    ' + lines[i])
+    console[ method ]('    ' + lines[ i ])
   }
   if (lines.length > MAX_LINES_LOG_STRINGIFY) {
-    console[method]('    ...')
+    console[ method ]('    ...')
   }
 }
 
 function stringifyObjects(method, values) {
   let count = 0
   for (let i = 0, length = values.length; i < length; i++) {
-    let value = values[i]
+    const value = values[ i ]
     if (isObject(value)) {
       if (isPlainObject(value) || isArray(value)) {
-        let str = stringifyFixingCycles(value)
-        console[method]('  [#' + count + ']:')
+        const str = stringifyFixingCycles(value)
+        console[ method ]('  [#' + count + ']:')
         logStringify(method, str)
       } else if (value.UID) {
-        console[method]('  [#' + count + ']: <' + value.UID + '>')
+        console[ method ]('  [#' + count + ']: <' + value.UID + '>')
       } else if (value._id) {
-        console[method]('  [#' + count + ']: <' + value._id + '>')
+        console[ method ]('  [#' + count + ']: <' + value._id + '>')
       } else {
-        console[method]('  [#' + count + ']: ' + value)
+        console[ method ]('  [#' + count + ']: ' + value)
       }
       ++count
     }
@@ -71,15 +71,15 @@ function stringifyObjects(method, values) {
 }
 
 function getLogSummary(values) {
-  let ret = []
+  const ret = []
   if (values) {
     let count = 0
     for (let i = 0, len = values.length; i < len; i++) {
-      if (isObject(values[i])) {
+      if (isObject(values[ i ])) {
         ret.push('[#' + count + ']')
         ++count
       } else {
-        ret.push(values[i])
+        ret.push(values[ i ])
       }
     }
   }
@@ -173,7 +173,7 @@ class Log {
   }
 
   _writeLogStringifyingObjects(method, type, values) {
-    console[method](type.toUpperCase() + ' ' + this._id + ' ' + getLogSummary(values))
+    console[ method ](type.toUpperCase() + ' ' + this._id + ' ' + getLogSummary(values))
     if (values) {
       stringifyObjects(method, values)
     }
@@ -189,11 +189,11 @@ class Log {
   _writeLog(type, level, values) {
     try {
       if (console && level >= this.getLevel()) {
-        let method = console[type] ? type : 'log'
+        const method = console[ type ] ? type : 'log'
         if (hasToStringifyObjects) {
           this._writeLogStringifyingObjects(method, type, values)
         } else {
-          console[method](type.toUpperCase(), this._id, ...values)
+          console[ method ](type.toUpperCase(), this._id, ...values)
         }
       }
     } catch (err) {
@@ -202,8 +202,8 @@ class Log {
   }
 }
 
-let instances = {},
-  level = 0
+const instances = {}
+let level = 0
 
 /**
  * Sets log verbosity
@@ -211,9 +211,9 @@ let instances = {},
  */
 function setLevel(newLevel) {
   if (newLevel !== level) {
-    console.log(`Logger level changed to ${invert(Level)[newLevel]}`)
+    console.log(`Logger level changed to ${invert(Level)[ newLevel ]}`)
     level = newLevel
-    for (let instance of Object.values(instances)) {
+    for (const instance of Object.values(instances)) {
       instance.setLevel(level)
     }
   }
@@ -233,12 +233,12 @@ function getLevel() {
  * @return {Log}
  */
 function getInstance(id = 'System') {
-  instances[id] = instances[id] || new Log(id, getLevel())
-  return instances[id]
+  instances[ id ] = instances[ id ] || new Log(id, getLevel())
+  return instances[ id ]
 }
 
 function destroyLogger(id = '') {
-  delete instances[id]
+  delete instances[ id ]
 }
 
 function setHasToStringifyObjectsInLog(value) {
@@ -251,5 +251,5 @@ export {
   destroyLogger,
   setLevel,
   getLevel,
-  setHasToStringifyObjectsInLog
+  setHasToStringifyObjectsInLog,
 }
