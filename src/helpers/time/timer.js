@@ -1,4 +1,4 @@
-import { getInstance as getLogger } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { Time, Type } from 'helpers/time/TimeConstants'
 
 /**
@@ -6,6 +6,10 @@ import { Time, Type } from 'helpers/time/TimeConstants'
  * @type {Number}
  */
 const MAX_TIMER_VALUE = Time.WEEK
+
+const _getLogger = () => {
+  return requestLogger('timer')
+}
 
 /**
  * Timer that wrappers setInterval, clearInterval, setTimeout and clearTimeout
@@ -73,12 +77,12 @@ function Timer(timerType) {
       const uniqueId = _getUniqueId(sourceName, timerName)
       _clear(uniqueId)
       if (time > MAX_TIMER_VALUE) {
-        DEBUG && getLogger('timer').error('Cannot set a timer bigger than', MAX_TIMER_VALUE)
+        DEBUG && _getLogger().error('Cannot set a timer bigger than', MAX_TIMER_VALUE)
         time = MAX_TIMER_VALUE
       }
       if (type === Type.INTERVAL) {
         if (time === 0) {
-          DEBUG && getLogger('timer').error('Cannot set an interval with time 0.', sourceName, timerName)
+          DEBUG && _getLogger().error('Cannot set an interval with time 0.', sourceName, timerName)
         } else {
           hash[ uniqueId ] = setInterval(callback, time)
         }
@@ -91,7 +95,7 @@ function Timer(timerType) {
       hashSourceTimers[ sourceName ] = hashSourceTimers[ sourceName ] || []
       hashSourceTimers[ sourceName ].push(uniqueId)
     } else {
-      DEBUG && getLogger('timer').error('Cannot set timer without a valid time.', type, sourceName, timerName, time)
+      DEBUG && _getLogger().error('Cannot set timer without a valid time.', type, sourceName, timerName, time)
     }
   }
 

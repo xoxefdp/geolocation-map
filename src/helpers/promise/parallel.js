@@ -1,10 +1,10 @@
-// import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 
 const promisesCache = {}
 
-// const _getLogger = () => {
-//   return getLoggerInstance('ParallelPromises')
-// }
+const _getLogger = () => {
+  return requestLogger('ParallelPromises')
+}
 
 /**
  * Checks for a promise with the given transaction Id
@@ -12,7 +12,7 @@ const promisesCache = {}
  * @return {Boolean}
  */
 const hasParallelPromise = (transactionId) => {
-  // DEBUG && _getLogger().debug('hasParallelPromise()', transactionId)
+  DEBUG && _getLogger().debug('hasParallelPromise()', transactionId)
   return !!promisesCache[ transactionId ]
 }
 
@@ -32,7 +32,7 @@ const getParallelPromise = (transactionId, callback) => {
     promise.finally(() => delete promisesCache[ transactionId ])
   }
 
-  // DEBUG && _getLogger().debug('getParallelPromise()', transactionId, callback)
+  DEBUG && _getLogger().debug('getParallelPromise()', transactionId, callback)
   return promise
 }
 

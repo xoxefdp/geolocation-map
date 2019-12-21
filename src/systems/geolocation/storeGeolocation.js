@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { getFromStore, setToStore } from 'systems/store'
 
 const ID = 'StoreGeolocation'
@@ -16,7 +16,7 @@ const state = {
  * @returns {String}
  */
 const _getLogger = () => {
-  return getLoggerInstance(ID)
+  return requestLogger(ID)
 }
 
 DEBUG && _getLogger().debug('initializeStore()')

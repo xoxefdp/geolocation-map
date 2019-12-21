@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { isString, isUndefined } from 'helpers/utilTypes'
 import values from 'lodash/values'
 
@@ -15,8 +15,6 @@ class BroadcastBase {
       emit: null,
       callbacks: null,
     }
-
-    // this._getLogger = this._getLogger.bind(this)
   }
 
   /**
@@ -24,7 +22,7 @@ class BroadcastBase {
    * @returns {String}
    */
   _getLogger() {
-    return getLoggerInstance(this._id)
+    return requestLogger(this._id)
   }
 
   /**

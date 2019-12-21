@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { isNull } from 'helpers/utilTypes'
 import broadcast from 'broadcast/broadcast'
 import { BootEvent } from 'systems/Events'
@@ -11,7 +11,7 @@ const ID = 'bootUI',
 let ui = null
 
 const _getLogger = () => {
-  return getLoggerInstance(ID)
+  return requestLogger(ID)
 }
 
 const _uiExist = () => {

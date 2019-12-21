@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { getFromStore, setToStore } from 'systems/store'
 
 const ID = 'StoreNetwork'
@@ -14,7 +14,7 @@ const state = {
  * @returns {String}
  */
 const _getLogger = () => {
-  return getLoggerInstance(ID)
+  return requestLogger(ID)
 }
 
 // eslint-disable-next-line no-use-before-define

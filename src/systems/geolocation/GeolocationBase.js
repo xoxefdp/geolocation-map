@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { isNull } from 'helpers/utilTypes'
 import GeolocationEvent from 'geolocation/GeolocationEvents'
 import {
@@ -33,7 +33,7 @@ class GeolocationBase {
    * @returns {String}
    */
   _getLogger() {
-    return getLoggerInstance(this._id)
+    return requestLogger(this._id)
   }
 
   /**

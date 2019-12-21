@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { isFunction, isInteger } from 'helpers/utilTypes'
 
 const ID = 'period'
@@ -10,7 +10,7 @@ let intervals = [],
  * @returns {String}
  */
 const _getLogger = () => {
-  return getLoggerInstance(ID)
+  return requestLogger(ID)
 }
 
 const _appendId = (array, element) => {

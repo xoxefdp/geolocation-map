@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { getInstance as getLoggerInstance } from 'helpers/logger'
+  import { requestLogger } from 'the-browser-logger'
   import { isNull } from 'helpers/utilTypes'
   import geolocation from 'geolocation/geolocation'
   import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
@@ -42,7 +42,7 @@
   // import Controls from 'components/app/Controls'
 
   const _getLogger = () => {
-    return getLoggerInstance(App.name);
+    return requestLogger(App.name);
   }
 
   const App = {

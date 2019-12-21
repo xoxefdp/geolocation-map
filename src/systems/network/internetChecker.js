@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { getParallelPromise } from 'helpers/promise/parallel'
 import { anyPromise } from 'helpers/promise/promise'
 import { interval, timeout } from 'helpers/time/timer'
@@ -13,7 +13,7 @@ import { HttpMethod } from 'helpers/http/HttpConstants'
 import { getCurrentInTimestamp } from 'helpers/utilTimes'
 import { setIsInternetConnected, getIsInternetConnected } from 'systems/network/storeNetwork'
 
-const ID = 'internetConnectionChecker',
+const ID = 'internetChecker',
   NUM_FAILS_TO_PASS_TO_DISCONNECTED = 2
 
 // const headers = new Headers()
@@ -21,7 +21,7 @@ let _numFails = 0,
   _isStarted = false
 
 const _getLogger = () => {
-  return getLoggerInstance(ID)
+  return requestLogger(ID)
 }
 
 /**

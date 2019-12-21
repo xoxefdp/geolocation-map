@@ -1,14 +1,10 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import storeBroadcast from 'broadcast/storeBroadcast'
 import { get, set } from 'helpers/utilOperations'
 import unset from 'lodash/unset'
 
 const ID = 'store'
 const store = {}
-
-const getLogger = () => {
-  return getLoggerInstance(ID)
-}
 
 const getFromStore = (path) => {
   return get(store, path)
@@ -17,7 +13,7 @@ const getFromStore = (path) => {
 const setToStore = (path, newValue, force) => {
   const oldValue = getFromStore(path)
   if (DEBUG && path.indexOf('undefined') === 0) {
-    getLogger().error('setToStore()::Error, wrong store path. Check how the path was created. path=', path)
+    requestLogger(ID).error('setToStore()::Error, wrong store path. Check how the path was created. path=', path)
   }
   if (force || oldValue !== newValue) {
     set(store, path, newValue)

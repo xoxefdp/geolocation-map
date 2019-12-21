@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import BroadcastBase from 'broadcast/BroadcastBase'
 
 /**
@@ -16,7 +16,7 @@ class StoreBroadcast extends BroadcastBase {
    * @override
    */
   _getLogger() {
-    return getLoggerInstance('StoreBroadcast')
+    return requestLogger('StoreBroadcast')
   }
 }
 

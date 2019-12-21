@@ -1,4 +1,4 @@
-import { getInstance as getLoggerInstance } from 'helpers/logger'
+import { requestLogger } from 'the-browser-logger'
 import { interval } from 'helpers/time/timer'
 import broadcast from 'broadcast/broadcast'
 import NetworkEvent from 'systems/network/NetworkEvents'
@@ -19,7 +19,7 @@ class NetworkMonitor {
   }
 
   _getLogger() {
-    return getLoggerInstance(this._id)
+    return requestLogger(this._id)
   }
 
   initializeMonitor() {
