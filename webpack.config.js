@@ -29,71 +29,80 @@ const DevtoolLevel = {
   SOURCE_MAP: 'source-map',
   INLINE_SOURCE_MAP: 'inline-source-map',
   HIDDEN_SOURCE_MAP: 'hidden-source-map',
-  NOSOURCES_SOURCE_MAP: 'nosources-source-map'
+  NO_SOURCES_SOURCE_MAP: 'nosources-source-map',
 }
 
 const config = {
   devtool: isDev ? DevtoolLevel.SOURCE_MAP : DevtoolLevel.CHEAP_SOURCE_MAP,
   entry: {
-    app: SRC_DIR + '/main.js'
+    app: SRC_DIR + '/main.js',
   },
   output: {
     path: DIST_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   resolve: {
-    extensions: [ '.js', '.vue' ],
+    extensions: ['.js', '.vue'],
+    modules: [SRC_DIR, 'node_modules'],
     alias: {
-      // 'vue$': isDev ? VUE_DIST_DIR + '/vue.common.js' : VUE_DIST_DIR + '/vue.runtime.common.js', // CommonJS
-      'vue$': isDev ? VUE_DIST_DIR + '/vue.esm.js' : VUE_DIST_DIR + '/vue.runtime.esm.js', // ESM (for bundlers)
-      // 'vue$' : isDev ? VUE_DIST_DIR + '/vue.esm.browser.js' : VUE_DIST_DIR + '/vue.esm.browser.min.js', // ESM (for browsers)
-      components: SRC_DIR + '/components',
-      helpers: SRC_DIR + '/helpers',
-      systems: SRC_DIR + '/systems',
-      broadcast: SRC_DIR + '/systems/broadcast',
-      geolocation: SRC_DIR + '/systems/geolocation',
-      styles: SRC_DIR + '/styles'
-    }
+      // 'vue$': isDev
+      //   ? VUE_DIST_DIR + '/vue.common.js'
+      //   : VUE_DIST_DIR + '/vue.runtime.common.js', // CommonJS
+      'vue$': isDev
+        ? VUE_DIST_DIR + '/vue.esm.js'
+        : VUE_DIST_DIR + '/vue.runtime.esm.js', // ESM (for bundlers)
+      // 'vue$' : isDev
+      //   ? VUE_DIST_DIR + '/vue.esm.browser.js'
+      //   : VUE_DIST_DIR + '/vue.esm.browser.min.js', // ESM (for browsers)
+      'components': SRC_DIR + '/components',
+      'helpers': SRC_DIR + '/helpers',
+      'systems': SRC_DIR + '/systems',
+      'broadcast': SRC_DIR + '/systems/broadcast',
+      'geolocation': SRC_DIR + '/systems/geolocation',
+      'network': SRC_DIR + '/systems/network',
+      'styles': SRC_DIR + '/styles',
+    },
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      NODE_ENV: process.env.NODE_ENV // use 'development' unless process.env.NODE_ENV is defined
+      NODE_ENV: process.env.NODE_ENV, // use 'development' unless process.env.NODE_ENV is defined
     }),
     new webpack.DefinePlugin({
-      DEBUG: isDev // use DEBUG unless process.env.DEBUG is defined
+      DEBUG: isDev, // use DEBUG unless process.env.DEBUG is defined
     }),
     new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
     new HtmlWebPackPlugin({
       template: SRC_DIR + '/index.html',
-      filename: 'index.html'
-    })
+      filename: 'index.html',
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.vue$/i,
-        use: [ 'vue-loader' ]
+        use: ['vue-loader'],
       },
       {
         test: /\.js$/i,
-        use: [ 'babel-loader' ]
+        use: ['eslint-loader'],
       },
       {
         test: /\.css$/i,
-        use: [ 'vue-style-loader', 'style-loader', 'css-loader' ]
+        use: ['vue-style-loader', 'style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/i,
-        use: [ 'file-loader' ]
-      }
-    ]
+        use: ['file-loader'],
+      },
+    ],
   },
   devServer: {
     hot: true,
-    port: 9000
-  }
-};
+    port: 9000,
+    host: '0.0.0.0',
+  },
+}
 
 console.log('NODE_ENV', process.env.NODE_ENV)
 console.log('DEBUG', isDev)
