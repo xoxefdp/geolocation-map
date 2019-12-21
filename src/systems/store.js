@@ -1,28 +1,29 @@
-import { getInstance as getLogger } from 'helpers/logger'
+import { getInstance as getLoggerInstance } from 'helpers/logger'
 import storeBroadcast from 'broadcast/storeBroadcast'
-import set from 'lodash/set'
-import get from 'lodash/get'
+import { get, set } from 'helpers/utilOperations'
 import unset from 'lodash/unset'
 
 const ID = 'store'
-let store = {
-  transitionName: ''
+const store = {}
+
+const getLogger = () => {
+  return getLoggerInstance(ID)
 }
 
-function getFromStore(path) {
+const getFromStore = (path) => {
   return get(store, path)
 }
 
-function setToStore(path, newValue, force) {
-  let oldValue = getFromStore(path)
+const setToStore = (path, newValue, force) => {
+  const oldValue = getFromStore(path)
   if (DEBUG && path.indexOf('undefined') === 0) {
-    getLogger(ID).error('setToStore()::Error, wrong store path. Check how the path was created. path=', path)
+    getLogger().error('setToStore()::Error, wrong store path. Check how the path was created. path=', path)
   }
   if (force || oldValue !== newValue) {
     set(store, path, newValue)
     storeBroadcast.publish(path, {
       newValue,
-      oldValue
+      oldValue,
     })
   }
   return newValue
@@ -33,29 +34,25 @@ function setToStore(path, newValue, force) {
  * @param {String} pathPrefix
  * @param {Object} values
  */
-function setValuesToStore(pathPrefix, values) {
-  for (let key in values) {
+const setValuesToStore = (pathPrefix, values) => {
+  for (const key in values) {
     // eslint-disable-next-line no-prototype-builtins
     if (values.hasOwnProperty(key)) {
-      setToStore(`${pathPrefix}.${key}`, values[key])
+      setToStore(`${pathPrefix}.${key}`, values[ key ])
     }
   }
 }
 
-function unsetStoreValue(path) {
+const unsetStoreValue = (path) => {
   return unset(path)
 }
 
-function subscribeToStoreValue(...args) {
+const subscribeToStoreValue = (...args) => {
   return getFromStore(storeBroadcast.subscribe(...args))
 }
 
-function unsubscribeToStoreValue(...args) {
+const unsubscribeToStoreValue = (...args) => {
   storeBroadcast.unsubscribe(...args)
-}
-
-function setTransitionName(name) {
-  setToStore('transitionName', name)
 }
 
 /**
@@ -64,7 +61,7 @@ function setTransitionName(name) {
  * @param {Object} storeValue
  * @param {Boolean} silently Indicates if it has to reset the store without syncing the data with the components.
  */
-function resetStore(storeName, storeValue, silently = false) {
+const resetStore = (storeName, storeValue, silently = false) => {
   if (silently) {
     setToStore(storeName, Object.assign({}, storeValue))
   } else {
@@ -79,6 +76,5 @@ export {
   unsetStoreValue,
   subscribeToStoreValue,
   unsubscribeToStoreValue,
-  setTransitionName,
-  resetStore
+  resetStore,
 }
