@@ -1,12 +1,11 @@
 import '@babel/polyfill'
-import * as L from 'leaflet'
-import Vue from 'vue'
-import App from 'components/app/App'
+import { requestLogger } from 'the-browser-logger'
+import initAsync from './initAsync'
+import { createUI } from 'systems/bootUI'
 
-Vue.use(L)
-
-new Vue({
-  el: '#root',
-  components: { App },
-  template: '<App />'
-})
+initAsync().finally(
+  () => {
+    DEBUG && requestLogger().debug('initAsync()')
+    createUI()
+  }
+)
