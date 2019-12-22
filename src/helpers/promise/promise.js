@@ -34,18 +34,6 @@ function anyPromise(promises) {
 };
 
 /**
-* Checks if the given object is a promise or not
-* @param {Promise} promise
-* @return {Boolean} true if is a promise, false otherwise.
-*/
-function isPromise(promise) {
-  return !!(promise &&
-    typeof promise.then === 'function' &&
-    typeof promise.catch === 'function' &&
-    typeof promise.finally === 'function')
-};
-
-/**
  * Inidicates if a promise has been fulfilled or not
  * @param  {Object} response
  * @return {Boolean}
@@ -56,6 +44,5 @@ function isPromiseFulfilled(response) {
 
 export {
   anyPromise,
-  isPromise,
   isPromiseFulfilled,
 }

@@ -1,5 +1,5 @@
 import { requestLogger } from 'the-browser-logger'
-import { isNull } from 'helpers/utilTypes'
+import { isNull } from 'the-type-validator'
 import GeolocationEvent from 'geolocation/GeolocationEvents'
 import {
   setTrackingWatcher,
@@ -20,20 +20,12 @@ class GeolocationBase {
   constructor() {
     this._id = 'Geolocation'
     // BIND TO CLASS
-    this._isSupported = this._isSupported.bind(this)
-    this._successTracking = this._successTracking.bind(this)
-    this._errorTracking = this._errorTracking.bind(this)
-    this.renewCurrentPosition = this.renewCurrentPosition.bind(this)
-    this.startTracking = this.startTracking.bind(this)
-    this.stopTracking = this.stopTracking.bind(this)
-  }
-
-  /**
-   * Logger method
-   * @returns {String}
-   */
-  _getLogger() {
-    return requestLogger(this._id)
+    // this._isSupported = this._isSupported.bind(this)
+    // this._successTracking = this._successTracking.bind(this)
+    // this._errorTracking = this._errorTracking.bind(this)
+    // this.renewCurrentPosition = this.renewCurrentPosition.bind(this)
+    // this.startTracking = this.startTracking.bind(this)
+    // this.stopTracking = this.stopTracking.bind(this)
   }
 
   /**
@@ -41,7 +33,7 @@ class GeolocationBase {
    */
   _isSupported() {
     const isSupported = !!navigator.geolocation
-    DEBUG && this._getLogger().debug('_isSupported()', isSupported)
+    DEBUG && requestLogger(this._id).debug('_isSupported()', isSupported)
     return isSupported
   }
 
@@ -56,7 +48,7 @@ class GeolocationBase {
 
     setCurrentPosition(position)
 
-    DEBUG && this._getLogger().debug('_successTracking() position', position)
+    DEBUG && requestLogger(this._id).debug('_successTracking() position', position)
     broadcast.publish(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
   }
 
@@ -64,7 +56,7 @@ class GeolocationBase {
    * @param {PositionError} error
    */
   _errorTracking(error) {
-    DEBUG && this._getLogger().error('_errorTracking()', error)
+    DEBUG && requestLogger(this._id).error('_errorTracking()', error)
     !!error.PERMISSION_DENIED && broadcast.publish(GeolocationEvent.ON_GEOLOCATION_PERMISSION_DENIED, error)
     !!error.POSITION_UNAVAILABLE && broadcast.publish(GeolocationEvent.ON_GEOLOCATION_POSITION_UNAVAILABLE, error)
     !!error.TIMEOUT && broadcast.publish(GeolocationEvent.ON_GEOLOCATION_TIMEOUT, error)
@@ -74,7 +66,7 @@ class GeolocationBase {
    * @param {PositionOptions} options
    */
   renewCurrentPosition(options = null) {
-    DEBUG && this._getLogger().debug('renewCurrentPosition() options ', options)
+    DEBUG && requestLogger(this._id).debug('renewCurrentPosition() options ', options)
     navigator.geolocation.getCurrentPosition(this._successTracking, this._errorTracking, options)
   }
 
@@ -88,7 +80,7 @@ class GeolocationBase {
       setTrackingWatcher(trackingWatcher)
       broadcast.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
     }
-    DEBUG && this._getLogger().debug('startTracking()', options, trackingWatcher)
+    DEBUG && requestLogger(this._id).debug('startTracking()', options, trackingWatcher)
   }
 
   /**
@@ -100,7 +92,7 @@ class GeolocationBase {
       setTrackingWatcher(null)
       broadcast.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
     }
-    DEBUG && this._getLogger().debug('stopTracking()', trackingWatcher)
+    DEBUG && requestLogger(this._id).debug('stopTracking()', trackingWatcher)
   }
 }
 

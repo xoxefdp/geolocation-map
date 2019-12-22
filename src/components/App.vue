@@ -31,7 +31,7 @@
 
 <script>
   import { requestLogger } from 'the-browser-logger'
-  import { isNull } from 'helpers/utilTypes'
+  import { isNull } from 'the-type-validator'
   import geolocation from 'geolocation/geolocation'
   import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
   import GeolocationEvent from 'geolocation/GeolocationEvents'
@@ -81,7 +81,7 @@
     methods: {
       _getCurrentPosition() {
         const currentPosition = getStoredCurrentPosition()
-        DEBUG && _getLogger().debug('_getCurrentPosition()', currentPosition)
+        DEBUG && requestLogger(App.name).debug('_getCurrentPosition()', currentPosition)
         return currentPosition
       },
 
@@ -104,7 +104,7 @@
       },
 
       updateCurrentBody(positionUpdate) {
-        DEBUG && _getLogger().debug('updateCurrentBody()')
+        DEBUG && requestLogger(App.name).debug('updateCurrentBody()')
         const currentPosition = this._getCurrentPosition()
         const isStored = currentPosition === positionUpdate
         const position = isStored ? currentPosition : positionUpdate

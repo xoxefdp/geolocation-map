@@ -1,4 +1,4 @@
-import { isArray } from 'helpers/utilTypes'
+import { isArray } from 'the-type-validator'
 
 const set = (obj, path, value) => {
   if (Object(obj) !== obj) {

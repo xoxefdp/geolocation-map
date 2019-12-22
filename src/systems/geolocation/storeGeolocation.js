@@ -11,10 +11,6 @@ const state = {
   beforeCurrentPosition: null,
 }
 
-/**
- * Logger
- * @returns {String}
- */
 const _getLogger = () => {
   return requestLogger(ID)
 }

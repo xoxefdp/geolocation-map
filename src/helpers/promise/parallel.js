@@ -32,7 +32,7 @@ const getParallelPromise = (transactionId, callback) => {
     promise.finally(() => delete promisesCache[ transactionId ])
   }
 
-  DEBUG && _getLogger().debug('getParallelPromise()', transactionId, callback)
+  DEBUG && _getLogger().debug('getParallelPromise()', transactionId)
   return promise
 }
 

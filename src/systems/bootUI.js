@@ -1,5 +1,5 @@
 import { requestLogger } from 'the-browser-logger'
-import { isNull } from 'helpers/utilTypes'
+import { isNull } from 'the-type-validator'
 import broadcast from 'broadcast/broadcast'
 import { BootEvent } from 'systems/Events'
 import * as L from 'leaflet'

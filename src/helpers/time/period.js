@@ -1,5 +1,5 @@
 import { requestLogger } from 'the-browser-logger'
-import { isFunction, isInteger } from 'helpers/utilTypes'
+import { isFunction, isInteger } from 'the-type-validator'
 
 const ID = 'period'
 let intervals = [],

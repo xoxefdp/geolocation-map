@@ -1,4 +1,4 @@
-import { isNull, isUndefined, isArray } from 'helpers/utilTypes'
+import { isNull, isUndefined, isArray } from 'the-type-validator'
 
 const get = (object, path, defaultVal) => {
   const PATH = isArray(path)

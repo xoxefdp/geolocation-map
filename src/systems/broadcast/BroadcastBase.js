@@ -1,5 +1,5 @@
 import { requestLogger } from 'the-browser-logger'
-import { isString, isUndefined } from 'helpers/utilTypes'
+import { isString, isUndefined } from 'the-type-validator'
 import values from 'lodash/values'
 
 /**
