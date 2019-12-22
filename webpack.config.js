@@ -51,7 +51,7 @@ const config = {
       'vue$': isDev
         ? VUE_DIST_DIR + '/vue.esm.js'
         : VUE_DIST_DIR + '/vue.runtime.esm.js', // ESM (for bundlers)
-      // 'vue$' : isDev
+      // 'vue$': isDev
       //   ? VUE_DIST_DIR + '/vue.esm.browser.js'
       //   : VUE_DIST_DIR + '/vue.esm.browser.min.js', // ESM (for browsers)
       'components': SRC_DIR + '/components',
@@ -64,13 +64,9 @@ const config = {
     },
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: process.env.NODE_ENV, // use 'development' unless process.env.NODE_ENV is defined
-    }),
     new webpack.DefinePlugin({
       DEBUG: isDev, // use DEBUG unless process.env.DEBUG is defined
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
     new HtmlWebPackPlugin({
       template: SRC_DIR + '/index.html',

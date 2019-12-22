@@ -10,7 +10,6 @@
         "process": true,
         "require": true
     },
-    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -20,7 +19,6 @@
         }
     },
     "plugins": [
-        "babel",
         "html"
     ],
     "rules": {
