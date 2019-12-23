@@ -177,7 +177,7 @@
       },
 
       disableTracking() {
-        // this.removeMap(true)
+        this.mapRendered && this.removeMap(true)
         geolocation.stopTracking()
       },
 

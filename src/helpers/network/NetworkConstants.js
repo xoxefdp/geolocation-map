@@ -13,8 +13,8 @@ const State = {
     { url: 'https://google.com', method: HttpMethod.HEAD }, // USA
     { url: 'https://yandex.ru', method: HttpMethod.HEAD }, // Rusia
     { url: 'https://baidu.com', method: HttpMethod.HEAD }, // China
-    { url: 'http://131.100.1.18', method: HttpMethod.HEAD }, // Colombia
-    { url: 'http://37.252.251.10', method: HttpMethod.HEAD }, // Chile
+    // { url: 'http://131.100.1.18', method: HttpMethod.HEAD }, // Colombia
+    // { url: 'http://37.252.251.10', method: HttpMethod.HEAD }, // Chile
     // { url: 'https://httpstat.us/200', method: HttpMethod.HEAD },
   ],
   CHECK_CONNECTION_TIMER_ID = 'CheckConnection'
