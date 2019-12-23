@@ -2,24 +2,16 @@
   "name": "geolocation-map",
   "version": "1.0.0",
   "description": "Locate position using device geolocation api, leaflet interactive map and openstreet layer",
-  "private": true,
-  "main": "./dist/main.js",
+  "author": "José Diaz <info@josediaz.site> (https://josediaz.site)",
+  "license": "ISC",
   "keywords": [
     "geolocation",
     "openstreetmap",
     "leaflet",
     "vuejs"
   ],
-  "author": "José Diaz <me@josediaz.site> (https://github.com/xoxefdp)",
-  "license": "ISC",
-  "dependencies": {
-    "@babel/polyfill": "^7.7.0",
-    "leaflet": "^1.6.0",
-    "lodash": "^4.17.15",
-    "the-browser-logger": "^1.0.0",
-    "the-type-validator": "^1.0.0",
-    "vue": "^2.6.10"
-  },
+  "private": true,
+  "main": "dist/main.js",
   "scripts": {
     "serve": "webpack-dev-server --progress --display-error-details --config webpack.config.js",
     "serve:dev": "NODE_ENV=development npm run serve",
@@ -35,6 +27,15 @@
   "pre-commit": [
     "lint"
   ],
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0",
+    "leaflet": "^1.6.0",
+    "lodash.unset": "^4.5.2",
+    "lodash.values": "^4.3.0",
+    "the-browser-logger": "^1.0.4",
+    "the-type-validator": "^1.0.2",
+    "vue": "^2.6.10"
+  },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",

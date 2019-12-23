@@ -1,7 +1,7 @@
 import { requestLogger } from 'the-browser-logger'
 import storeBroadcast from 'broadcast/storeBroadcast'
 import { get, set } from 'helpers/utilOperations'
-import unset from 'lodash/unset'
+import unset from 'lodash.unset'
 
 const ID = 'store'
 const store = {}

@@ -1,6 +1,6 @@
 import { requestLogger } from 'the-browser-logger'
 import { isString, isUndefined } from 'the-type-validator'
-import values from 'lodash/values'
+import values from 'lodash.values'
 
 /**
  * BroadcastBase class for sending emits among different modules
