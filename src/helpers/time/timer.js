@@ -15,7 +15,7 @@ const _getLogger = () => {
  * Timer that wrappers setInterval, clearInterval, setTimeout and clearTimeout
  * and stores automatically the handles generated
  * @param {String} timerType
- * @return {Object}
+ * @returns {Object}
  */
 function Timer(timerType) {
   let hash = {},

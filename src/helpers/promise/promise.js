@@ -5,7 +5,7 @@ const STATE_FULFILLED = 'fulfilled'
 * and rejected if ALL of the given promises are rejected. Acts as a wrapper of
 * rsvp.Promises.allSettled but ignoring the specific result of each promise
 * @param {Array<Promise>} promises
-* @return {Promise}
+* @returns {Promise}
 */
 function anyPromise(promises) {
   return new Promise(
@@ -36,7 +36,7 @@ function anyPromise(promises) {
 /**
  * Inidicates if a promise has been fulfilled or not
  * @param  {Object} response
- * @return {Boolean}
+ * @returns {Boolean}
  */
 function isPromiseFulfilled(response) {
   return response && response.state === STATE_FULFILLED

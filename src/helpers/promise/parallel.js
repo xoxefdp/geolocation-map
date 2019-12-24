@@ -9,7 +9,7 @@ const _getLogger = () => {
 /**
  * Checks for a promise with the given transaction Id
  * @param {String} transactionId
- * @return {Boolean}
+ * @returns {Boolean}
  */
 const hasParallelPromise = (transactionId) => {
   DEBUG && _getLogger().debug('hasParallelPromise()', transactionId)
@@ -20,7 +20,7 @@ const hasParallelPromise = (transactionId) => {
  * Gets the same promise for an operation if the first call has not been finished.
  * @param {String} transactionId
  * @param {Function} callback
- * @return {Promise}
+ * @returns {Promise}
  */
 const getParallelPromise = (transactionId, callback) => {
   let promise = promisesCache[ transactionId ]

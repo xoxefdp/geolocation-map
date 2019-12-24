@@ -4,7 +4,7 @@ import values from 'lodash.values'
 
 /**
  * BroadcastBase class for sending emits among different modules
- * @return {Object}
+ * @returns {Object}
  */
 class BroadcastBase {
   constructor() {
@@ -100,7 +100,7 @@ class BroadcastBase {
    * Creates an id based on two strings
    * @param {String} emitName
    * @param {String} sourceName
-   * @return {String}
+   * @returns {String}
    */
   _getCallbackId(emitName, sourceName) {
     let ret = emitName
@@ -138,10 +138,10 @@ class BroadcastBase {
 
   /**
    * Subscribe to emit
-   * @param {Object=} arg
+   * @param {Object} arg
    * @param {String} emit
    * @param {Function} callback
-   * @param {String=} source
+   * @param {String} source
    * @returns {String} emit
    */
   subscribe(...args) {
@@ -169,7 +169,7 @@ class BroadcastBase {
 
   /**
    * Unsubscribe from emit
-   * @param {Object=} arg
+   * @param {Object} arg
    * @param {String} emit
    * @param {Function} callback
    */
@@ -199,7 +199,7 @@ class BroadcastBase {
 
   /**
    * @param {String} emit
-   * @return {Boolean}
+   * @returns {Boolean}
    */
   hasSubscribers(emit) {
     return isUndefined(this.emits[ emit ])

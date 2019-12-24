@@ -57,16 +57,16 @@ function stop() {
 /**
  * Checks if a url is available
  * @param {String} url
- * @param {String=} method
- * @param {Boolean=} avoidCache
- * @param {Boolean=} preventCORS
- * @return {Promise} promise
+ * @param {String} method
+ * @param {Boolean} avoidCache
+ * @param {Boolean} preventCORS
+ * @returns {Promise} promise
  */
 function checkUrlAsync(url, method = HttpMethod.HEAD, avoidCache = true) {
   DEBUG && _getLogger().debug('checkUrlAsync()::url=', url, 'method=', method)
   return getParallelPromise(url, (resolve, reject) => {
     if (avoidCache) {
-      url += '?t=' + getCurrentInTimestamp()
+      url += '?timestamp=' + getCurrentInTimestamp()
     }
 
     timeout.set(ID, url, () => {
@@ -100,7 +100,7 @@ function checkUrlAsync(url, method = HttpMethod.HEAD, avoidCache = true) {
 
 /**
  * Checks whether connected to internet
- * @return {Promise}
+ * @returns {Promise}
  */
 function checkConnectionAsync() {
   return getParallelPromise('ConnectionChecker.checkConnectionAsync', (resolve, reject) => {

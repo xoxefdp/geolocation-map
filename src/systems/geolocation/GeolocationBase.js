@@ -14,7 +14,7 @@ import broadcast from 'broadcast/broadcast'
 
 /**
  * GeolocationBase class to define geolocation functionality
- * @return {Object}
+ * @returns {Object}
  */
 class GeolocationBase {
   constructor() {

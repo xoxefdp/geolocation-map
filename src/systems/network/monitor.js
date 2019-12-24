@@ -36,7 +36,7 @@ class NetworkMonitor {
 
   /**
    * returns true if device is in connected state and has got the correct IP
-   * @return {boolean}
+   * @returns {boolean}
    */
   get isConnected() {
     DEBUG && this._getLogger().debug('isConnected()')
