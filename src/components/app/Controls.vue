@@ -1,27 +1,25 @@
 <template>
   <div id="data-scheme">
-    <p>latitude: <span id="latitude"></span></p>
-    <p>longitude: <span id="longitude"></span></p>
-    <p>altitude: <span id="altitude"></span></p>
-    <p>accuracy: <span id="accuracy"></span></p>
-    <p>altitudeAccuracy: <span id="altitudeAccuracy"></span></p>
-    <p>heading: <span id="heading"></span></p>
-    <p>speed: <span id="speed"></span></p>
-    <p>coords updated times: <span id="coordsUpdatedTimes"></span></p>
-    <p>timestamp: <span id="timestamp"></span></p>
-    <p>status update: <span id="statusUpdate"></span></p>
-    <p>last coords update: <span id="lastCoordsUpdate"></span></p>
+    <p>latitude: <span id="latitude"> {{ latitude }} </span></p>
+    <p>longitude: <span id="longitude"> {{ longitude }} </span></p>
+    <p>altitude: <span id="altitude"> {{ altitude }} </span></p>
+    <p>accuracy: <span id="accuracy"> {{ accuracy }} </span></p>
+    <p>altitudeAccuracy: <span id="altitudeAccuracy"> {{ altitudeAccuracy }} </span></p>
+    <p>heading: <span id="heading"> {{ heading }} </span></p>
+    <p>speed: <span id="speed"> {{ speed }} </span></p>
+    <p>timestamp: <span id="timestamp"> {{ timestamp }} </span></p>
+    <p>coords updated times: <span id="coordsUpdatedTimes"> {{ coordsUpdatedTimes }} </span></p>
+    <p>status update: <span id="statusUpdate"> {{ statusUpdate }} </span></p>
+    <p>tracking status: <span id="tracking"> {{ tracking }} </span></p>
     <div style="display:inline-block">
       <div style="display:inline-block">
-        <button id="trackingButton" v-on:click="toggleTracking">
-          <span id="trackingOn" style="display:block">Track: On</span>
-          <span id="trackingOff" style="display:none">Track: Off</span>
+        <button v-on:click="toggleTracking">
+          <span>{{ trackingText }}</span>
         </button>
       </div>
       <div style="display:inline-block">
-        <button id="mapButton" style="display:none" v-on:click="toggleMap">
-          <span id="showMap" style="display:block">Map: On</span>
-          <span id="hideMap" style="display:none">Map: Off</span>
+        <button v-bind:class="{ btnShow: tracking, btnHide: !tracking }" v-on:click="toggleMap">
+          <span>{{ mapButtonText }}</span>
         </button>
       </div>
     </div>
@@ -29,28 +27,24 @@
 </template>
 
 <script>
-  // import { geolocation } from 'geolocation/geolocation'
+  import { requestLogger } from 'the-browser-logger'
+  import { isNull } from 'the-type-validator'
+  import broadcast from 'broadcast/broadcast'
+  import GeolocationEvent from 'geolocation/GeolocationEvents'
+  import geolocation from 'geolocation/geolocation'
+  import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
+  import { interval } from 'helpers/time/timer'
+  import { Time } from 'helpers/time/TimeConstants'
+
+  const _getLogger = () => {
+    return requestLogger(Controls.name);
+  }
 
   const Controls = {
     name: 'Controls',
     data: function() {
       return {
-        currentPosition: null,
-        geoPermissionStatus: null,
-        countCoordsUpdate: 0,
-        map: null,
-        mapElement: null,
-        mapRendered: false,
-        popup: null,
-        mapZoom: 17,
-        navListener: null,
-        mapMarker: null,
-        mapButton: null,
-        showMap: null,
-        hideMap: null,
-        trackingOn: null,
-        trackingOff: null,
-        tracking: false,
+        // input values
         latitude: null,
         longitude: null,
         altitude: null,
@@ -60,201 +54,158 @@
         speed: null,
         timestamp: null,
         statusUpdate: null,
-        coordsUpdatedTimes: null,
-        lastCoordsUpdate: null
+        coordsUpdatedTimes: 0,
+
+        // buttons data
+        tracking: false,
+        trackingText: 'Track: On',
+        mapButtonText: 'Map: On',
+
+        // status
+        STATUS_INTERVAL_ID: 'statusInterval',
+        STATUS_INTERVAL_TIMER: Time.SECOND,
       }
     },
+    props: [
+      'position',
+      'rendered'
+    ],
     methods: {
-      _printCurrentPosition() {
-        // _printCoordsToBody( _getCurrentPosition() )
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            _setPosition(position)
-          }, (error) => {
-            console.log(error)
-          }
-        )
-      },
-
+      // GEOLOCATION METHODS
       _getCurrentPosition() {
-        return this.currentPosition
+        const currentPosition = getStoredCurrentPosition()
+        DEBUG && _getLogger().debug('_getCurrentPosition()', currentPosition)
+        return currentPosition
       },
 
-      _setCurrentPosition(position) {
-        this.currentPosition = position
+      _updateControlsData(newPosition) {
+        this.latitude = newPosition.coords.latitude
+        this.longitude = newPosition.coords.longitude
+        this.altitude = newPosition.coords.altitude
+        this.accuracy = newPosition.coords.accuracy
+        this.altitudeAccuracy = newPosition.coords.altitudeAccuracy
+        this.heading = newPosition.coords.heading
+        this.speed = newPosition.coords.speed
+        this.timestamp = newPosition.timestamp
       },
 
-      _printCoordsToBody(data) {
-        this.latitude.textContent = data.coords.latitude
-        this.longitude.textContent = data.coords.longitude
-        this.altitude.textContent = data.coords.altitude
-        this.accuracy.textContent = data.coords.accuracy
-        this.altitudeAccuracy.textContent = data.coords.altitudeAccuracy
-        this.heading.textContent = data.coords.heading
-        this.speed.textContent = data.coords.speed
-        this.timestamp.textContent = data.timestamp
-        // lastCoordsUpdate.textContent = 0
-        this.coordsUpdatedTimes.textContent = this.countCoordsUpdate
+      _setPosition(newPosition) {
+        this.coordsUpdatedTimes++
+        this._updateControlsData( newPosition )
       },
 
-      _setPosition(position) {
-        this.countCoordsUpdate++
-        this._setCurrentPosition(position)
-        this._printCoordsToBody( this._getCurrentPosition() )
+      // GEOLOCATION EVENTS
+      _onCurrentPositionUpdate(positionUpdate) {
+        DEBUG && _getLogger().debug('_onCurrentPositionUpdate()')
+        if ( !isNull(positionUpdate) ) {
+          this._setPosition(positionUpdate)
+        }
+      },
+      // ********************************************************
+
+      // MAP METHODS
+      renderMap() {
+        this._onMapRender()
       },
 
-      _revealPosition(position) {
-        console.log(position)
-      },
-
-      _positionDenied(error) {
-        console.log(error)
-      },
-
-      updateCurrentBody(position) {
-        this._revealPosition(position)
-        this._setPosition(position)
-        // !mapRendered && renderMap(position.coords)
-        this.mapRendered && this.updateMap(position.coords)
-      },
-
-      renderMap(coordinates) {
-        this.map = document.getElementById('map')
-        this.map.style.width = (window.innerWidth - 40) + 'px'
-        this.map.style.height = (window.innerHeight - 40) + 'px'
-
-        this.mapElement = L.map(this.map)
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
-          foo: 'bar',
-          attribution: 'Map data &copy <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-        }).addTo(this.mapElement)
-
-        this.mapMarker = L.marker([coordinates.latitude, coordinates.longitude]).addTo(this.mapElement)
-
-        this.popup = L.popup()
-        
-        this.mapElement.on('click', this.onMapClick)
-
-        this.updateMap(coordinates)
-
-        this.toggleMapButtonMessages()
-      },
-
-      removeMap() {
-        this.mapMarker.remove()
-        this.mapElement.remove()
-        this.map.setAttribute('style', '')
-        this.map.className = ''
-        this.map.innerHTML = ''
-        this.toggleMapButtonMessages()
+      destroyMap() {
+        this._onMapDestroy()
       },
 
       toggleMap() {
-        this.mapRendered ? this.removeMap() : this.renderMap( this._getCurrentPosition().coords )
-        this.mapRendered = !this.mapRendered
+        _getLogger().debug('toggleMap() map rendered', this.rendered)
+        if (!!this.rendered) {
+          this.destroyMap()
+        } else {
+          const position = this._getCurrentPosition()
+          _getLogger().debug('toggleMap() position', position)
+          !!position && this.renderMap()
+        }
       },
 
-      toggleMapButton() {
-        this.mapButton.style.display = this.mapButton.style.display == 'block' ? 'none' : ' block'
+      // MAP EVENTS
+      _onMapRender() {
+        _getLogger().debug('_onMapRender()')
+        this.$emit('onmaprenderchange', true)
+        this.mapButtonText = 'Map: Off'
       },
 
-
-      toggleMapButtonMessages() {
-        this.showMap.style.display = this.showMap.style.display == 'block' ? 'none' : ' block'
-        this.hideMap.style.display = this.hideMap.style.display == 'block' ? 'none' : ' block'
+      _onMapDestroy() {
+        _getLogger().debug('_onMapDestroy()')
+        this.$emit('onmaprenderchange', false)
+        this.mapButtonText = 'Map: On'
       },
+      // ********************************************************
 
-      onMapClick(e) {
-        this.updateMap({latitude: e.latlng.lat, longitude: e.latlng.lng})
-        this.popup
-          .setLatLng(e.latlng)
-          .setContent("Coordinates: " + e.latlng.toString())
-          .openOn(this.mapElement)
-      },
-
-      updateMap(coordinates) {
-        let position = [coordinates.latitude, coordinates.longitude]
-        this.mapElement.setView(position, this.mapZoom)
-        this.mapMarker.setLatLng(position)
-      },
-
-      enableTracking() {
-        this.toggleMapButton()
-        // this.navListener = navigator.geolocation.watchPosition(this.updateCurrentBody, this._positionDenied, null)
+      // TRACKING METHODS
+      startTracking() {
         geolocation.startTracking()
-        this.toggleTrackingButton()
       },
 
-      disableTracking() {
-        this.toggleMap()
-        this.toggleMapButton()
-        // this.navListener = null
+      stopTracking() {
         geolocation.stopTracking()
-        this.toggleTrackingButton()
       },
 
       toggleTracking() {
-        this.tracking ? this.disableTracking() : this.enableTracking()
-        this.tracking = !this.tracking
+        this.tracking ? this.stopTracking() : this.startTracking()
       },
 
-      toggleTrackingButton() {
-        this.trackingOn.style.display = this.trackingOn.style.display == 'block' ? 'none' : ' block'
-        this.trackingOff.style.display = this.trackingOff.style.display == 'block' ? 'none' : ' block'
+      // TRACKING EVENTS
+      _onTrackingStarted() {
+        _getLogger().debug('_onTrackingStarted()')
+
+        this.tracking = true
+        this.trackingText = 'Track: Off'
+      },
+
+      _onTrackingStopped() {
+        _getLogger().debug('_onTrackingStopped()')
+
+        !!this.rendered && this.destroyMap()
+
+        this.tracking = false
+        this.trackingText = 'Track: On'
       }
+      // ********************************************************
     },
-    beforeCreate: () => {
-      console.log('beforeCreate')
+    beforeCreate: function() {
+      _getLogger().debug('beforeCreate')
     },
-    created: () => {
-      console.log('created')
+    created: function() {
+      _getLogger().debug('created')
     },
-    beforeMount: () => {
-      console.log('beforeMount')
+    beforeMount: function() {
+      _getLogger().debug('beforeMount')
     },
-    mounted: () => {
-      console.log('mounted')
+    mounted: function() {
+      _getLogger().debug('mounted')
 
-      this.latitude = document.getElementById('latitude')
-      this.longitude = document.getElementById('longitude')
-      this.altitude = document.getElementById('altitude')
-      this.accuracy = document.getElementById('accuracy')
-      this.altitudeAccuracy = document.getElementById('altitudeAccuracy')
-      this.heading = document.getElementById('heading')
-      this.speed = document.getElementById('speed')
-      this.timestamp = document.getElementById('timestamp')
-      this.statusUpdate = document.getElementById('statusUpdate')
-      this.coordsUpdatedTimes = document.getElementById('coordsUpdatedTimes')
-      this.lastCoordsUpdate = document.getElementById('lastCoordsUpdate')
-      this.mapButton = document.getElementById('mapButton')
-      this.showMap = document.getElementById('showMap')
-      this.hideMap = document.getElementById('hideMap')
-      this.trackingOn = document.getElementById('trackingOn')
-      this.trackingOff = document.getElementById('trackingOff')
+      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this._onCurrentPositionUpdate)
+      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this._onTrackingStarted)
+      broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this._onTrackingStopped)
 
-      setInterval(() => {
-        let date = Date.now()
-        console.log(date)
-        this.statusUpdate.textContent = date
-        // console.log(geoPermissionStatus.state)
-        if (navigator.geolocation) {
-          // _printCurrentPosition()
-          this.lastCoordsUpdate.textContent = this.statusUpdate.textContent - this.timestamp.textContent
-        }
-      }, 1000)
+      // interval.set(Controls.name, this.STATUS_INTERVAL_ID, () => {
+      //   this.statusUpdate = Date.now()
+      //   DEBUG && _getLogger().debug('Status updated at ', this.statusUpdate)
+      // }, this.STATUS_INTERVAL_TIMER)
     },
-    beforeUpdate: () => {
-      console.log('beforeUpdate')
+    beforeUpdate: function() {
+      _getLogger().debug('beforeUpdate')
     },
-    updated: () => {
-      console.log('updated')
+    updated: function() {
+      _getLogger().debug('updated')
     },
-    beforeDestroy: () => {
-      console.log('beforeDestroy')
+    beforeDestroy: function() {
+      _getLogger().debug('beforeDestroy')
     },
-    destroyed: () => {
-      console.log('destroyed')
+    destroyed: function() {
+      _getLogger().debug('destroyed')
+
+      broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+      broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED)
+      broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED)
+
+      // interval.clear(Controls.name, this.STATUS_INTERVAL_ID)
     }
   }
 
@@ -271,7 +222,13 @@
     padding: 5px;
     line-height: 0;
   }
-  #latitude, #longitude, #altitude, #accuracy, #altitudeAccuracy, #heading, #speed, #coordsUpdatedTimes, #timestamp, #statusUpdate, #lastCoordsUpdate {
+  p > span {
     color: red;
+  }
+  .btnShow {
+    display: block;
+  }
+  .btnHide {
+    display: none;
   }
 </style>

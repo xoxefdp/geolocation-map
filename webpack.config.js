@@ -8,7 +8,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // FRAMEWORK FOLDERS
 const NODE_DIR = path.resolve(__dirname, 'node_modules')
 const VUE_DIST_DIR = path.resolve(__dirname, NODE_DIR + '/vue/dist')
-// const WEBPACK_COMMON_DIR = path.resolve(__dirname, 'webpack')
 
 // APPLICATION FOLDERS
 const SRC_DIR = path.resolve(__dirname, 'src')
