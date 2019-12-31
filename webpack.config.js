@@ -14,6 +14,18 @@ const SRC_DIR = path.resolve(__dirname, 'src')
 const DIST_DIR = path.resolve(__dirname, 'dist')
 
 const isDev = process.env.NODE_ENV === 'development'
+const buildType = process.env.BUILD_TYPE
+
+const vueBuildType = {
+  umd: isDev // UMD
+    ? VUE_DIST_DIR + '/vue.js'
+    : VUE_DIST_DIR + '/vue.min.js',
+  commonjs: VUE_DIST_DIR + '/vue.common.js', // CommonJS
+  bundlers: VUE_DIST_DIR + '/vue.esm.js', // ESM (for bundlers)
+  browsers: isDev // ESM (for browsers)
+    ? VUE_DIST_DIR + '/vue.esm.browser.js'
+    : VUE_DIST_DIR + '/vue.esm.browser.min.js',
+}
 
 const DevtoolLevel = {
   NONE: 'none',
@@ -44,15 +56,7 @@ const config = {
     extensions: ['.js', '.vue'],
     modules: [SRC_DIR, 'node_modules'],
     alias: {
-      // 'vue$': isDev
-      //   ? VUE_DIST_DIR + '/vue.common.js'
-      //   : VUE_DIST_DIR + '/vue.runtime.common.js', // CommonJS
-      'vue$': isDev
-        ? VUE_DIST_DIR + '/vue.esm.js'
-        : VUE_DIST_DIR + '/vue.runtime.esm.js', // ESM (for bundlers)
-      // 'vue$': isDev
-      //   ? VUE_DIST_DIR + '/vue.esm.browser.js'
-      //   : VUE_DIST_DIR + '/vue.esm.browser.min.js', // ESM (for browsers)
+      'vue$': vueBuildType[ buildType ],
       'components': SRC_DIR + '/components',
       'helpers': SRC_DIR + '/helpers',
       'systems': SRC_DIR + '/systems',
@@ -99,6 +103,7 @@ const config = {
   },
 }
 
+console.log('BUILD_TYPE', process.env.BUILD_TYPE)
 console.log('NODE_ENV', process.env.NODE_ENV)
 console.log('DEBUG', isDev)
 console.log('devtool', config.devtool)

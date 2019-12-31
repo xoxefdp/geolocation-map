@@ -4,8 +4,12 @@
         "node": true,
         "es6": true
     },
-    "extends": ["google"],
+    "extends": [
+        "google",
+        "plugin:vue/essential"
+    ],
     "globals": {
+        "BUILD_TYPE": true,
         "DEBUG": true,
         "process": true,
         "require": true
@@ -19,7 +23,7 @@
         }
     },
     "plugins": [
-        "html"
+        "vue"
     ],
     "rules": {
         "linebreak-style": 0,
