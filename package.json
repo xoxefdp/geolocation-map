@@ -1,6 +1,6 @@
 {
   "name": "geolocation-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Locate position using device geolocation api, leaflet interactive map and openstreet layer",
   "author": "José Diaz <contact@xisco.dev> (https://xisco.dev)",
   "license": "ISC",
