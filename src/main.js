@@ -1,7 +1,9 @@
-// import '@babel/polyfill'
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import initAsync from './initAsync'
 import { createUI } from 'systems/bootUI'
+
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
 
 const ID = 'main'
 const _getLogger = () => {
@@ -10,7 +12,7 @@ const _getLogger = () => {
 
 initAsync().finally(
   () => {
-    DEBUG && _getLogger().debug('initAsync()')
+    _getLogger().debug('initAsync()')
     createUI()
   }
 )

@@ -1,6 +1,9 @@
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isString, isUndefined } from 'the-type-validator'
 import values from 'lodash.values'
+
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
 
 /**
  * BroadcastBase class for sending emits among different modules
@@ -78,7 +81,7 @@ class BroadcastBase {
         })
       }
     } catch (e) {
-      DEBUG && this._getLogger().error('_executeCallback()', emit, e)
+      this._getLogger().error('_executeCallback()', emit, e)
     }
   }
 
@@ -159,10 +162,10 @@ class BroadcastBase {
     source = source || 'AllSources'
 
     if (isString(emit)) {
-      DEBUG && this._getLogger().debug('subscribe()', emit, source, arg ? arg.UID : '')
+      this._getLogger().debug('subscribe()', emit, source, arg ? arg.UID : '')
       this._subscribe(arg, emit, callback, source)
     } else {
-      DEBUG && this._getLogger().error('subscribe() wrong parameters', args)
+      this._getLogger().error('subscribe() wrong parameters', args)
     }
     return emit
   }
@@ -183,7 +186,7 @@ class BroadcastBase {
     } else {
       [arg, emit, callback] = args
     }
-    DEBUG && this._getLogger().debug('unsubscribe()', emit, arg ? arg.UID : '')
+    this._getLogger().debug('unsubscribe()', emit, arg ? arg.UID : '')
     if (this.emits[ emit ]) {
       for (const callbacks of values(this.emits[ emit ])) {
         this._removeFromCallbacks(callbacks, callback, arg)
@@ -218,7 +221,7 @@ class BroadcastBase {
       if (source) {
         sources.push(source)
       }
-      DEBUG && this._getLogger().debug('publish()', emit, data, source)
+      this._getLogger().debug('publish()', emit, data, source)
 
       this.publishing.emit = emit
       for (let i = 0, srcLen = sources.length; i < srcLen; i++) {
@@ -241,7 +244,7 @@ class BroadcastBase {
    * Resets local objects
    */
   __reset() {
-    DEBUG && this._getLogger().debug('__reset()')
+    this._getLogger().debug('__reset()')
     this.emits = {}
     this.broadcastCallbacks = {}
     this.publishing = {

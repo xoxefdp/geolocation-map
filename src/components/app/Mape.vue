@@ -1,26 +1,27 @@
 <template>
   <div id="map" v-bind:style="[ mapStyles ]">
-    <l-map :zoom="zoom" :center.sync="coordinates" @click="createOrMovePopup" v-if="rendered">
+    <l-map :zoom="zoom" :center="coordinates" @click="createOrMovePopup" v-if="rendered">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-marker :lat-lng.sync="coordinates" />
-      <l-popup :content="popupContent" />
+      <l-marker :lat-lng="coordinates" />
     </l-map>
   </div>
 </template>
 
 <script>
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { latLng } from 'leaflet'
-import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 
-const _getLogger = () => {
-  // eslint-disable-next-line no-use-before-define
-  return requestLogger(Map.name)
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
+
+const _getLogger = (component) => {
+  return requestLogger(component.name)
 }
 
-const Map = {
-  name: 'Map',
-  components: { LMap, LTileLayer, LMarker, LPopup },
+const Mape = {
+  name: 'Mape',
+  components: { LMap, LTileLayer, LMarker },
   data: function() {
     return {
       popupCoordinates: null,
@@ -45,7 +46,7 @@ const Map = {
         latitude: event.latlng.lat,
         longitude: event.latlng.lng,
       }
-      DEBUG && _getLogger().debug('createOrMovePopup()', this.popupCoordinates)
+      _getLogger(Mape).debug('createOrMovePopup()', this.popupCoordinates)
     },
   },
   watch: {
@@ -55,7 +56,7 @@ const Map = {
     },
   },
   beforeCreate: function() {
-    DEBUG && _getLogger().debug('beforeCreate')
+    _getLogger(Mape).debug('beforeCreate')
 
     this.mapStyles = {
       height: window.innerHeight - 20 + 'px',
@@ -63,29 +64,29 @@ const Map = {
     }
   },
   created: function() {
-    DEBUG && _getLogger().debug('created')
+    _getLogger(Mape).debug('created')
   },
   beforeMount: function() {
-    DEBUG && _getLogger().debug('beforeMount')
+    _getLogger(Mape).debug('beforeMount')
   },
   mounted: function() {
-    DEBUG && _getLogger().debug('mounted')
+    _getLogger(Mape).debug('mounted')
   },
   beforeUpdate: function() {
-    DEBUG && _getLogger().debug('beforeUpdate')
+    _getLogger(Mape).debug('beforeUpdate')
   },
   updated: function() {
-    DEBUG && _getLogger().debug('updated')
+    _getLogger(Mape).debug('updated')
   },
   beforeDestroy: function() {
-    DEBUG && _getLogger().debug('beforeDestroy')
+    _getLogger(Mape).debug('beforeDestroy')
   },
   destroyed: function() {
-    DEBUG && _getLogger().debug('destroyed')
+    _getLogger(Mape).debug('destroyed')
   },
 }
 
-export default Map
+export default Mape
 </script>
 
 <style>

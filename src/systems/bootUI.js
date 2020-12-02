@@ -1,10 +1,22 @@
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isNull } from 'the-type-validator'
 import broadcast from 'broadcast/broadcast'
 import { BootEvent } from 'systems/Events'
 import * as L from 'leaflet'
 import Vue from 'vue'
 import App from 'components/App'
+
+// Workaround for missing marker icon using leaflet with webapack
+// https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
+L.Icon.Default.imagePath = '/'
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+})
+
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
 
 const ID = 'bootUI',
   bodyElement = document.getElementsByTagName('body')[ 0 ]
@@ -20,7 +32,7 @@ const _uiExist = () => {
 }
 
 const createUI = () => {
-  DEBUG && _getLogger().debug('createUI()')
+  _getLogger().debug('createUI()')
   Vue.use(L)
 
   ui = new Vue({
@@ -44,7 +56,7 @@ const _createAppendRootElement = () => {
 }
 
 const destroyUI = () => {
-  DEBUG && _getLogger().debug('destroyUI()')
+  _getLogger().debug('destroyUI()')
   ui = null
 
   _destroyRootElement()
@@ -54,7 +66,7 @@ const destroyUI = () => {
 }
 
 const rebootUI = () => {
-  DEBUG && _getLogger().debug('rebootUI()')
+  _getLogger().debug('rebootUI()')
   _uiExist() && destroyUI()
   createUI()
   broadcast.publish(BootEvent.ON_APP_REBOOTED)

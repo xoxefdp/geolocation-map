@@ -1,7 +1,10 @@
-import { requestLogger } from 'the-browser-logger'
+import { setTimestampFormat, setLoggerLevel, Level, requestLogger } from 'the-browser-logger'
 import storeBroadcast from 'broadcast/storeBroadcast'
 import { get, set } from 'helpers/utilOperations'
 import unset from 'lodash.unset'
+
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
 
 const ID = 'store'
 const store = {}
@@ -12,7 +15,7 @@ const getFromStore = (path) => {
 
 const setToStore = (path, newValue, force) => {
   const oldValue = getFromStore(path)
-  if (DEBUG && path.indexOf('undefined') === 0) {
+  if (path.indexOf('undefined') === 0) {
     requestLogger(ID).error('setToStore()::Error, wrong store path. Check how the path was created. path=', path)
   }
   if (force || oldValue !== newValue) {

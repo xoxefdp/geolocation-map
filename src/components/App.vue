@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Map
+    <Mape
       :rendered="rendered"
       :position="position"
       v-on:onmaprenderchange="_onMapRenderChange"
@@ -14,22 +14,23 @@
 </template>
 
 <script>
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isNull } from 'the-type-validator'
 import broadcast from 'broadcast/broadcast'
 import GeolocationEvent from 'geolocation/GeolocationEvents'
-// import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
-import Map from 'components/app/Map'
+import Mape from 'components/app/Mape'
 import Controls from 'components/app/Controls'
 
-const _getLogger = () => {
-  // eslint-disable-next-line no-use-before-define
-  return requestLogger(App.name)
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
+
+const _getLogger = (component) => {
+  return requestLogger(component.name)
 }
 
 const App = {
   name: 'App',
-  components: { Map, Controls },
+  components: { Mape, Controls },
   data: function() {
     return {
       rendered: false,
@@ -48,51 +49,51 @@ const App = {
   methods: {
     // METHODS
     _setPosition(position) {
-      DEBUG && _getLogger().debug('_setPosition()', position)
+      _getLogger(App).debug('_setPosition()', position)
       this.position = position
     },
 
     // EVENTS
     _onCurrentPositionUpdate(positionUpdate) {
-      DEBUG && _getLogger().debug('_onCurrentPositionUpdate()', positionUpdate)
+      _getLogger(App).debug('_onCurrentPositionUpdate()', positionUpdate)
       if ( !isNull(positionUpdate) ) {
         this._setPosition(positionUpdate)
       }
     },
     _onMapRenderChange(value) {
-      DEBUG && _getLogger().debug('_onMapRenderChange()', value)
+      _getLogger(App).debug('_onMapRenderChange()', value)
       this.rendered = value
     },
   },
   beforeCreate: function() {
-    DEBUG && _getLogger().debug('beforeCreate')
+    _getLogger(App).debug('beforeCreate')
   },
   created: function() {
-    DEBUG && _getLogger().debug('created')
+    _getLogger(App).debug('created')
   },
   beforeMount: function() {
-    DEBUG && _getLogger().debug('beforeMount')
+    _getLogger(App).debug('beforeMount')
   },
   mounted: function() {
-    DEBUG && _getLogger().debug('mounted')
+    _getLogger(App).debug('mounted')
 
     broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE,
       this._onCurrentPositionUpdate
     )
   },
   beforeUpdate: function() {
-    DEBUG && _getLogger().debug('beforeUpdate')
+    _getLogger(App).debug('beforeUpdate')
   },
   updated: function() {
-    DEBUG && _getLogger().debug('updated')
+    _getLogger(App).debug('updated')
   },
   beforeDestroy: function() {
-    DEBUG && _getLogger().debug('beforeDestroy')
+    _getLogger(App).debug('beforeDestroy')
 
     broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
   },
   destroyed: function() {
-    DEBUG && _getLogger().debug('destroyed')
+    _getLogger(App).debug('destroyed')
   },
 }
 

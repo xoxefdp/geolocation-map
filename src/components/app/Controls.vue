@@ -27,18 +27,19 @@
 </template>
 
 <script>
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isNull } from 'the-type-validator'
 import broadcast from 'broadcast/broadcast'
 import GeolocationEvent from 'geolocation/GeolocationEvents'
 import geolocation from 'geolocation/geolocation'
 import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
-// import { interval } from 'helpers/time/timer'
-import { Time } from 'helpers/time/TimeConstants'
+import { createInterval, destroyInterval, TimeUnit } from 'timer-creator'
 
-const _getLogger = () => {
-  // eslint-disable-next-line no-use-before-define
-  return requestLogger(Controls.name)
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
+
+const _getLogger = (component) => {
+  return requestLogger(component.name)
 }
 
 const Controls = {
@@ -64,7 +65,7 @@ const Controls = {
 
       // status
       STATUS_INTERVAL_ID: 'statusInterval',
-      STATUS_INTERVAL_TIMER: Time.SECOND,
+      STATUS_INTERVAL_TIMER: 10 * TimeUnit.SECOND,
     }
   },
   props: [
@@ -75,7 +76,7 @@ const Controls = {
     // GEOLOCATION METHODS
     _getCurrentPosition() {
       const currentPosition = getStoredCurrentPosition()
-      DEBUG && _getLogger().debug('_getCurrentPosition()', currentPosition)
+      _getLogger(Controls).debug('_getCurrentPosition()', currentPosition)
       return currentPosition
     },
 
@@ -97,7 +98,7 @@ const Controls = {
 
     // GEOLOCATION EVENTS
     _onCurrentPositionUpdate(positionUpdate) {
-      DEBUG && _getLogger().debug('_onCurrentPositionUpdate()')
+      _getLogger(Controls).debug('_onCurrentPositionUpdate()')
       if ( !isNull(positionUpdate) ) {
         this._setPosition(positionUpdate)
       }
@@ -114,25 +115,25 @@ const Controls = {
     },
 
     toggleMap() {
-      DEBUG && _getLogger().debug('toggleMap() map rendered', this.rendered)
-      if (!!this.rendered) {
+      _getLogger(Controls).debug('toggleMap() map rendered', this.rendered)
+      if (this.rendered) {
         this.destroyMap()
       } else {
         const position = this._getCurrentPosition()
-        DEBUG && _getLogger().debug('toggleMap() position', position)
+        _getLogger(Controls).debug('toggleMap() position', position)
         !!position && this.renderMap()
       }
     },
 
     // MAP EVENTS
     _onMapRender() {
-      DEBUG && _getLogger().debug('_onMapRender()')
+      _getLogger(Controls).debug('_onMapRender()')
       this.$emit('onmaprenderchange', true)
       this.mapButtonText = 'Map: Off'
     },
 
     _onMapDestroy() {
-      DEBUG && _getLogger().debug('_onMapDestroy()')
+      _getLogger(Controls).debug('_onMapDestroy()')
       this.$emit('onmaprenderchange', false)
       this.mapButtonText = 'Map: On'
     },
@@ -153,16 +154,16 @@ const Controls = {
 
     // TRACKING EVENTS
     _onTrackingStarted() {
-      DEBUG && _getLogger().debug('_onTrackingStarted()')
+      _getLogger(Controls).debug('_onTrackingStarted()')
 
       this.tracking = true
       this.trackingText = 'Track: Off'
     },
 
     _onTrackingStopped() {
-      DEBUG && _getLogger().debug('_onTrackingStopped()')
+      _getLogger(Controls).debug('_onTrackingStopped()')
 
-      !!this.rendered && this.destroyMap()
+      this.rendered && this.destroyMap()
 
       this.tracking = false
       this.trackingText = 'Track: On'
@@ -170,43 +171,43 @@ const Controls = {
     // ********************************************************
   },
   beforeCreate: function() {
-    DEBUG && _getLogger().debug('beforeCreate')
+    _getLogger(Controls).debug('beforeCreate')
   },
   created: function() {
-    DEBUG && _getLogger().debug('created')
+    _getLogger(Controls).debug('created')
   },
   beforeMount: function() {
-    DEBUG && _getLogger().debug('beforeMount')
+    _getLogger(Controls).debug('beforeMount')
   },
   mounted: function() {
-    DEBUG && _getLogger().debug('mounted')
+    _getLogger(Controls).debug('mounted')
 
     broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this._onCurrentPositionUpdate)
     broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this._onTrackingStarted)
     broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this._onTrackingStopped)
 
-    // interval.set(Controls.name, this.STATUS_INTERVAL_ID, () => {
-    //   this.statusUpdate = Date.now()
-    //   DEBUG && _getLogger().debug('Status updated at ', this.statusUpdate)
-    // }, this.STATUS_INTERVAL_TIMER)
+    createInterval(this.STATUS_INTERVAL_ID, this.STATUS_INTERVAL_TIMER, () => {
+      this.statusUpdate = Date.now()
+      _getLogger(Controls).debug('Status updated at ', this.statusUpdate)
+    })
   },
   beforeUpdate: function() {
-    DEBUG && _getLogger().debug('beforeUpdate')
+    _getLogger(Controls).debug('beforeUpdate')
   },
   updated: function() {
-    DEBUG && _getLogger().debug('updated')
+    _getLogger(Controls).debug('updated')
   },
   beforeDestroy: function() {
-    DEBUG && _getLogger().debug('beforeDestroy')
+    _getLogger(Controls).debug('beforeDestroy')
   },
   destroyed: function() {
-    DEBUG && _getLogger().debug('destroyed')
+    _getLogger(Controls).debug('destroyed')
 
     broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
     broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED)
     broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED)
 
-    // interval.clear(Controls.name, this.STATUS_INTERVAL_ID)
+    destroyInterval(this.STATUS_INTERVAL_ID)
   },
 }
 

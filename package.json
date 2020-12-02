@@ -2,7 +2,7 @@
   "name": "geolocation-map",
   "version": "1.0.0",
   "description": "Locate position using device geolocation api, leaflet interactive map and openstreet layer",
-  "author": "José Diaz <info@josediaz.site> (https://josediaz.site)",
+  "author": "José Diaz <contact@xisco.dev> (https://xisco.dev)",
   "license": "ISC",
   "keywords": [
     "geolocation",
@@ -44,8 +44,8 @@
     "leaflet": "^1.6.0",
     "lodash.unset": "^4.5.2",
     "lodash.values": "^4.3.0",
-    "the-browser-logger": "^1.0.4",
-    "the-type-validator": "^1.0.2",
+    "the-type-validator": "^1.1.0",
+    "timer-creator": "^1.0.2",
     "vue": "^2.6.10",
     "vue2-leaflet": "^2.4.1"
   },
@@ -63,6 +63,7 @@
     "pre-commit": "^1.2.2",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",
+    "the-browser-logger": "^1.1.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.2.0",
     "vue-loader": "^15.7.2",

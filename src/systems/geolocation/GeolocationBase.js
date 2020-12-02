@@ -1,4 +1,4 @@
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isNull } from 'the-type-validator'
 import GeolocationEvent from 'geolocation/GeolocationEvents'
 import {
@@ -11,6 +11,9 @@ import {
   getStoredCurrentPosition,
 } from 'geolocation/storeGeolocation'
 import broadcast from 'broadcast/broadcast'
+
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
 
 /**
  * GeolocationBase class to define geolocation functionality
@@ -38,7 +41,7 @@ class GeolocationBase {
    */
   _isSupported() {
     const isSupported = !!navigator.geolocation
-    DEBUG && this._getLogger().debug('_isSupported()', isSupported)
+    this._getLogger().debug('_isSupported()', isSupported)
     return isSupported
   }
 
@@ -53,7 +56,7 @@ class GeolocationBase {
 
     setCurrentPosition(position)
 
-    DEBUG && this._getLogger().debug('_successTracking() position', position)
+    this._getLogger().debug('_successTracking() position', position)
     broadcast.publish(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
   }
 
@@ -61,7 +64,7 @@ class GeolocationBase {
    * @param {PositionError} error
    */
   _errorTracking(error) {
-    DEBUG && this._getLogger().error('_errorTracking()', error)
+    this._getLogger().error('_errorTracking()', error)
     !!error.PERMISSION_DENIED && broadcast.publish(GeolocationEvent.ON_GEOLOCATION_PERMISSION_DENIED, error)
     !!error.POSITION_UNAVAILABLE && broadcast.publish(GeolocationEvent.ON_GEOLOCATION_POSITION_UNAVAILABLE, error)
     !!error.TIMEOUT && broadcast.publish(GeolocationEvent.ON_GEOLOCATION_TIMEOUT, error)
@@ -71,7 +74,7 @@ class GeolocationBase {
    * @param {PositionOptions} options
    */
   renewCurrentPosition(options = null) {
-    DEBUG && this._getLogger().debug('renewCurrentPosition() options ', options)
+    this._getLogger().debug('renewCurrentPosition() options', options)
     navigator.geolocation.getCurrentPosition(this._successTracking, this._errorTracking, options)
   }
 
@@ -85,7 +88,7 @@ class GeolocationBase {
       setTrackingWatcher(trackingWatcher)
       broadcast.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
     }
-    DEBUG && this._getLogger().debug('startTracking()', options, trackingWatcher)
+    this._getLogger().debug('startTracking()', options, trackingWatcher)
   }
 
   /**
@@ -97,7 +100,7 @@ class GeolocationBase {
       setTrackingWatcher(null)
       broadcast.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
     }
-    DEBUG && this._getLogger().debug('stopTracking()', trackingWatcher)
+    this._getLogger().debug('stopTracking()', trackingWatcher)
   }
 }
 

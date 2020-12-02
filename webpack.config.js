@@ -72,6 +72,7 @@ const config = {
     }),
     new VueLoaderPlugin(),
     new HtmlWebPackPlugin({
+      favicon: SRC_DIR + '/favicon.ico',
       template: SRC_DIR + '/index.html',
       filename: 'index.html',
     }),
@@ -91,7 +92,7 @@ const config = {
         use: ['vue-style-loader', 'style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/i,
+        test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/i,
         use: ['file-loader'],
       },
     ],
@@ -103,7 +104,7 @@ const config = {
   },
 }
 
-console.log('BUILD_TYPE', process.env.BUILD_TYPE)
+console.log('BUILD_TYPE', buildType)
 console.log('NODE_ENV', process.env.NODE_ENV)
 console.log('DEBUG', isDev)
 console.log('devtool', config.devtool)

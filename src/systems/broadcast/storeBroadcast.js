@@ -1,5 +1,8 @@
-import { requestLogger } from 'the-browser-logger'
+import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import BroadcastBase from 'broadcast/BroadcastBase'
+
+setTimestampFormat(true)
+DEBUG && setLoggerLevel(Level.DEBUG)
 
 /**
  * Class to handle notifications from the Store

@@ -1,13 +1,10 @@
-import networkMonitor from 'systems/network/monitor'
-
-export default function() {
-  const asyncReturn = new Promise(
+const initAsync = () => {
+  return new Promise(
     (resolve, reject) => {
-      // MONITORS
-      networkMonitor.initializeMonitor()
+      // INIT ANY MODULE BEFORE RENDER HERE
       resolve()
     }
   )
-
-  return asyncReturn
 }
+
+export default initAsync
