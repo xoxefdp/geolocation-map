@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["src/components"],
+      "systems/*": ["src/systems"],
+      "geolocation/*": ["src/systems/geolocation"],
+      "permissions/*": ["src/systems/permissions"],
+      "styles/*": ["src/styles"],
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
