@@ -8,16 +8,8 @@
 </template>
 
 <script>
-import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { latLng } from 'leaflet'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
-
-setTimestampFormat(true)
-DEBUG && setLoggerLevel(Level.DEBUG)
-
-const _getLogger = (component) => {
-  return requestLogger(component.name)
-}
 
 const Mape = {
   name: 'Mape',
@@ -26,13 +18,12 @@ const Mape = {
     return {
       popupCoordinates: null,
       popupContent: '',
-
       // leaflet data
       zoom: 17,
       coordinates: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution: '&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>, ' +
-        'Powered by <a href="https://deepertech.com" target="_blank">Deepertech</a>',
+      attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>
+        Powered by <a href="https://deepertech.com" target="_blank">Deepertech</a>`,
       // ************
     }
   },
@@ -41,48 +32,27 @@ const Mape = {
     'rendered',
   ],
   methods: {
-    createOrMovePopup(event) {
+    createOrMovePopup (event) {
       this.popupCoordinates = {
         latitude: event.latlng.lat,
         longitude: event.latlng.lng,
       }
-      _getLogger(Mape).debug('createOrMovePopup()', this.popupCoordinates)
+      console.debug(Mape.name, 'createOrMovePopup()', this.popupCoordinates)
     },
   },
   watch: {
     position: function(newPosition, oldPosition) {
       this.coordinates = latLng(newPosition.coords.latitude, newPosition.coords.longitude)
-      this.popupContent = !!this.popupCoordinates ? 'Coordinates: ' + this.popupCoordinates.toString() : ''
+      this.popupContent = this.popupCoordinates ? 'Coordinates: ' + this.popupCoordinates.toString() : ''
     },
   },
   beforeCreate: function() {
-    _getLogger(Mape).debug('beforeCreate')
+    console.debug(Mape.name, 'beforeCreate')
 
     this.mapStyles = {
       height: window.innerHeight - 20 + 'px',
       width: window.innerWidth - 20 + 'px',
     }
-  },
-  created: function() {
-    _getLogger(Mape).debug('created')
-  },
-  beforeMount: function() {
-    _getLogger(Mape).debug('beforeMount')
-  },
-  mounted: function() {
-    _getLogger(Mape).debug('mounted')
-  },
-  beforeUpdate: function() {
-    _getLogger(Mape).debug('beforeUpdate')
-  },
-  updated: function() {
-    _getLogger(Mape).debug('updated')
-  },
-  beforeDestroy: function() {
-    _getLogger(Mape).debug('beforeDestroy')
-  },
-  destroyed: function() {
-    _getLogger(Mape).debug('destroyed')
   },
 }
 

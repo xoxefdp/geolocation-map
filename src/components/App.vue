@@ -8,25 +8,21 @@
     <Controls
       :rendered="rendered"
       :position="position"
+      :geoDisabled="geoDisabled"
       v-on:onmaprenderchange="_onMapRenderChange"
     />
   </div>
 </template>
 
 <script>
-import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isNull } from 'the-type-validator'
-import broadcast from 'broadcast/broadcast'
-import GeolocationEvent from 'geolocation/GeolocationEvents'
+import PubSub from 'pubsub-js'
+import { GeolocationEvent, PermissionEvent } from 'systems/Events'
+import { isGeolocationDenied } from 'geolocation/geolocation'
+import { STORE_NAME as GeoStore, getStoredCurrentPosition } from 'geolocation/store'
+import { getStoredCurrentState } from 'permissions/store'
 import Mape from 'components/app/Mape'
 import Controls from 'components/app/Controls'
-
-setTimestampFormat(true)
-DEBUG && setLoggerLevel(Level.DEBUG)
-
-const _getLogger = (component) => {
-  return requestLogger(component.name)
-}
 
 const App = {
   name: 'App',
@@ -44,56 +40,51 @@ const App = {
         speed: null,
         timestamp: null,
       },
+      geoDisabled: isGeolocationDenied(),
     }
   },
   methods: {
     // METHODS
-    _setPosition(position) {
-      _getLogger(App).debug('_setPosition()', position)
+    _setPosition (position) {
+      console.debug(App.name, '_setPosition()', position)
       this.position = position
     },
 
+    _setGeoDisabled () {
+      const permission = getStoredCurrentState(GeoStore)
+      console.debug(App.name, '_setGeoDisabled()', permission)
+      this.geoDisabled = isGeolocationDenied()
+    },
+
     // EVENTS
-    _onCurrentPositionUpdate(positionUpdate) {
-      _getLogger(App).debug('_onCurrentPositionUpdate()', positionUpdate)
-      if ( !isNull(positionUpdate) ) {
+    _onCurrentPositionUpdate () {
+      const positionUpdate = getStoredCurrentPosition()
+      console.debug(App.name, '_onCurrentPositionUpdate()', positionUpdate)
+      if (!isNull(positionUpdate)) {
         this._setPosition(positionUpdate)
       }
     },
-    _onMapRenderChange(value) {
-      _getLogger(App).debug('_onMapRenderChange()', value)
+
+    _onMapRenderChange (value) {
+      console.debug(App.name, '_onMapRenderChange()', value)
       this.rendered = value
     },
   },
-  beforeCreate: function() {
-    _getLogger(App).debug('beforeCreate')
-  },
-  created: function() {
-    _getLogger(App).debug('created')
-  },
-  beforeMount: function() {
-    _getLogger(App).debug('beforeMount')
-  },
   mounted: function() {
-    _getLogger(App).debug('mounted')
+    console.debug(App.name, 'mounted')
 
-    broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE,
+    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE,
       this._onCurrentPositionUpdate
     )
-  },
-  beforeUpdate: function() {
-    _getLogger(App).debug('beforeUpdate')
-  },
-  updated: function() {
-    _getLogger(App).debug('updated')
+
+    PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this._setGeoDisabled)
+    PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this._setGeoDisabled)
+    PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this._setGeoDisabled)
   },
   beforeDestroy: function() {
-    _getLogger(App).debug('beforeDestroy')
+    console.debug(App.name, 'beforeDestroy')
 
-    broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
-  },
-  destroyed: function() {
-    _getLogger(App).debug('destroyed')
+    PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
   },
 }
 
