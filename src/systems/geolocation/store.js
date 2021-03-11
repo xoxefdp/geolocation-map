@@ -1,8 +1,5 @@
-import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { getFromStore, setToStore } from 'systems/store'
-
-setTimestampFormat(true)
-DEBUG && setLoggerLevel(Level.DEBUG)
+import { initializeResourceStore } from 'permissions/store'
 
 const ID = 'StoreGeolocation'
 const STORE_NAME = 'geolocation'
@@ -14,18 +11,15 @@ const state = {
   beforeCurrentPosition: null,
 }
 
-const _getLogger = () => {
-  return requestLogger(ID)
-}
-
-_getLogger().debug('initializeStore()')
+console.debug(ID, 'initializeStore()')
 setToStore(STORE_NAME, state)
+initializeResourceStore(STORE_NAME)
 
 /**
  * @param {number} trackingWatcher
  */
 const setTrackingWatcher = (trackingWatcher) => {
-  _getLogger().debug('setTrackingWatcher()', trackingWatcher)
+  console.debug(ID, 'setTrackingWatcher()', trackingWatcher)
   setToStore(`${STORE_NAME}.trackingWatcher`, trackingWatcher)
 }
 
@@ -33,7 +27,7 @@ const setTrackingWatcher = (trackingWatcher) => {
  * @returns {number}
  */
 const getStoredTrackingWatcher = () => {
-  _getLogger().debug('getStoredTrackingWatcher()')
+  console.debug(ID, 'getStoredTrackingWatcher()')
   return getFromStore(`${STORE_NAME}.trackingWatcher`)
 }
 
@@ -41,7 +35,7 @@ const getStoredTrackingWatcher = () => {
  * @param {Position} position
  */
 const setInitialPosition = (position) => {
-  _getLogger().debug('setInitialPosition()', position)
+  console.debug(ID, 'setInitialPosition()', position)
   setToStore(`${STORE_NAME}.initialPosition`, position)
 }
 
@@ -49,7 +43,7 @@ const setInitialPosition = (position) => {
  * @returns {Position}
  */
 const getStoredInitialPosition = () => {
-  _getLogger().debug('getStoredInitialPosition()')
+  console.debug(ID, 'getStoredInitialPosition()')
   return getFromStore(`${STORE_NAME}.initialPosition`)
 }
 
@@ -57,7 +51,7 @@ const getStoredInitialPosition = () => {
  * @param {Position} position
  */
 const setCurrentPosition = (position) => {
-  _getLogger().debug('setCurrentPosition()', position)
+  console.debug(ID, 'setCurrentPosition()', position)
   setToStore(`${STORE_NAME}.currentPosition`, position)
 }
 
@@ -65,7 +59,7 @@ const setCurrentPosition = (position) => {
  * @returns {Position}
  */
 const getStoredCurrentPosition = () => {
-  _getLogger().debug('getStoredCurrentPosition()')
+  console.debug(ID, 'getStoredCurrentPosition()')
   return getFromStore(`${STORE_NAME}.currentPosition`)
 }
 
@@ -73,7 +67,7 @@ const getStoredCurrentPosition = () => {
  * @param {Position} position
  */
 const setBeforeCurrentPosition = (position) => {
-  _getLogger().debug('setBeforeCurrentPosition()', position)
+  console.debug(ID, 'setBeforeCurrentPosition()', position)
   setToStore(`${STORE_NAME}.beforeCurrentPosition`, position)
 }
 
@@ -81,7 +75,7 @@ const setBeforeCurrentPosition = (position) => {
  * @returns {Position}
  */
 const getStoredBeforeCurrentPosition = () => {
-  _getLogger().debug('getStoredBeforeCurrentPosition()')
+  console.debug(ID, 'getStoredBeforeCurrentPosition()')
   return getFromStore(`${STORE_NAME}.beforeCurrentPosition`)
 }
 
