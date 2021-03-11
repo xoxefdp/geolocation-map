@@ -49,7 +49,6 @@
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "lodash.unset": "^4.5.2",
-    "lodash.values": "^4.3.0",
     "pubsub-js": "^1.9.3",
     "the-type-validator": "^1.1.0",
     "timer-creator": "^1.0.2",
