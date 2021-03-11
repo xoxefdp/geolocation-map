@@ -1,26 +1,23 @@
-import { setTimestampFormat, setLoggerLevel, Level, requestLogger } from 'the-browser-logger'
-import storeBroadcast from 'broadcast/storeBroadcast'
-import { get, set } from 'helpers/utilOperations'
+import PubSub from 'pubsub-js'
+import set from 'lodash.set'
+import get from 'lodash.get'
 import unset from 'lodash.unset'
 
-setTimestampFormat(true)
-DEBUG && setLoggerLevel(Level.DEBUG)
-
-const ID = 'store'
-const store = {}
+const ID = '_store'
+const _store = {}
 
 const getFromStore = (path) => {
-  return get(store, path)
+  return get(_store, path)
 }
 
 const setToStore = (path, newValue, force) => {
   const oldValue = getFromStore(path)
   if (path.indexOf('undefined') === 0) {
-    requestLogger(ID).error('setToStore()::Error, wrong store path. Check how the path was created. path=', path)
+    console.error(ID, 'setToStore()::Error, wrong _store path. Check how the path was created. path=', path)
   }
   if (force || oldValue !== newValue) {
-    set(store, path, newValue)
-    storeBroadcast.publish(path, {
+    set(_store, path, newValue)
+    PubSub.publish(path, {
       newValue,
       oldValue,
     })
@@ -29,15 +26,16 @@ const setToStore = (path, newValue, force) => {
 }
 
 /**
- * Sets several values in the store
- * @param {String} pathPrefix
- * @param {Object} values
+ * Sets several values in the _store
+ *
+ * @param {string} pathPrefix
+ * @param {object} values
  */
 const setValuesToStore = (pathPrefix, values) => {
   for (const key in values) {
     // eslint-disable-next-line no-prototype-builtins
     if (values.hasOwnProperty(key)) {
-      setToStore(`${pathPrefix}.${key}`, values[ key ])
+      setToStore(`${pathPrefix}.${key}`, values[key])
     }
   }
 }
@@ -47,18 +45,19 @@ const unsetStoreValue = (path) => {
 }
 
 const subscribeToStoreValue = (...args) => {
-  return getFromStore(storeBroadcast.subscribe(...args))
+  return getFromStore(PubSub.subscribe(...args))
 }
 
 const unsubscribeToStoreValue = (...args) => {
-  storeBroadcast.unsubscribe(...args)
+  PubSub.unsubscribe(...args)
 }
 
 /**
- * Resets a store
- * @param {String} storeName
- * @param {Object} storeValue
- * @param {Boolean} silently Indicates if it has to reset the store without syncing the data with the components.
+ * Resets a _store
+ *
+ * @param {string} storeName
+ * @param {object} storeValue
+ * @param {boolean} silently Indicates if it has to reset the _store without syncing the data with the components.
  */
 const resetStore = (storeName, storeValue, silently = false) => {
   if (silently) {
@@ -69,6 +68,7 @@ const resetStore = (storeName, storeValue, silently = false) => {
 }
 
 export {
+  _store,
   setToStore,
   setValuesToStore,
   getFromStore,

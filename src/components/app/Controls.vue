@@ -13,12 +13,16 @@
     <p>tracking status: <span id="tracking"> {{ tracking }} </span></p>
     <div style="display:inline-block">
       <div style="display:inline-block">
-        <button v-on:click="toggleTracking">
+        <button v-on:click="toggleTracking" :disabled="geoDisabled">
           <span>{{ trackingText }}</span>
         </button>
       </div>
       <div style="display:inline-block">
-        <button v-bind:class="{ btnShow: tracking, btnHide: !tracking }" v-on:click="toggleMap">
+        <button
+          v-bind:class="{ btnShow: tracking, btnHide: !tracking }"
+          v-on:click="toggleMap"
+          :disabled="geoDisabled"
+        >
           <span>{{ mapButtonText }}</span>
         </button>
       </div>
@@ -27,20 +31,12 @@
 </template>
 
 <script>
-import { Level, setTimestampFormat, setLoggerLevel, requestLogger } from 'the-browser-logger'
 import { isNull } from 'the-type-validator'
-import broadcast from 'broadcast/broadcast'
-import GeolocationEvent from 'geolocation/GeolocationEvents'
-import geolocation from 'geolocation/geolocation'
-import { getStoredCurrentPosition } from 'geolocation/storeGeolocation'
+import PubSub from 'pubsub-js'
+import { GeolocationEvent } from 'systems/Events'
+import { startTracking, stopTracking } from 'geolocation/geolocation'
+import { getStoredCurrentPosition } from 'geolocation/store'
 import { createInterval, destroyInterval, TimeUnit } from 'timer-creator'
-
-setTimestampFormat(true)
-DEBUG && setLoggerLevel(Level.DEBUG)
-
-const _getLogger = (component) => {
-  return requestLogger(component.name)
-}
 
 const Controls = {
   name: 'Controls',
@@ -71,16 +67,17 @@ const Controls = {
   props: [
     'position',
     'rendered',
+    'geoDisabled',
   ],
   methods: {
     // GEOLOCATION METHODS
-    _getCurrentPosition() {
+    _getCurrentPosition () {
       const currentPosition = getStoredCurrentPosition()
-      _getLogger(Controls).debug('_getCurrentPosition()', currentPosition)
+      console.debug(Controls.name, '_getCurrentPosition()', currentPosition)
       return currentPosition
     },
 
-    _updateControlsData(newPosition) {
+    _updateControlsData (newPosition) {
       this.latitude = newPosition.coords.latitude
       this.longitude = newPosition.coords.longitude
       this.altitude = newPosition.coords.altitude
@@ -91,121 +88,106 @@ const Controls = {
       this.timestamp = newPosition.timestamp
     },
 
-    _setPosition(newPosition) {
+    _setPosition (newPosition) {
       this.coordsUpdatedTimes++
-      this._updateControlsData( newPosition )
+      this._updateControlsData(newPosition)
     },
 
     // GEOLOCATION EVENTS
-    _onCurrentPositionUpdate(positionUpdate) {
-      _getLogger(Controls).debug('_onCurrentPositionUpdate()')
-      if ( !isNull(positionUpdate) ) {
+    _onCurrentPositionUpdate () {
+      const positionUpdate = this._getCurrentPosition()
+      console.debug(Controls.name, '_onCurrentPositionUpdate()')
+      if (!isNull(positionUpdate)) {
         this._setPosition(positionUpdate)
       }
     },
     // ********************************************************
 
     // MAP METHODS
-    renderMap() {
+    renderMap () {
       this._onMapRender()
     },
 
-    destroyMap() {
+    destroyMap () {
       this._onMapDestroy()
     },
 
-    toggleMap() {
-      _getLogger(Controls).debug('toggleMap() map rendered', this.rendered)
+    toggleMap () {
+      console.debug(Controls.name, 'toggleMap() map rendered', this.rendered)
       if (this.rendered) {
         this.destroyMap()
       } else {
-        const position = this._getCurrentPosition()
-        _getLogger(Controls).debug('toggleMap() position', position)
-        !!position && this.renderMap()
+        const currentPosition = this._getCurrentPosition()
+        console.debug(Controls.name, 'toggleMap() position', currentPosition)
+        !!currentPosition && this.renderMap()
       }
     },
 
     // MAP EVENTS
-    _onMapRender() {
-      _getLogger(Controls).debug('_onMapRender()')
+    _onMapRender () {
+      console.debug(Controls.name, '_onMapRender()')
       this.$emit('onmaprenderchange', true)
       this.mapButtonText = 'Map: Off'
     },
 
-    _onMapDestroy() {
-      _getLogger(Controls).debug('_onMapDestroy()')
+    _onMapDestroy () {
+      console.debug(Controls.name, '_onMapDestroy()')
       this.$emit('onmaprenderchange', false)
       this.mapButtonText = 'Map: On'
     },
     // ********************************************************
 
     // TRACKING METHODS
-    startTracking() {
-      geolocation.startTracking()
-    },
-
-    stopTracking() {
-      geolocation.stopTracking()
-    },
-
-    toggleTracking() {
-      this.tracking ? this.stopTracking() : this.startTracking()
+    toggleTracking () {
+      this.tracking
+        ? stopTracking()
+        : startTracking()
     },
 
     // TRACKING EVENTS
-    _onTrackingStarted() {
-      _getLogger(Controls).debug('_onTrackingStarted()')
+    _onTrackingStarted () {
+      console.debug(Controls.name, '_onTrackingStarted()')
+
+      // new Promise((resolve, reject) => {
+
+      // })
 
       this.tracking = true
       this.trackingText = 'Track: Off'
     },
 
-    _onTrackingStopped() {
-      _getLogger(Controls).debug('_onTrackingStopped()')
+    _onTrackingStopped () {
+      console.debug(Controls.name, '_onTrackingStopped()')
 
       this.rendered && this.destroyMap()
+
+      // new Promise((resolve, reject) => {
+
+      // })
 
       this.tracking = false
       this.trackingText = 'Track: On'
     },
     // ********************************************************
   },
-  beforeCreate: function() {
-    _getLogger(Controls).debug('beforeCreate')
-  },
-  created: function() {
-    _getLogger(Controls).debug('created')
-  },
-  beforeMount: function() {
-    _getLogger(Controls).debug('beforeMount')
-  },
   mounted: function() {
-    _getLogger(Controls).debug('mounted')
+    console.debug(Controls.name, 'mounted')
 
-    broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this._onCurrentPositionUpdate)
-    broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this._onTrackingStarted)
-    broadcast.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this._onTrackingStopped)
+    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this._onCurrentPositionUpdate)
+    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this._onTrackingStarted)
+    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this._onTrackingStopped)
 
     createInterval(this.STATUS_INTERVAL_ID, this.STATUS_INTERVAL_TIMER, () => {
       this.statusUpdate = Date.now()
-      _getLogger(Controls).debug('Status updated at ', this.statusUpdate)
+      console.debug(Controls.name, 'Status updated at ', this.statusUpdate)
     })
   },
-  beforeUpdate: function() {
-    _getLogger(Controls).debug('beforeUpdate')
-  },
-  updated: function() {
-    _getLogger(Controls).debug('updated')
-  },
   beforeDestroy: function() {
-    _getLogger(Controls).debug('beforeDestroy')
-  },
-  destroyed: function() {
-    _getLogger(Controls).debug('destroyed')
+    console.debug(Controls.name, 'beforeDestroy')
 
-    broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
-    broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED)
-    broadcast.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED)
+    PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+    PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED)
+    PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED)
 
     destroyInterval(this.STATUS_INTERVAL_ID)
   },

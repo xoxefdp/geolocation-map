@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-// const dvt = require(WEBPACK_COMMON_DIR + '/devtool-level')
+const TerserPlugin = require('terser-webpack-plugin')
 
 // FRAMEWORK FOLDERS
 const NODE_DIR = path.resolve(__dirname, 'node_modules')
@@ -44,26 +44,23 @@ const DevtoolLevel = {
 }
 
 const config = {
-  devtool: isDev ? DevtoolLevel.SOURCE_MAP : DevtoolLevel.CHEAP_SOURCE_MAP,
-  entry: {
-    app: SRC_DIR + '/main.js',
-  },
+  mode: process.env.NODE_ENV,
+  devtool: isDev ? DevtoolLevel.SOURCE_MAP : DevtoolLevel.NONE,
+  entry: `${SRC_DIR}/main.js`,
   output: {
     path: DIST_DIR,
     filename: 'bundle.js',
   },
   resolve: {
     extensions: ['.js', '.vue'],
-    modules: [SRC_DIR, 'node_modules'],
+    modules: [SRC_DIR, NODE_DIR],
     alias: {
-      'vue$': vueBuildType[ buildType ],
-      'components': SRC_DIR + '/components',
-      'helpers': SRC_DIR + '/helpers',
-      'systems': SRC_DIR + '/systems',
-      'broadcast': SRC_DIR + '/systems/broadcast',
-      'geolocation': SRC_DIR + '/systems/geolocation',
-      'network': SRC_DIR + '/systems/network',
-      'styles': SRC_DIR + '/styles',
+      vue$: vueBuildType[buildType],
+      components: `${SRC_DIR}/components`,
+      systems: `${SRC_DIR}/systems`,
+      geolocation: `${SRC_DIR}/systems/geolocation`,
+      permissions: `${SRC_DIR}/systems/permissions`,
+      styles: `${SRC_DIR}/styles`,
     },
   },
   plugins: [
@@ -72,8 +69,8 @@ const config = {
     }),
     new VueLoaderPlugin(),
     new HtmlWebPackPlugin({
-      favicon: SRC_DIR + '/favicon.ico',
-      template: SRC_DIR + '/index.html',
+      favicon: `${SRC_DIR}/favicon.ico`,
+      template: `${SRC_DIR}/index.html`,
       filename: 'index.html',
     }),
   ],
@@ -82,10 +79,17 @@ const config = {
       {
         test: /\.vue$/i,
         use: ['vue-loader'],
+        exclude: [
+          /\.spec\.js/,
+        ],
       },
       {
         test: /\.js$/i,
         use: ['eslint-loader'],
+        exclude: [
+          /node_modules/,
+          /\.spec\.js/,
+        ],
       },
       {
         test: /\.css$/i,
@@ -102,6 +106,14 @@ const config = {
     port: 9000,
     host: '0.0.0.0',
   },
+}
+if (!isDev) {
+  config.optimization = {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      parallel: true,
+    })],
+  }
 }
 
 console.log('BUILD_TYPE', buildType)
