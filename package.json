@@ -81,7 +81,7 @@
     "pre-commit": "^1.2.2",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",
-    "terser-webpack-plugin": "^5.1.1",
+    "terser-webpack-plugin": "^4.2.3",
     "url-loader": "^2.2.0",
     "vue-jest": "^3.0.7",
     "vue-loader": "^15.7.2",
