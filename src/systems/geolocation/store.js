@@ -1,3 +1,4 @@
+import { isNull } from 'the-type-validator'
 import { getFromStore, setToStore } from 'systems/store'
 import { initializeResourceStore } from 'permissions/store'
 
@@ -24,27 +25,11 @@ const setTrackingWatcher = (trackingWatcher) => {
 }
 
 /**
- * @returns {number}
- */
-const getStoredTrackingWatcher = () => {
-  console.debug(ID, 'getStoredTrackingWatcher()')
-  return getFromStore(`${STORE_NAME}.trackingWatcher`)
-}
-
-/**
  * @param {Position} position
  */
 const setInitialPosition = (position) => {
   console.debug(ID, 'setInitialPosition()', position)
   setToStore(`${STORE_NAME}.initialPosition`, position)
-}
-
-/**
- * @returns {Position}
- */
-const getStoredInitialPosition = () => {
-  console.debug(ID, 'getStoredInitialPosition()')
-  return getFromStore(`${STORE_NAME}.initialPosition`)
 }
 
 /**
@@ -56,14 +41,6 @@ const setCurrentPosition = (position) => {
 }
 
 /**
- * @returns {Position}
- */
-const getStoredCurrentPosition = () => {
-  console.debug(ID, 'getStoredCurrentPosition()')
-  return getFromStore(`${STORE_NAME}.currentPosition`)
-}
-
-/**
  * @param {Position} position
  */
 const setBeforeCurrentPosition = (position) => {
@@ -72,11 +49,50 @@ const setBeforeCurrentPosition = (position) => {
 }
 
 /**
+ * @returns {number}
+ */
+const getStoredTrackingWatcher = () => {
+  const trackingWatcher = getFromStore(`${STORE_NAME}.trackingWatcher`)
+  console.debug(ID, `getStoredTrackingWatcher() ${trackingWatcher}`)
+  return trackingWatcher
+}
+
+/**
+ * @returns {Position}
+ */
+const getStoredInitialPosition = () => {
+  const initialPosition = getFromStore(`${STORE_NAME}.initialPosition`)
+  console.debug(ID, `getStoredInitialPosition() ${initialPosition}`)
+  return initialPosition
+}
+
+/**
+ * @returns {Position}
+ */
+const getStoredCurrentPosition = () => {
+  const currentPosition = getFromStore(`${STORE_NAME}.currentPosition`)
+  console.debug(ID, `getStoredCurrentPosition() ${currentPosition}`)
+  return currentPosition
+}
+
+/**
  * @returns {Position}
  */
 const getStoredBeforeCurrentPosition = () => {
-  console.debug(ID, 'getStoredBeforeCurrentPosition()')
-  return getFromStore(`${STORE_NAME}.beforeCurrentPosition`)
+  const beforeCurrentPosition = getFromStore(`${STORE_NAME}.beforeCurrentPosition`)
+  console.debug(ID, `getStoredBeforeCurrentPosition() ${beforeCurrentPosition}`)
+  return beforeCurrentPosition
+}
+
+const updateGeolocationStore = (position) => {
+  console.debug(ID, 'updateGeolocationStore()', position)
+
+  const initialPosition = getStoredInitialPosition()
+  const currentPosition = getStoredCurrentPosition()
+  isNull(initialPosition) && setInitialPosition(position)
+  !isNull(currentPosition) && setBeforeCurrentPosition(currentPosition)
+
+  setCurrentPosition(position)
 }
 
 export {
@@ -89,4 +105,5 @@ export {
   getStoredInitialPosition,
   getStoredCurrentPosition,
   getStoredBeforeCurrentPosition,
+  updateGeolocationStore,
 }
