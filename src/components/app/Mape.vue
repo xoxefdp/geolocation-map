@@ -38,7 +38,7 @@ const Mape = {
       coordinates: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>
-        Powered by <a href="https://deepertech.com" target="_blank">Deepertech</a>`,
+        Powered by <a href="https://xisco.dev" target="_blank">xiscodev</a>`,
     }
   },
   props: [
