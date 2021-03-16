@@ -111,10 +111,10 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -122,7 +122,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n#data-scheme {\n  background-color:rgba(255,255,255,0.6);\n  position: absolute;\n  bottom: 30px;\n  right: 10px;\n  z-index: 1000;\n  padding: 5px;\n  line-height: 0;\n}\np > span {\n  color: red;\n}\n.btnShow {\n  display: block;\n}\n.btnHide {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "\n.custom-mape-controls {\n  position: absolute;\n  bottom: 110px;\n  right: 22px;\n  z-index: 1000;\n}\n.btns-container {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: flex-start;\n  -ms-flex-pack: start;\n  justify-content: flex-start;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  align-content: center;\n  -webkit-align-items: flex-start;\n  -ms-flex-align: start;\n  align-items: flex-start;\n}\n.btn-box {\n  width: 30px;\n  height: 30px;\n  border: 2px solid rgba(0,0,0,0.2);\n  border-radius: 4px;\n  margin-top: 7px;\n  -webkit-order: 0;\n  -ms-flex-order: 0;\n  order: 0;\n  -webkit-flex: 0 1 auto;\n  -ms-flex: 0 1 auto;\n  flex: 0 1 auto;\n  -webkit-align-self: auto;\n  -ms-flex-item-align: auto;\n  align-self: auto;\n}\n.btn-gps {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  border: none;\n}\n.image-gps {\n  vertical-align: middle;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -143,6 +143,24 @@ exports = ___CSS_LOADER_API_IMPORT___(false);
 exports.i(___CSS_LOADER_AT_RULE_IMPORT_0___);
 // Module
 exports.push([module.i, "\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.overlay-component {\n  position: absolute;\n  background-color: rgba(255,255,255,0.7);\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 1000;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-flex-wrap: wrap;\n  -ms-flex-wrap: wrap;\n  flex-wrap: wrap;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  justify-content: center;\n  -webkit-align-content: stretch;\n  -ms-flex-line-pack: stretch;\n  align-content: stretch;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  align-items: center;\n}\n.overlay-box {\n  -webkit-order: 0;\n  -ms-flex-order: 0;\n  order: 0;\n  -webkit-flex: 0 1 auto;\n  -ms-flex: 0 1 auto;\n  flex: 0 1 auto;\n  -webkit-align-self: auto;\n  -ms-flex-item-align: auto;\n  align-self: auto;\n}\n.permission-denied {\n  color: red;\n}\n.permission-prompt {\n  color: black;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -18147,15 +18165,15 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Controls.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&");
+            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomMapeControls.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&");
 
             content = content.__esModule ? content.default : content;
 
@@ -18185,6 +18203,35 @@ module.exports = content.locals || {};
 
 var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
             var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Mape.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Mape.vue?vue&type=style&index=0&lang=css&");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Overlay.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&");
 
             content = content.__esModule ? content.default : content;
 
@@ -18496,17 +18543,6 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./node_modules/timer-creator/dist/main.js":
-/*!*************************************************!*\
-  !*** ./node_modules/timer-creator/dist/main.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-!function(e){var t={};function r(o){if(t[o])return t[o].exports;var n=t[o]={i:o,l:!1,exports:{}};return e[o].call(n.exports,n,n.exports,r),n.l=!0,n.exports}r.m=e,r.c=t,r.d=function(e,t,o){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(r.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)r.d(o,n,function(t){return e[t]}.bind(null,n));return o},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="/home/xoxefdp/WORKSPACE/PROJECTS/NPM_LIBS/timer-creator/dist",r(r.s=0)}([function(e,t,r){"use strict";r.r(t);var o={MILISECOND:1,SECOND:1e3,MINUTE:6e4,HOUR:36e5,DAY:864e5};const n=e=>!!e&&"[object Map]"===e.toString(),i=()=>new Map,u=(e,t,r)=>{e&&t&&r&&n(e)&&e.set(t,r)},a=(e,t)=>n(e)&&e.get(t),s=(e,t)=>n(e)&&e.has(t),c=(e,t)=>{n(e)&&e.delete(t)};var l=(e,t)=>{var r;(r=e)&&"function"==typeof r&&(t?Array.isArray(t)&&0!==t.length?e(...t):e(t):e())};const f=i(),p=e=>s(f,e),d=e=>a(f,e),x=i(),v=e=>{c(x,e)},y=e=>s(x,e),m=e=>a(x,e);exports.TimeUnit=o,exports.existInterval=p,exports.getInterval=d,exports.createInterval=(e,t,r,o)=>{if(!p(e)){const n=setInterval(()=>{l(t,o)},r);u(f,e,n)}},exports.destroyInterval=e=>{p(e)&&(clearInterval(d(e)),(e=>{c(f,e)})(e))},exports.existTimeout=y,exports.getTimeout=m,exports.createTimeout=(e,t,r,o)=>{if(!y(e)){const n=setTimeout(()=>{v(e),l(t,o)},r);u(x,e,n)}},exports.destroyTimeout=e=>{y(e)&&(clearTimeout(m(e)),v(e))}}]);
-
-/***/ }),
-
 /***/ "./node_modules/timers-browserify/main.js":
 /*!************************************************!*\
   !*** ./node_modules/timers-browserify/main.js ***!
@@ -18591,24 +18627,15 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
-/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var geolocation_geolocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! geolocation/geolocation */ "./src/systems/geolocation/geolocation.js");
-/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
-/* harmony import */ var components_app_Mape__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! components/app/Mape */ "./src/components/app/Mape.vue");
-/* harmony import */ var components_app_Controls__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! components/app/Controls */ "./src/components/app/Controls.vue");
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var components_app_Mape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! components/app/Mape */ "./src/components/app/Mape.vue");
+/* harmony import */ var components_app_CustomMapeControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! components/app/CustomMapeControls */ "./src/components/app/CustomMapeControls.vue");
+/* harmony import */ var components_app_Overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/app/Overlay */ "./src/components/app/Overlay.vue");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
 //
 //
 //
@@ -18629,65 +18656,39 @@ __webpack_require__.r(__webpack_exports__);
 
 const App = {
   name: 'App',
-  components: { Mape: components_app_Mape__WEBPACK_IMPORTED_MODULE_6__["default"], Controls: components_app_Controls__WEBPACK_IMPORTED_MODULE_7__["default"] },
+  components: { Mape: components_app_Mape__WEBPACK_IMPORTED_MODULE_0__["default"], CustomMapeControls: components_app_CustomMapeControls__WEBPACK_IMPORTED_MODULE_1__["default"], Overlay: components_app_Overlay__WEBPACK_IMPORTED_MODULE_2__["default"] },
   data: function() {
     return {
-      rendered: false,
-      position: {
-        latitude: null,
-        longitude: null,
-        altitude: null,
-        accuracy: null,
-        altitudeAccuracy: null,
-        heading: null,
-        speed: null,
-        timestamp: null,
-      },
-      geoDisabled: Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_3__["isGeolocationDenied"])(),
+      overlay: !Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_7__["isPermissionGranted"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"]),
+      permissionState: Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["getStoredCurrentState"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"]),
     }
   },
   methods: {
-    // METHODS
-    _setPosition (position) {
-      console.debug(App.name, '_setPosition()', position)
-      this.position = position
-    },
-
-    _setGeoDisabled () {
-      const permission = Object(permissions_store__WEBPACK_IMPORTED_MODULE_5__["getStoredCurrentState"])(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["STORE_NAME"])
-      console.debug(App.name, '_setGeoDisabled()', permission)
-      this.geoDisabled = Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_3__["isGeolocationDenied"])()
-    },
-
-    // EVENTS
-    _onCurrentPositionUpdate () {
-      const positionUpdate = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["getStoredCurrentPosition"])()
-      console.debug(App.name, '_onCurrentPositionUpdate()', positionUpdate)
-      if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(positionUpdate)) {
-        this._setPosition(positionUpdate)
-      }
-    },
-
-    _onMapRenderChange (value) {
-      console.debug(App.name, '_onMapRenderChange()', value)
-      this.rendered = value
+    _onPermissionChanged (message, data) {
+      console.debug(`_onPermissionChanged() ${message} ${data.resource} ${data.state}`)
+      Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["updatePermissionStore"])(data.resource, data.state)
+      this.overlay = !Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_7__["isPermissionGranted"])(data.resource)
+      this.permissionState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["getStoredCurrentState"])(data.resource)
     },
   },
   mounted: function() {
     console.debug(App.name, 'mounted')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE,
-      this._onCurrentPositionUpdate
-    )
-
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_GRANTED, this._setGeoDisabled)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_PROMPT, this._setGeoDisabled)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_DENIED, this._setGeoDisabled)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_GRANTED, this._onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_PROMPT, this._onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_DENIED, this._onPermissionChanged)
+  },
+  updated: function() {
+    console.debug(App.name, 'updated')
+    console.debug(App.name, `overlay: ${this.overlay}`)
+    console.debug(App.name, `permissionState: ${this.permissionState}`)
   },
   beforeDestroy: function() {
     console.debug(App.name, 'beforeDestroy')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_GRANTED)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_PROMPT)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_DENIED)
   },
 }
 
@@ -18696,37 +18697,25 @@ const App = {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Controls.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/CustomMapeControls.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
-/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var geolocation_geolocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! geolocation/geolocation */ "./src/systems/geolocation/geolocation.js");
-/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var timer_creator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! timer-creator */ "./node_modules/timer-creator/dist/main.js");
-/* harmony import */ var timer_creator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(timer_creator__WEBPACK_IMPORTED_MODULE_5__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/img/cursor-24.png */ "./src/assets/img/cursor-24.png");
+/* harmony import */ var assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! assets/img/gps-24.png */ "./src/assets/img/gps-24.png");
+/* harmony import */ var assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! geolocation/geolocation */ "./src/systems/geolocation/geolocation.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
+/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
 //
 //
 //
@@ -18754,162 +18743,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Controls = {
-  name: 'Controls',
+
+const CustomMapeControls = {
+  name: 'CustomMapeControls',
   data: function() {
     return {
+      cursorImage: assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2___default.a,
+      gpsImage: assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3___default.a,
+
       // input values
-      latitude: null,
-      longitude: null,
-      altitude: null,
-      accuracy: null,
-      altitudeAccuracy: null,
-      heading: null,
-      speed: null,
-      timestamp: null,
       statusUpdate: null,
       coordsUpdatedTimes: 0,
 
-      // buttons data
-      tracking: false,
-      trackingText: 'Track: On',
-      mapButtonText: 'Map: On',
-
-      // status
-      STATUS_INTERVAL_ID: 'statusInterval',
-      STATUS_INTERVAL_TIMER: 10 * timer_creator__WEBPACK_IMPORTED_MODULE_5__["TimeUnit"].SECOND,
+      //
+      geoDisabled: null,
     }
   },
-  props: [
-    'position',
-    'rendered',
-    'geoDisabled',
-  ],
   methods: {
-    // GEOLOCATION METHODS
-    _getCurrentPosition () {
-      const currentPosition = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["getStoredCurrentPosition"])()
-      console.debug(Controls.name, '_getCurrentPosition()', currentPosition)
-      return currentPosition
-    },
-
-    _updateControlsData (newPosition) {
-      this.latitude = newPosition.coords.latitude
-      this.longitude = newPosition.coords.longitude
-      this.altitude = newPosition.coords.altitude
-      this.accuracy = newPosition.coords.accuracy
-      this.altitudeAccuracy = newPosition.coords.altitudeAccuracy
-      this.heading = newPosition.coords.heading
-      this.speed = newPosition.coords.speed
-      this.timestamp = newPosition.timestamp
-    },
-
-    _setPosition (newPosition) {
-      this.coordsUpdatedTimes++
-      this._updateControlsData(newPosition)
-    },
-
-    // GEOLOCATION EVENTS
-    _onCurrentPositionUpdate () {
-      const positionUpdate = this._getCurrentPosition()
-      console.debug(Controls.name, '_onCurrentPositionUpdate()')
-      if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(positionUpdate)) {
-        this._setPosition(positionUpdate)
-      }
-    },
-    // ********************************************************
-
-    // MAP METHODS
-    renderMap () {
-      this._onMapRender()
-    },
-
-    destroyMap () {
-      this._onMapDestroy()
-    },
-
-    toggleMap () {
-      console.debug(Controls.name, 'toggleMap() map rendered', this.rendered)
-      if (this.rendered) {
-        this.destroyMap()
-      } else {
-        const currentPosition = this._getCurrentPosition()
-        console.debug(Controls.name, 'toggleMap() position', currentPosition)
-        !!currentPosition && this.renderMap()
-      }
-    },
-
     // MAP EVENTS
-    _onMapRender () {
-      console.debug(Controls.name, '_onMapRender()')
-      this.$emit('onmaprenderchange', true)
-      this.mapButtonText = 'Map: Off'
+    trackLocation () {
+      Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["startTracking"])().then(() => pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish('onTrackMap'))
     },
-
-    _onMapDestroy () {
-      console.debug(Controls.name, '_onMapDestroy()')
-      this.$emit('onmaprenderchange', false)
-      this.mapButtonText = 'Map: On'
+    checkLocation () {
+      Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["renewCurrentPosition"])().then(() => pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish('onCenterMap'))
     },
-    // ********************************************************
-
-    // TRACKING METHODS
-    toggleTracking () {
-      this.tracking
-        ? Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_3__["stopTracking"])()
-        : Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_3__["startTracking"])()
+    // PERMISION EVENTS
+    _onPermissionChanged () {
+      this.geoDisabled = Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_6__["isPermissionPrompt"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"]) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_6__["isPermissionDenied"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"])
     },
-
-    // TRACKING EVENTS
-    _onTrackingStarted () {
-      console.debug(Controls.name, '_onTrackingStarted()')
-
-      // new Promise((resolve, reject) => {
-
-      // })
-
-      this.tracking = true
-      this.trackingText = 'Track: Off'
-    },
-
-    _onTrackingStopped () {
-      console.debug(Controls.name, '_onTrackingStopped()')
-
-      this.rendered && this.destroyMap()
-
-      // new Promise((resolve, reject) => {
-
-      // })
-
-      this.tracking = false
-      this.trackingText = 'Track: On'
-    },
-    // ********************************************************
   },
   mounted: function() {
-    console.debug(Controls.name, 'mounted')
+    console.debug(CustomMapeControls.name, 'mounted')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this._onCurrentPositionUpdate)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, this._onTrackingStarted)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED, this._onTrackingStopped)
-
-    Object(timer_creator__WEBPACK_IMPORTED_MODULE_5__["createInterval"])(this.STATUS_INTERVAL_ID, this.STATUS_INTERVAL_TIMER, () => {
-      this.statusUpdate = Date.now()
-      console.debug(Controls.name, 'Status updated at ', this.statusUpdate)
-    })
+    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, this._onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, this._onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, this._onPermissionChanged)
+  },
+  updated: function() {
+    console.debug(CustomMapeControls.name, 'updated')
   },
   beforeDestroy: function() {
-    console.debug(Controls.name, 'beforeDestroy')
+    console.debug(CustomMapeControls.name, 'beforeDestroy')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED)
-
-    Object(timer_creator__WEBPACK_IMPORTED_MODULE_5__["destroyInterval"])(this.STATUS_INTERVAL_ID)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED)
   },
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Controls);
+/* harmony default export */ __webpack_exports__["default"] = (CustomMapeControls);
 
 
 /***/ }),
@@ -18923,9 +18805,17 @@ const Controls = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+//
+//
 //
 //
 //
@@ -18938,53 +18828,144 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+// Workaround for missing marker icon using leaflet with webapack
+// https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
+leaflet__WEBPACK_IMPORTED_MODULE_4__["Icon"].Default.imagePath = '/'
+leaflet__WEBPACK_IMPORTED_MODULE_4__["Icon"].Default.mergeOptions({
+  iconRetinaUrl: __webpack_require__(/*! leaflet/dist/images/marker-icon-2x.png */ "./node_modules/leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: __webpack_require__(/*! leaflet/dist/images/marker-icon.png */ "./node_modules/leaflet/dist/images/marker-icon.png"),
+  shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "./node_modules/leaflet/dist/images/marker-shadow.png"),
+})
 
 const Mape = {
   name: 'Mape',
-  components: { LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_1__["LMap"], LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_1__["LTileLayer"], LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_1__["LMarker"] },
+  components: { LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LMap"], LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LTileLayer"], LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LMarker"], LControlScale: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LControlScale"], LControlZoom: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LControlZoom"] },
   data: function() {
     return {
-      popupCoordinates: null,
-      popupContent: '',
-      // leaflet data
+      mape: null,
+      // leaflet config
       zoom: 17,
+      center: leaflet__WEBPACK_IMPORTED_MODULE_4__["latLng"](10.471654, -68.020949),
       coordinates: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>
-        Powered by <a href="https://deepertech.com" target="_blank">Deepertech</a>`,
-      // ************
+        Powered by <a href="https://xisco.dev" target="_blank">xiscodev</a>`,
     }
   },
   props: [
-    'position',
-    'rendered',
+    'overlay',
   ],
   methods: {
-    createOrMovePopup (event) {
-      this.popupCoordinates = {
-        latitude: event.latlng.lat,
-        longitude: event.latlng.lng,
+    setCenter (coords) {
+      this.center = coords
+    },
+    setCoordinates (coordinates) {
+      this.coordinates = coordinates
+    },
+    getCoordinates () {
+      return this.coordinates
+    },
+    setCenterCoordinates () {
+      this.setCenter(this.coordinates)
+      this.mape.setView(this.coordinates) // sets map view to coordinates
+    },
+    onCurrentPositionUpdate () {
+      const positionUpdate = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["getStoredCurrentPosition"])()
+      console.debug(Mape.name, 'onCurrentPositionUpdate()', positionUpdate)
+      if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(positionUpdate)) {
+        const coords = leaflet__WEBPACK_IMPORTED_MODULE_4__["latLng"](positionUpdate.coords.latitude, positionUpdate.coords.longitude)
+        this.setCoordinates(coords)
       }
-      console.debug(Mape.name, 'createOrMovePopup()', this.popupCoordinates)
     },
   },
-  watch: {
-    position: function(newPosition, oldPosition) {
-      this.coordinates = Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["latLng"])(newPosition.coords.latitude, newPosition.coords.longitude)
-      this.popupContent = this.popupCoordinates ? 'Coordinates: ' + this.popupCoordinates.toString() : ''
-    },
-  },
-  beforeCreate: function() {
-    console.debug(Mape.name, 'beforeCreate')
+  beforeMount: function() {
+    console.debug(Mape.name, 'beforeMount')
 
     this.mapStyles = {
       height: window.innerHeight - 20 + 'px',
       width: window.innerWidth - 20 + 'px',
     }
   },
+  mounted: function() {
+    console.debug(Mape.name, 'mounted')
+
+    // reference to leaflet map
+    this.$nextTick(() => {
+      this.mape = this.$refs.mape.mapObject
+    })
+
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe('onTrackMap', this.setCenterCoordinates)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe('onCenterMap', this.setCenterCoordinates)
+  },
+  updated: function() {
+    console.debug(Mape.name, 'updated')
+  },
+  beforeDestroy: function() {
+    console.debug(Mape.name, 'beforeDestroy')
+
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe('onTrackMap')
+    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe('onCenterMap')
+  },
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Mape);
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Overlay.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var geolocation_geolocation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! geolocation/geolocation */ "./src/systems/geolocation/geolocation.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+const Overlay = {
+  name: 'Overlay',
+  props: [
+    'permissionState',
+  ],
+  methods: {
+    requestTracking () {
+      Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_1__["renewCurrentPosition"])().then(() => pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish('onCenterMap'))
+    },
+  },
+  updated: function() {
+    console.debug(Overlay.name, 'updated')
+  },
+  beforeDestroy: function() {
+    console.debug(Overlay.name, 'beforeDestroy')
+  },
+}
+/* harmony default export */ __webpack_exports__["default"] = (Overlay);
 
 
 /***/ }),
@@ -19007,18 +18988,29 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("Mape", {
-        attrs: { rendered: _vm.rendered, position: _vm.position },
-        on: { onmaprenderchange: _vm._onMapRenderChange }
+      _c("Mape", { attrs: { overlay: _vm.overlay } }),
+      _vm._v(" "),
+      _c("CustomMapeControls", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.overlay,
+            expression: "!overlay"
+          }
+        ]
       }),
       _vm._v(" "),
-      _c("Controls", {
-        attrs: {
-          rendered: _vm.rendered,
-          position: _vm.position,
-          geoDisabled: _vm.geoDisabled
-        },
-        on: { onmaprenderchange: _vm._onMapRenderChange }
+      _c("Overlay", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.overlay,
+            expression: "overlay"
+          }
+        ],
+        attrs: { permissionState: _vm.permissionState }
       })
     ],
     1
@@ -19031,10 +19023,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=template&id=d140d5d8&":
-/*!******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Controls.vue?vue&type=template&id=d140d5d8& ***!
-  \******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=template&id=11840f64&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/CustomMapeControls.vue?vue&type=template&id=11840f64& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19046,111 +19038,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "data-scheme" } }, [
-    _c("p", [
-      _vm._v("latitude: "),
-      _c("span", { attrs: { id: "latitude" } }, [
-        _vm._v(" " + _vm._s(_vm.latitude) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("longitude: "),
-      _c("span", { attrs: { id: "longitude" } }, [
-        _vm._v(" " + _vm._s(_vm.longitude) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("altitude: "),
-      _c("span", { attrs: { id: "altitude" } }, [
-        _vm._v(" " + _vm._s(_vm.altitude) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("accuracy: "),
-      _c("span", { attrs: { id: "accuracy" } }, [
-        _vm._v(" " + _vm._s(_vm.accuracy) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("altitudeAccuracy: "),
-      _c("span", { attrs: { id: "altitudeAccuracy" } }, [
-        _vm._v(" " + _vm._s(_vm.altitudeAccuracy) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("heading: "),
-      _c("span", { attrs: { id: "heading" } }, [
-        _vm._v(" " + _vm._s(_vm.heading) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("speed: "),
-      _c("span", { attrs: { id: "speed" } }, [
-        _vm._v(" " + _vm._s(_vm.speed) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("timestamp: "),
-      _c("span", { attrs: { id: "timestamp" } }, [
-        _vm._v(" " + _vm._s(_vm.timestamp) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("coords updated times: "),
-      _c("span", { attrs: { id: "coordsUpdatedTimes" } }, [
-        _vm._v(" " + _vm._s(_vm.coordsUpdatedTimes) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("status update: "),
-      _c("span", { attrs: { id: "statusUpdate" } }, [
-        _vm._v(" " + _vm._s(_vm.statusUpdate) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("tracking status: "),
-      _c("span", { attrs: { id: "tracking" } }, [
-        _vm._v(" " + _vm._s(_vm.tracking) + " ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticStyle: { display: "inline-block" } }, [
-      _c("div", { staticStyle: { display: "inline-block" } }, [
+  return _c("div", { staticClass: "custom-mape-controls" }, [
+    _c("div", { staticClass: "btns-container" }, [
+      _c("div", { staticClass: "btn-box" }, [
         _c(
           "button",
           {
+            staticClass: "btn-gps",
             attrs: { disabled: _vm.geoDisabled },
-            on: { click: _vm.toggleTracking }
+            on: { click: _vm.trackLocation }
           },
-          [_c("span", [_vm._v(_vm._s(_vm.trackingText))])]
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "image-cursor",
+              attrs: { src: _vm.cursorImage, alt: "gps tracking" }
+            })
+          ]
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticStyle: { display: "inline-block" } }, [
+      _c("div", { staticClass: "btn-box" }, [
         _c(
           "button",
           {
-            class: { btnShow: _vm.tracking, btnHide: !_vm.tracking },
+            staticClass: "btn-gps",
             attrs: { disabled: _vm.geoDisabled },
-            on: { click: _vm.toggleMap }
+            on: { click: _vm.checkLocation }
           },
-          [_c("span", [_vm._v(_vm._s(_vm.mapButtonText))])]
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "image-gps",
+              attrs: { src: _vm.gpsImage, alt: "gps position" }
+            })
+          ]
         )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { display: "none" } }, [
+      _vm._v("Icons made by "),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.flaticon.com/authors/becris",
+            title: "Becris"
+          }
+        },
+        [_vm._v("Becris")]
+      ),
+      _vm._v(" from "),
+      _c(
+        "a",
+        { attrs: { href: "https://www.flaticon.com/", title: "Flaticon" } },
+        [_vm._v("www.flaticon.com")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { display: "none" } }, [
+      _vm._v("Iconos diseñados por "),
+      _c(
+        "a",
+        { attrs: { href: "https://www.freepik.com", title: "Freepik" } },
+        [_vm._v("Freepik")]
+      ),
+      _vm._v(" from "),
+      _c(
+        "a",
+        { attrs: { href: "https://www.flaticon.es/", title: "Flaticon" } },
+        [_vm._v("www.flaticon.es")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -19174,28 +19148,116 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { style: [_vm.mapStyles], attrs: { id: "map" } },
+    { style: [_vm.mapStyles] },
     [
-      _vm.rendered
-        ? _c(
-            "l-map",
-            {
-              attrs: { zoom: _vm.zoom, center: _vm.coordinates },
-              on: { click: _vm.createOrMovePopup }
-            },
-            [
-              _c("l-tile-layer", {
-                attrs: { url: _vm.url, attribution: _vm.attribution }
-              }),
-              _vm._v(" "),
-              _c("l-marker", { attrs: { "lat-lng": _vm.coordinates } })
-            ],
-            1
-          )
-        : _vm._e()
+      _c(
+        "l-map",
+        {
+          ref: "mape",
+          attrs: {
+            options: { zoomControl: false },
+            zoom: _vm.zoom,
+            center: _vm.center
+          }
+        },
+        [
+          _c("l-tile-layer", {
+            attrs: { url: _vm.url, attribution: _vm.attribution }
+          }),
+          _vm._v(" "),
+          !_vm.overlay
+            ? _c("l-marker", { attrs: { "lat-lng": _vm.center } })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.overlay
+            ? _c("l-control-scale", {
+                attrs: { position: "topright", imperial: true, metric: true }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.overlay
+            ? _c("l-control-zoom", { attrs: { position: "bottomright" } })
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=template&id=18f37762&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Overlay.vue?vue&type=template&id=18f37762& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "overlay-component" }, [
+    _c("div", { staticClass: "overlay-box" }, [
+      _c(
+        "h1",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.permissionState === "denied",
+              expression: "permissionState === 'denied'"
+            }
+          ],
+          staticClass: "permission-denied"
+        },
+        [_vm._v("Geolocation Denied By User")]
+      ),
+      _vm._v(" "),
+      _c(
+        "h1",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.permissionState === "prompt",
+              expression: "permissionState === 'prompt'"
+            }
+          ],
+          staticClass: "permission-prompt"
+        },
+        [_vm._v("Waiting for Geolocation permission prompt")]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.permissionState === "prompt",
+            expression: "permissionState === 'prompt'"
+          }
+        ],
+        staticClass: "overlay-box"
+      },
+      [_c("button", { on: { click: _vm.requestTracking } }, [_vm._v("Prompt")])]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19316,23 +19378,23 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Controls.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomMapeControls.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&");
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
-var update = add("2c2454f5", content, false, {});
+var update = add("36921bb5", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -19355,6 +19417,28 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
 var update = add("848185d6", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Overlay.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("19e4b661", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -44261,6 +44345,28 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./src/assets/img/cursor-24.png":
+/*!**************************************!*\
+  !*** ./src/assets/img/cursor-24.png ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "028e21fc3ed658a171c62fe7d343c3e8.png";
+
+/***/ }),
+
+/***/ "./src/assets/img/gps-24.png":
+/*!***********************************!*\
+  !*** ./src/assets/img/gps-24.png ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "8c191d8717df59b1cc6827fe6fa2e0ef.png";
+
+/***/ }),
+
 /***/ "./src/components/App.vue":
 /*!********************************!*\
   !*** ./src/components/App.vue ***!
@@ -44330,18 +44436,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/app/Controls.vue":
-/*!*****************************************!*\
-  !*** ./src/components/app/Controls.vue ***!
-  \*****************************************/
+/***/ "./src/components/app/CustomMapeControls.vue":
+/*!***************************************************!*\
+  !*** ./src/components/app/CustomMapeControls.vue ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Controls_vue_vue_type_template_id_d140d5d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Controls.vue?vue&type=template&id=d140d5d8& */ "./src/components/app/Controls.vue?vue&type=template&id=d140d5d8&");
-/* harmony import */ var _Controls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Controls.vue?vue&type=script&lang=js& */ "./src/components/app/Controls.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Controls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Controls.vue?vue&type=style&index=0&lang=css& */ "./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _CustomMapeControls_vue_vue_type_template_id_11840f64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomMapeControls.vue?vue&type=template&id=11840f64& */ "./src/components/app/CustomMapeControls.vue?vue&type=template&id=11840f64&");
+/* harmony import */ var _CustomMapeControls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomMapeControls.vue?vue&type=script&lang=js& */ "./src/components/app/CustomMapeControls.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CustomMapeControls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CustomMapeControls.vue?vue&type=style&index=0&lang=css& */ "./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -44352,9 +44458,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _Controls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Controls_vue_vue_type_template_id_d140d5d8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Controls_vue_vue_type_template_id_d140d5d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CustomMapeControls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CustomMapeControls_vue_vue_type_template_id_11840f64___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CustomMapeControls_vue_vue_type_template_id_11840f64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -44364,54 +44470,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "src/components/app/Controls.vue"
+component.options.__file = "src/components/app/CustomMapeControls.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./src/components/app/Controls.vue?vue&type=script&lang=js&":
-/*!******************************************************************!*\
-  !*** ./src/components/app/Controls.vue?vue&type=script&lang=js& ***!
-  \******************************************************************/
+/***/ "./src/components/app/CustomMapeControls.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./src/components/app/CustomMapeControls.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Controls.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomMapeControls.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************!*\
-  !*** ./src/components/app/Controls.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************/
+/***/ "./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************!*\
+  !*** ./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Controls.vue?vue&type=style&index=0&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomMapeControls.vue?vue&type=style&index=0&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ "./src/components/app/Controls.vue?vue&type=template&id=d140d5d8&":
-/*!************************************************************************!*\
-  !*** ./src/components/app/Controls.vue?vue&type=template&id=d140d5d8& ***!
-  \************************************************************************/
+/***/ "./src/components/app/CustomMapeControls.vue?vue&type=template&id=11840f64&":
+/*!**********************************************************************************!*\
+  !*** ./src/components/app/CustomMapeControls.vue?vue&type=template&id=11840f64& ***!
+  \**********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_template_id_d140d5d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Controls.vue?vue&type=template&id=d140d5d8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/app/Controls.vue?vue&type=template&id=d140d5d8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_template_id_d140d5d8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_template_id_11840f64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomMapeControls.vue?vue&type=template&id=11840f64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/app/CustomMapeControls.vue?vue&type=template&id=11840f64&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_template_id_11840f64___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Controls_vue_vue_type_template_id_d140d5d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomMapeControls_vue_vue_type_template_id_11840f64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -44504,6 +44610,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/app/Overlay.vue":
+/*!****************************************!*\
+  !*** ./src/components/app/Overlay.vue ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Overlay_vue_vue_type_template_id_18f37762___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Overlay.vue?vue&type=template&id=18f37762& */ "./src/components/app/Overlay.vue?vue&type=template&id=18f37762&");
+/* harmony import */ var _Overlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Overlay.vue?vue&type=script&lang=js& */ "./src/components/app/Overlay.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Overlay_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Overlay.vue?vue&type=style&index=0&lang=css& */ "./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Overlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Overlay_vue_vue_type_template_id_18f37762___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Overlay_vue_vue_type_template_id_18f37762___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/app/Overlay.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/app/Overlay.vue?vue&type=script&lang=js&":
+/*!*****************************************************************!*\
+  !*** ./src/components/app/Overlay.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Overlay.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************!*\
+  !*** ./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/vue-loader/lib??vue-loader-options!./Overlay.vue?vue&type=style&index=0&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./src/components/app/Overlay.vue?vue&type=template&id=18f37762&":
+/*!***********************************************************************!*\
+  !*** ./src/components/app/Overlay.vue?vue&type=template&id=18f37762& ***!
+  \***********************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_template_id_18f37762___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Overlay.vue?vue&type=template&id=18f37762& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/app/Overlay.vue?vue&type=template&id=18f37762&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_template_id_18f37762___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Overlay_vue_vue_type_template_id_18f37762___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./src/initAsync.js":
 /*!**************************!*\
   !*** ./src/initAsync.js ***!
@@ -44515,22 +44708,23 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
 /* harmony import */ var geolocation_geolocation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! geolocation/geolocation */ "./src/systems/geolocation/geolocation.js");
+/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
+
 
 
 
 const initAsync = () => {
   return new Promise(
     (resolve, reject) => {
-      // INIT ANY MODULE BEFORE RENDER HERE
-      permissions_permissions__WEBPACK_IMPORTED_MODULE_0__["isPermissionsSupported"]
+      Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_0__["isPermissionsSupported"])()
         ? Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_1__["initGeoService"])()
-          .then((permissionStatus) => {
-            resolve(permissionStatus)
+          .then(() => {
+            resolve()
           })
           .catch((error) => {
             reject(error)
           })
-        : reject(new Error('Web APIs not supported'))
+        : reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].PERMISSIONS_NOT_SUPPORTED))
     })
 }
 
@@ -44565,6 +44759,40 @@ Object(initAsync__WEBPACK_IMPORTED_MODULE_0__["default"])().finally(
 
 /***/ }),
 
+/***/ "./src/systems/Constants.js":
+/*!**********************************!*\
+  !*** ./src/systems/Constants.js ***!
+  \**********************************/
+/*! exports provided: GeolocationError, PermissionState, WebAPIError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GeolocationError", function() { return GeolocationError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PermissionState", function() { return PermissionState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebAPIError", function() { return WebAPIError; });
+const GeolocationError = {
+  PERMISSION_DENIED: 1,
+  POSITION_UNAVAILABLE: 2,
+  TIMEOUT: 3,
+}
+
+const PermissionState = {
+  GRANTED: 'granted',
+  PROMPT: 'prompt',
+  DENIED: 'denied',
+}
+
+const WebAPIError = {
+  GEOLOCATION_NOT_SUPPORTED: 'Geolocation API not supported',
+  PERMISSIONS_NOT_SUPPORTED: 'Permissions API not supported',
+}
+
+
+
+
+/***/ }),
+
 /***/ "./src/systems/Events.js":
 /*!*******************************!*\
   !*** ./src/systems/Events.js ***!
@@ -44592,6 +44820,7 @@ const GeolocationEvent = {
   ON_GEOLOCATION_PERMISSION_DENIED: 'onGeolocationPermissionDenied', // 1
   ON_GEOLOCATION_POSITION_UNAVAILABLE: 'onGeolocationPositionUnavailable', // 2
   ON_GEOLOCATION_TIMEOUT: 'onGeolocationTimeout', // 3
+  ON_GEOLOCATION_UNKNOWN_ERROR: 'onGeolocationUnknownError', // ?
 }
 
 const PermissionEvent = {
@@ -44636,26 +44865,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
 /* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var components_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! components/App */ "./src/components/App.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var components_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/App */ "./src/components/App.vue");
 
 
 
 
 
-
-
-// Workaround for missing marker icon using leaflet with webapack
-// https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
-leaflet__WEBPACK_IMPORTED_MODULE_3__["Icon"].Default.imagePath = '/'
-leaflet__WEBPACK_IMPORTED_MODULE_3__["Icon"].Default.mergeOptions({
-  iconRetinaUrl: __webpack_require__(/*! leaflet/dist/images/marker-icon-2x.png */ "./node_modules/leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: __webpack_require__(/*! leaflet/dist/images/marker-icon.png */ "./node_modules/leaflet/dist/images/marker-icon.png"),
-  shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "./node_modules/leaflet/dist/images/marker-shadow.png"),
-})
 
 const ID = 'bootUI'
 const bodyElement = document.getElementsByTagName('body')[0]
@@ -44668,11 +44885,10 @@ const _uiExist = () => {
 
 const createUI = () => {
   console.debug(ID, 'createUI()')
-  vue__WEBPACK_IMPORTED_MODULE_4___default.a.use(leaflet__WEBPACK_IMPORTED_MODULE_3__)
 
-  ui = new vue__WEBPACK_IMPORTED_MODULE_4___default.a({
+  ui = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
     el: '#root',
-    components: { App: components_App__WEBPACK_IMPORTED_MODULE_5__["default"] },
+    components: { App: components_App__WEBPACK_IMPORTED_MODULE_4__["default"] },
     template: '<App />',
   })
 
@@ -44734,11 +44950,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
+/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -44752,15 +44970,9 @@ const ID = 'geolocation'
  * @param {Position} position
  */
 const _successTracking = (position) => {
-  const initialPosition = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["getStoredInitialPosition"])()
-  const currentPosition = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["getStoredCurrentPosition"])()
-  Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(initialPosition) && Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["setInitialPosition"])(position)
-  !Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(currentPosition) && Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["setBeforeCurrentPosition"])(currentPosition)
-
-  Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["setCurrentPosition"])(position)
-
   console.debug(ID, '_successTracking() position', position)
-  pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
+  Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["updateGeolocationStore"])(position)
+  pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
 }
 
 /**
@@ -44768,9 +44980,21 @@ const _successTracking = (position) => {
  */
 const _errorTracking = (error) => {
   console.error(ID, '_errorTracking()', error)
-  !!error.PERMISSION_DENIED && pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, error)
-  !!error.POSITION_UNAVAILABLE && pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_POSITION_UNAVAILABLE, error)
-  !!error.TIMEOUT && pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TIMEOUT, error)
+
+  switch (error.code) {
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_2__["GeolocationError"].PERMISSION_DENIED:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, error)
+    break
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_2__["GeolocationError"].POSITION_UNAVAILABLE:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_POSITION_UNAVAILABLE, error)
+    break
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_2__["GeolocationError"].TIMEOUT:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TIMEOUT, error)
+    break
+  default:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_UNKNOWN_ERROR, error)
+    break
+  }
 }
 
 /**
@@ -44783,90 +45007,124 @@ const isGeolocationSupported = () => {
 }
 
 const isGeolocationDenied = () => {
-  return Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_3__["isPermissionDenied"])(ID)
+  return Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID)
 }
 
 const handleGeolocationPermission = (event) => {
-  const permissionStatus = event.target
+  console.debug(ID, `handleGeolocationPermission() ${ID} ${event.currentTarget.state}`)
+  const permissionStatus = event.currentTarget
   const state = permissionStatus.state
-  const initialState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_4__["getStoredInitialState"])(ID)
-  const currentState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_4__["getStoredCurrentState"])(ID)
 
-  Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(initialState) && Object(permissions_store__WEBPACK_IMPORTED_MODULE_4__["setInitialState"])(ID, state)
-  !Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(currentState) && Object(permissions_store__WEBPACK_IMPORTED_MODULE_4__["setBeforeCurrentState"])(ID, currentState)
+  Object(permissions_store__WEBPACK_IMPORTED_MODULE_5__["updatePermissionStore"])(ID, state)
 
-  Object(permissions_store__WEBPACK_IMPORTED_MODULE_4__["setCurrentState"])(ID, state)
-
-  console.debug(ID, `queryPermissionStatus() ${ID} ${state}`)
-
-  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_3__["isPermissionGranted"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, state)
-  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_3__["isPermissionPrompt"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, state)
-  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_3__["isPermissionDenied"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, state)
+  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionGranted"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state })
+  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionPrompt"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, { resource: ID, state })
+  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state })
 }
 
 const initGeoService = () => {
-  return isSupported
+  return _isSupported
     ? new Promise((resolve, reject) => {
-      Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_3__["queryPermissionStatus"])(ID)
+      console.debug(ID, `initGeoService() started at ${Date.now()}`)
+      Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["queryPermissionStatus"])(ID)
         .then((permissionStatus) => {
           permissionStatus.onchange = handleGeolocationPermission
-          resolve(permissionStatus)
+          resolve()
         })
-        .catch((error) => {
-          reject(error)
+        .catch((err) => {
+          reject(err)
         })
     })
-    : new Promise((resolve, reject) => {
-      reject(new Error('Geolocation API not supported'))
-    })
+    : Promise.reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED))
 }
 
 /**
  * @param {PositionOptions} options
  */
 const renewCurrentPosition = (options = null) => {
-  if (isSupported) {
-    console.debug(ID, 'renewCurrentPosition() options', options)
-    navigator.geolocation.getCurrentPosition(_successTracking, _errorTracking, options)
-  } else {
-    console.debug(ID, 'renewCurrentPosition()', 'Geolocation API not supported')
-  }
+  return new Promise((resolve, reject) => {
+    if (_isSupported) {
+      console.debug(ID, `renewCurrentPosition() options ${options}`)
+      try {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+      } catch (err) {
+        console.error(ID, 'renewCurrentPosition()', err)
+        reject(err)
+      }
+    } else {
+      const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
+      console.error(ID, 'renewCurrentPosition()', err)
+      reject(err)
+    }
+  }).then((result) => {
+    if (Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionPrompt"])(ID) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID)) {
+      pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].GRANTED })
+    }
+    _successTracking(result)
+  }).catch((err) => {
+    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].DENIED })
+    _errorTracking(err)
+  })
 }
 
 /**
  * @param {PositionOptions} options
  */
 const startTracking = (options = null) => {
-  if (isSupported) {
-    let trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["getStoredTrackingWatcher"])()
-    if (Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
-      trackingWatcher = navigator.geolocation.watchPosition(_successTracking, _errorTracking, options)
-      Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["setTrackingWatcher"])(trackingWatcher)
-      pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
+  console.debug(ID, `startTracking() options ${options}`)
+  return new Promise((resolve, reject) => {
+    if (_isSupported) {
+      let trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["getStoredTrackingWatcher"])()
+      if (Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
+        trackingWatcher = navigator.geolocation.watchPosition(resolve, reject, options)
+        Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["setTrackingWatcher"])(trackingWatcher)
+        console.debug(ID, `startTracking() trackingWatcher ${trackingWatcher}`)
+        pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
+      } else {
+        console.debug(ID, `startTracking() trackingWatcher found ${trackingWatcher}`)
+      }
+    } else {
+      const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
+      console.error(ID, 'startTracking()', err)
+      reject(err)
     }
-    console.debug(ID, 'startTracking()', options, trackingWatcher)
-  } else {
-    console.error(ID, 'startTracking()', 'Geolocation API not supported')
-  }
+  }).then((result) => {
+    if (Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionPrompt"])(ID) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID)) {
+      pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].GRANTED })
+    }
+    _successTracking(result)
+  }).catch((error) => {
+    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].DENIED })
+    _errorTracking(error)
+  })
 }
 
 /**
  */
 const stopTracking = () => {
-  if (isSupported) {
-    const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["getStoredTrackingWatcher"])()
+  if (_isSupported) {
+    const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["getStoredTrackingWatcher"])()
     if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
       navigator.geolocation.clearWatch(trackingWatcher)
-      Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["setTrackingWatcher"])(null)
-      pubsub_js__WEBPACK_IMPORTED_MODULE_5___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
+      Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["setTrackingWatcher"])(null)
+      console.debug(ID, `stopTracking() trackingWatcher ${trackingWatcher}`)
+      pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
+    } else {
+      console.debug(ID, `stopTracking() no trackingWatcher found`)
     }
-    console.debug(ID, 'stopTracking()', trackingWatcher)
   } else {
-    console.error(ID, 'stopTracking()', 'Geolocation API not supported')
+    const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
+    console.error(ID, 'stopTracking()', err)
   }
 }
 
-const isSupported = isGeolocationSupported()
+const _isSupported = isGeolocationSupported()
+
+// Error Handling
+pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, stopTracking)
+pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_POSITION_UNAVAILABLE, stopTracking)
+pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TIMEOUT, stopTracking)
+pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_UNKNOWN_ERROR, stopTracking)
 
 
 
@@ -44877,7 +45135,7 @@ const isSupported = isGeolocationSupported()
 /*!******************************************!*\
   !*** ./src/systems/geolocation/store.js ***!
   \******************************************/
-/*! exports provided: STORE_NAME, setTrackingWatcher, setInitialPosition, setCurrentPosition, setBeforeCurrentPosition, getStoredTrackingWatcher, getStoredInitialPosition, getStoredCurrentPosition, getStoredBeforeCurrentPosition */
+/*! exports provided: STORE_NAME, setTrackingWatcher, setInitialPosition, setCurrentPosition, setBeforeCurrentPosition, getStoredTrackingWatcher, getStoredInitialPosition, getStoredCurrentPosition, getStoredBeforeCurrentPosition, updateGeolocationStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44891,8 +45149,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredInitialPosition", function() { return getStoredInitialPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredCurrentPosition", function() { return getStoredCurrentPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredBeforeCurrentPosition", function() { return getStoredBeforeCurrentPosition; });
-/* harmony import */ var systems_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! systems/store */ "./src/systems/store.js");
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateGeolocationStore", function() { return updateGeolocationStore; });
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var systems_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/store */ "./src/systems/store.js");
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+
 
 
 
@@ -44907,23 +45169,15 @@ const state = {
 }
 
 console.debug(ID, 'initializeStore()')
-Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(STORE_NAME, state)
-Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["initializeResourceStore"])(STORE_NAME)
+Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(STORE_NAME, state)
+Object(permissions_store__WEBPACK_IMPORTED_MODULE_2__["initializeResourceStore"])(STORE_NAME)
 
 /**
  * @param {number} trackingWatcher
  */
 const setTrackingWatcher = (trackingWatcher) => {
   console.debug(ID, 'setTrackingWatcher()', trackingWatcher)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.trackingWatcher`, trackingWatcher)
-}
-
-/**
- * @returns {number}
- */
-const getStoredTrackingWatcher = () => {
-  console.debug(ID, 'getStoredTrackingWatcher()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.trackingWatcher`)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.trackingWatcher`, trackingWatcher)
 }
 
 /**
@@ -44931,15 +45185,7 @@ const getStoredTrackingWatcher = () => {
  */
 const setInitialPosition = (position) => {
   console.debug(ID, 'setInitialPosition()', position)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.initialPosition`, position)
-}
-
-/**
- * @returns {Position}
- */
-const getStoredInitialPosition = () => {
-  console.debug(ID, 'getStoredInitialPosition()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.initialPosition`)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.initialPosition`, position)
 }
 
 /**
@@ -44947,15 +45193,7 @@ const getStoredInitialPosition = () => {
  */
 const setCurrentPosition = (position) => {
   console.debug(ID, 'setCurrentPosition()', position)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.currentPosition`, position)
-}
-
-/**
- * @returns {Position}
- */
-const getStoredCurrentPosition = () => {
-  console.debug(ID, 'getStoredCurrentPosition()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.currentPosition`)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.currentPosition`, position)
 }
 
 /**
@@ -44963,15 +45201,54 @@ const getStoredCurrentPosition = () => {
  */
 const setBeforeCurrentPosition = (position) => {
   console.debug(ID, 'setBeforeCurrentPosition()', position)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.beforeCurrentPosition`, position)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.beforeCurrentPosition`, position)
+}
+
+/**
+ * @returns {number}
+ */
+const getStoredTrackingWatcher = () => {
+  const trackingWatcher = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.trackingWatcher`)
+  console.debug(ID, `getStoredTrackingWatcher() ${trackingWatcher}`)
+  return trackingWatcher
+}
+
+/**
+ * @returns {Position}
+ */
+const getStoredInitialPosition = () => {
+  const initialPosition = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.initialPosition`)
+  console.debug(ID, `getStoredInitialPosition() ${initialPosition}`)
+  return initialPosition
+}
+
+/**
+ * @returns {Position}
+ */
+const getStoredCurrentPosition = () => {
+  const currentPosition = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.currentPosition`)
+  console.debug(ID, `getStoredCurrentPosition() ${currentPosition}`)
+  return currentPosition
 }
 
 /**
  * @returns {Position}
  */
 const getStoredBeforeCurrentPosition = () => {
-  console.debug(ID, 'getStoredBeforeCurrentPosition()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.beforeCurrentPosition`)
+  const beforeCurrentPosition = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.beforeCurrentPosition`)
+  console.debug(ID, `getStoredBeforeCurrentPosition() ${beforeCurrentPosition}`)
+  return beforeCurrentPosition
+}
+
+const updateGeolocationStore = (position) => {
+  console.debug(ID, 'updateGeolocationStore()', position)
+
+  const initialPosition = getStoredInitialPosition()
+  const currentPosition = getStoredCurrentPosition()
+  Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(initialPosition) && setInitialPosition(position)
+  !Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(currentPosition) && setBeforeCurrentPosition(currentPosition)
+
+  setCurrentPosition(position)
 }
 
 
@@ -44983,7 +45260,7 @@ const getStoredBeforeCurrentPosition = () => {
 /*!************************************************!*\
   !*** ./src/systems/permissions/permissions.js ***!
   \************************************************/
-/*! exports provided: isPermissionsSupported, isPermissionGranted, isPermissionPrompt, isPermissionDenied, queryPermissionStatus, queryPermissionState, queryPermissionHandler, setPermissionHandler */
+/*! exports provided: isPermissionsSupported, isPermissionGranted, isPermissionPrompt, isPermissionDenied, queryPermissionStatus */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44993,13 +45270,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPermissionPrompt", function() { return isPermissionPrompt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPermissionDenied", function() { return isPermissionDenied; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryPermissionStatus", function() { return queryPermissionStatus; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryPermissionState", function() { return queryPermissionState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryPermissionHandler", function() { return queryPermissionHandler; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPermissionHandler", function() { return setPermissionHandler; });
-/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
-/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
 /* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
 /* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -45008,12 +45281,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const ID = 'permissions'
-
-const PermissionState = {
-  GRANTED: 'granted',
-  PROMPT: 'prompt',
-  DENIED: 'denied',
-}
 
 /**
  * @returns {boolean}
@@ -45025,93 +45292,49 @@ const isPermissionsSupported = () => {
 }
 
 const isPermissionGranted = (resource) => {
-  console.debug(ID, 'isPermissionGranted()')
-  return PermissionState.GRANTED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
+  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].GRANTED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["getStoredCurrentState"])(resource)
+  console.debug(ID, `isPermissionGranted() ${resource} ${state}`)
+  return state
 }
 
 const isPermissionPrompt = (resource) => {
-  console.debug(ID, 'isPermissionPrompt()')
-  return PermissionState.PROMPT === Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
+  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].PROMPT === Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["getStoredCurrentState"])(resource)
+  console.debug(ID, `isPermissionPrompt() ${resource} ${state}`)
+  return state
 }
 
 const isPermissionDenied = (resource) => {
-  console.debug(ID, 'isPermissionDenied()')
-  return PermissionState.DENIED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
+  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].DENIED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["getStoredCurrentState"])(resource)
+  console.debug(ID, `isPermissionDenied() ${resource} ${state}`)
+  return state
 }
 
 const queryPermissionStatus = (resource) => {
-  return isSupported
+  console.debug(ID, `queryPermissionStatus() ${resource}`)
+  return _isSupported
     ? new Promise((resolve, reject) => {
       navigator.permissions.query({ name: resource })
         .then((permissionStatus) => {
           const state = permissionStatus.state
-          const initialState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredInitialState"])(resource)
-          const currentState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
+          console.debug(ID, `queryPermissionStatus() resolve ${resource} ${state}`)
 
-          Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(initialState) && Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["setInitialState"])(resource, state)
-          !Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(currentState) && Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["setBeforeCurrentState"])(resource, currentState)
+          Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["updatePermissionStore"])(resource, state)
 
-          Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["setCurrentState"])(resource, state)
-
-          console.debug(ID, `queryPermissionStatus() ${resource} ${state}`)
-
-          isPermissionGranted(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_GRANTED, state)
-          isPermissionPrompt(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_PROMPT, state)
-          isPermissionDenied(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_DENIED, state)
+          isPermissionGranted(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource, state })
+          isPermissionPrompt(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, { resource, state })
+          isPermissionDenied(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource, state })
 
           resolve(permissionStatus)
         })
-        .catch((error) => {
-          console.error(ID, `queryPermissionStatus() ${resource} ${error}`)
-          reject(error)
+        .catch((err) => {
+          console.error(ID, `queryPermissionStatus() reject ${resource} ${err}`)
+          reject(err)
         })
     })
-    : new Promise((resolve, reject) => {
-      reject(new Error('Permission API not supported'))
-    })
+    : Promise.reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].PERMISSIONS_NOT_SUPPORTED))
 }
 
-const queryPermissionState = (resource) => {
-  console.debug(ID, 'queryPermissionState()', resource)
-  return new Promise((resolve, reject) => {
-    queryPermissionStatus(resource)
-      .then((permissionStatus) => {
-        resolve(permissionStatus.state)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
-const queryPermissionHandler = (resource) => {
-  console.debug(ID, 'queryPermissionHandler()', resource)
-  return new Promise((resolve, reject) => {
-    queryPermissionStatus(resource)
-      .then((permissionStatus) => {
-        resolve(permissionStatus.onchange)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
-const setPermissionHandler = (resource, handler) => {
-  console.debug(ID, 'setPermissionHandler()', resource)
-  return new Promise((resolve, reject) => {
-    queryPermissionStatus(resource)
-      .then((permissionStatus) => {
-        permissionStatus.onchange = handler
-        resolve()
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
-const isSupported = isPermissionsSupported()
+const _isSupported = isPermissionsSupported()
 
 
 
@@ -45122,7 +45345,7 @@ const isSupported = isPermissionsSupported()
 /*!******************************************!*\
   !*** ./src/systems/permissions/store.js ***!
   \******************************************/
-/*! exports provided: STORE_NAME, initializeResourceStore, setInitialState, setCurrentState, setBeforeCurrentState, getStoredInitialState, getStoredCurrentState, getStoredBeforeCurrentState */
+/*! exports provided: STORE_NAME, initializeResourceStore, setInitialState, setCurrentState, setBeforeCurrentState, getStoredInitialState, getStoredCurrentState, getStoredBeforeCurrentState, updatePermissionStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45135,7 +45358,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredInitialState", function() { return getStoredInitialState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredCurrentState", function() { return getStoredCurrentState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredBeforeCurrentState", function() { return getStoredBeforeCurrentState; });
-/* harmony import */ var systems_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! systems/store */ "./src/systems/store.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePermissionStore", function() { return updatePermissionStore; });
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var systems_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/store */ "./src/systems/store.js");
+
 
 
 const ID = 'StorePermission'
@@ -45148,42 +45375,56 @@ const resourceStoreState = {
 }
 
 console.debug(ID, 'initializeStore()')
-Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(STORE_NAME, {})
+Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(STORE_NAME, {})
 
 const initializeResourceStore = (resource) => {
   console.debug(ID, resource, 'initializeResourceStore()')
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(STORE_NAME, resource)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setValuesToStore"])(`${STORE_NAME}.${resource}`, resourceStoreState)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(STORE_NAME, resource)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setValuesToStore"])(`${STORE_NAME}.${resource}`, resourceStoreState)
 }
 
 const setInitialState = (resource, state) => {
   console.debug(ID, 'setInitialState()', state)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.${resource}.initialState`, state)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.${resource}.initialState`, state)
 }
 
 const setCurrentState = (resource, state) => {
   console.debug(ID, 'setCurrentState()', state)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.${resource}.currentState`, state)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.${resource}.currentState`, state)
 }
 
 const setBeforeCurrentState = (resource, state) => {
   console.debug(ID, 'setBeforeCurrentState()', state)
-  Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["setToStore"])(`${STORE_NAME}.${resource}.beforeCurrentState`, state)
+  Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["setToStore"])(`${STORE_NAME}.${resource}.beforeCurrentState`, state)
 }
 
 const getStoredInitialState = (resource) => {
-  console.debug(ID, 'getStoredInitialState()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.${resource}.initialState`)
+  const initialState = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.${resource}.initialState`)
+  console.debug(ID, `getStoredInitialState() ${initialState}`)
+  return initialState
 }
 
 const getStoredCurrentState = (resource) => {
-  console.debug(ID, 'getStoredCurrentState()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.${resource}.currentState`)
+  const currentState = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.${resource}.currentState`)
+  console.debug(ID, `getStoredCurrentState() ${currentState}`)
+  return currentState
 }
 
 const getStoredBeforeCurrentState = (resource) => {
-  console.debug(ID, 'getStoredBeforeCurrentState()')
-  return Object(systems_store__WEBPACK_IMPORTED_MODULE_0__["getFromStore"])(`${STORE_NAME}.${resource}.beforeCurrentState`)
+  const beforeCurrentState = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.${resource}.beforeCurrentState`)
+  console.debug(ID, `getStoredBeforeCurrentState() ${beforeCurrentState}`)
+  return beforeCurrentState
+}
+
+const updatePermissionStore = (resource, state) => {
+  console.debug(ID, `updatePermissionStore() ${resource} ${state}`)
+  const initialState = getStoredInitialState(resource)
+  const currentState = getStoredCurrentState(resource)
+
+  Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(initialState) && setInitialState(resource, state)
+  !Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(currentState) && setBeforeCurrentState(resource, currentState)
+
+  setCurrentState(resource, state)
 }
 
 

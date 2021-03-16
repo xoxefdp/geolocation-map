@@ -61,6 +61,7 @@ const config = {
       geolocation: `${SRC_DIR}/systems/geolocation`,
       permissions: `${SRC_DIR}/systems/permissions`,
       styles: `${SRC_DIR}/styles`,
+      assets: `${SRC_DIR}/assets`,
     },
   },
   plugins: [

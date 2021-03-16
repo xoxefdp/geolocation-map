@@ -1,3 +1,4 @@
+import { isNull } from 'the-type-validator'
 import { getFromStore, setToStore, setValuesToStore } from 'systems/store'
 
 const ID = 'StorePermission'
@@ -34,18 +35,32 @@ const setBeforeCurrentState = (resource, state) => {
 }
 
 const getStoredInitialState = (resource) => {
-  console.debug(ID, 'getStoredInitialState()')
-  return getFromStore(`${STORE_NAME}.${resource}.initialState`)
+  const initialState = getFromStore(`${STORE_NAME}.${resource}.initialState`)
+  console.debug(ID, `getStoredInitialState() ${initialState}`)
+  return initialState
 }
 
 const getStoredCurrentState = (resource) => {
-  console.debug(ID, 'getStoredCurrentState()')
-  return getFromStore(`${STORE_NAME}.${resource}.currentState`)
+  const currentState = getFromStore(`${STORE_NAME}.${resource}.currentState`)
+  console.debug(ID, `getStoredCurrentState() ${currentState}`)
+  return currentState
 }
 
 const getStoredBeforeCurrentState = (resource) => {
-  console.debug(ID, 'getStoredBeforeCurrentState()')
-  return getFromStore(`${STORE_NAME}.${resource}.beforeCurrentState`)
+  const beforeCurrentState = getFromStore(`${STORE_NAME}.${resource}.beforeCurrentState`)
+  console.debug(ID, `getStoredBeforeCurrentState() ${beforeCurrentState}`)
+  return beforeCurrentState
+}
+
+const updatePermissionStore = (resource, state) => {
+  console.debug(ID, `updatePermissionStore() ${resource} ${state}`)
+  const initialState = getStoredInitialState(resource)
+  const currentState = getStoredCurrentState(resource)
+
+  isNull(initialState) && setInitialState(resource, state)
+  !isNull(currentState) && setBeforeCurrentState(resource, currentState)
+
+  setCurrentState(resource, state)
 }
 
 export {
@@ -57,4 +72,5 @@ export {
   getStoredInitialState,
   getStoredCurrentState,
   getStoredBeforeCurrentState,
+  updatePermissionStore,
 }

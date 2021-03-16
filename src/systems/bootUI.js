@@ -1,18 +1,8 @@
 import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
 import { BootEvent } from 'systems/Events'
-import * as L from 'leaflet'
 import Vue from 'vue'
 import App from 'components/App'
-
-// Workaround for missing marker icon using leaflet with webapack
-// https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
-L.Icon.Default.imagePath = '/'
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-})
 
 const ID = 'bootUI'
 const bodyElement = document.getElementsByTagName('body')[0]
@@ -25,7 +15,6 @@ const _uiExist = () => {
 
 const createUI = () => {
   console.debug(ID, 'createUI()')
-  Vue.use(L)
 
   ui = new Vue({
     el: '#root',
