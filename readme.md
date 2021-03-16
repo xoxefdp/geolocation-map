@@ -25,5 +25,5 @@ $ npm run build:commonjs:prod
 
 ||||
 |-|-|-|
-| Javascript | [VueJS](https://vuejs.org/) | [leaflet](https://leafletjs.com/) |
+| [Javascript](https://developer.mozilla.org/es/docs/Web/JavaScript/) | [VueJS](https://vuejs.org/) | [leaflet](https://leafletjs.com/) |
 |<img style="-webkit-order: 0; -ms-flex-order: 0; order: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; -webkit-align-self: auto; -ms-flex-item-align: auto; align-self: auto;" src="icon.png" /> | <img style="-webkit-order: 0; -ms-flex-order: 0; order: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; -webkit-align-self: auto; -ms-flex-item-align: auto; align-self: auto;" src="vuejs.png" /> | <img style="-webkit-order: 0; -ms-flex-order: 0; order: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; -webkit-align-self: auto; -ms-flex-item-align: auto; align-self: auto;" src="leaflet.png" /> |
