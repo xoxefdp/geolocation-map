@@ -9,6 +9,7 @@
       "geolocation/*": ["src/systems/geolocation"],
       "permissions/*": ["src/systems/permissions"],
       "styles/*": ["src/styles"],
+      "assets/*": ["src/assets"],
     }
   },
   "exclude": ["node_modules", "dist"]
