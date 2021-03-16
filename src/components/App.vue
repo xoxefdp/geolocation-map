@@ -1,90 +1,56 @@
 <template>
   <div>
-    <Mape
-      :rendered="rendered"
-      :position="position"
-      v-on:onmaprenderchange="_onMapRenderChange"
-    />
-    <Controls
-      :rendered="rendered"
-      :position="position"
-      :geoDisabled="geoDisabled"
-      v-on:onmaprenderchange="_onMapRenderChange"
-    />
+    <Mape :overlay="overlay" />
+    <CustomMapeControls v-show="!overlay" />
+    <Overlay v-show="overlay" :permissionState="permissionState" />
   </div>
 </template>
 
 <script>
-import { isNull } from 'the-type-validator'
-import PubSub from 'pubsub-js'
-import { GeolocationEvent, PermissionEvent } from 'systems/Events'
-import { isGeolocationDenied } from 'geolocation/geolocation'
-import { STORE_NAME as GeoStore, getStoredCurrentPosition } from 'geolocation/store'
-import { getStoredCurrentState } from 'permissions/store'
 import Mape from 'components/app/Mape'
-import Controls from 'components/app/Controls'
+import CustomMapeControls from 'components/app/CustomMapeControls'
+import Overlay from 'components/app/Overlay'
+import PubSub from 'pubsub-js'
+import { PermissionEvent } from 'systems/Events'
+import { STORE_NAME as GeoStore } from 'geolocation/store'
+import { getStoredCurrentState, updatePermissionStore } from 'permissions/store'
+import { isPermissionGranted } from 'permissions/permissions'
 
 const App = {
   name: 'App',
-  components: { Mape, Controls },
+  components: { Mape, CustomMapeControls, Overlay },
   data: function() {
     return {
-      rendered: false,
-      position: {
-        latitude: null,
-        longitude: null,
-        altitude: null,
-        accuracy: null,
-        altitudeAccuracy: null,
-        heading: null,
-        speed: null,
-        timestamp: null,
-      },
-      geoDisabled: isGeolocationDenied(),
+      overlay: !isPermissionGranted(GeoStore),
+      permissionState: getStoredCurrentState(GeoStore),
     }
   },
   methods: {
-    // METHODS
-    _setPosition (position) {
-      console.debug(App.name, '_setPosition()', position)
-      this.position = position
-    },
-
-    _setGeoDisabled () {
-      const permission = getStoredCurrentState(GeoStore)
-      console.debug(App.name, '_setGeoDisabled()', permission)
-      this.geoDisabled = isGeolocationDenied()
-    },
-
-    // EVENTS
-    _onCurrentPositionUpdate () {
-      const positionUpdate = getStoredCurrentPosition()
-      console.debug(App.name, '_onCurrentPositionUpdate()', positionUpdate)
-      if (!isNull(positionUpdate)) {
-        this._setPosition(positionUpdate)
-      }
-    },
-
-    _onMapRenderChange (value) {
-      console.debug(App.name, '_onMapRenderChange()', value)
-      this.rendered = value
+    _onPermissionChanged (message, data) {
+      console.debug(`_onPermissionChanged() ${message} ${data.resource} ${data.state}`)
+      updatePermissionStore(data.resource, data.state)
+      this.overlay = !isPermissionGranted(data.resource)
+      this.permissionState = getStoredCurrentState(data.resource)
     },
   },
   mounted: function() {
     console.debug(App.name, 'mounted')
 
-    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE,
-      this._onCurrentPositionUpdate
-    )
-
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this._setGeoDisabled)
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this._setGeoDisabled)
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this._setGeoDisabled)
+    PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this._onPermissionChanged)
+    PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this._onPermissionChanged)
+    PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this._onPermissionChanged)
+  },
+  updated: function() {
+    console.debug(App.name, 'updated')
+    console.debug(App.name, `overlay: ${this.overlay}`)
+    console.debug(App.name, `permissionState: ${this.permissionState}`)
   },
   beforeDestroy: function() {
     console.debug(App.name, 'beforeDestroy')
 
-    PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+    PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_GRANTED)
+    PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_PROMPT)
+    PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_DENIED)
   },
 }
 

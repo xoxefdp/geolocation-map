@@ -12,6 +12,7 @@ const GeolocationEvent = {
   ON_GEOLOCATION_PERMISSION_DENIED: 'onGeolocationPermissionDenied', // 1
   ON_GEOLOCATION_POSITION_UNAVAILABLE: 'onGeolocationPositionUnavailable', // 2
   ON_GEOLOCATION_TIMEOUT: 'onGeolocationTimeout', // 3
+  ON_GEOLOCATION_UNKNOWN_ERROR: 'onGeolocationUnknownError', // ?
 }
 
 const PermissionEvent = {

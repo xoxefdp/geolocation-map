@@ -1,19 +1,19 @@
 import { isPermissionsSupported } from 'permissions/permissions'
 import { initGeoService } from 'geolocation/geolocation'
+import { WebAPIError } from 'systems/Constants'
 
 const initAsync = () => {
   return new Promise(
     (resolve, reject) => {
-      // INIT ANY MODULE BEFORE RENDER HERE
-      isPermissionsSupported
+      isPermissionsSupported()
         ? initGeoService()
-          .then((permissionStatus) => {
-            resolve(permissionStatus)
+          .then(() => {
+            resolve()
           })
           .catch((error) => {
             reject(error)
           })
-        : reject(new Error('Web APIs not supported'))
+        : reject(new Error(WebAPIError.PERMISSIONS_NOT_SUPPORTED))
     })
 }
 

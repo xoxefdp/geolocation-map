@@ -5,7 +5,6 @@ import {
 import { PermissionEvent } from 'systems/Events'
 import { PermissionState, WebAPIError } from 'systems/Constants'
 import PubSub from 'pubsub-js'
-import { createInterval, destroyInterval } from 'timer-creator'
 
 const ID = 'permissions'
 

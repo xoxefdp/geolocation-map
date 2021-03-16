@@ -82,7 +82,6 @@ const initGeoService = () => {
       queryPermissionStatus(ID)
         .then((permissionStatus) => {
           permissionStatus.onchange = handleGeolocationPermission
-          // startPermissionsChecker(ID)
           resolve()
         })
         .catch((err) => {
