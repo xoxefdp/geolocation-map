@@ -1,21 +1,13 @@
-import { isNull } from 'the-type-validator'
 import {
-  setInitialState,
-  setCurrentState,
-  setBeforeCurrentState,
-  getStoredInitialState,
   getStoredCurrentState,
+  updatePermissionStore,
 } from 'permissions/store'
 import { PermissionEvent } from 'systems/Events'
+import { PermissionState, WebAPIError } from 'systems/Constants'
 import PubSub from 'pubsub-js'
+import { createInterval, destroyInterval } from 'timer-creator'
 
 const ID = 'permissions'
-
-const PermissionState = {
-  GRANTED: 'granted',
-  PROMPT: 'prompt',
-  DENIED: 'denied',
-}
 
 /**
  * @returns {boolean}
@@ -27,93 +19,49 @@ const isPermissionsSupported = () => {
 }
 
 const isPermissionGranted = (resource) => {
-  console.debug(ID, 'isPermissionGranted()')
-  return PermissionState.GRANTED === getStoredCurrentState(resource)
+  const state = PermissionState.GRANTED === getStoredCurrentState(resource)
+  console.debug(ID, `isPermissionGranted() ${resource} ${state}`)
+  return state
 }
 
 const isPermissionPrompt = (resource) => {
-  console.debug(ID, 'isPermissionPrompt()')
-  return PermissionState.PROMPT === getStoredCurrentState(resource)
+  const state = PermissionState.PROMPT === getStoredCurrentState(resource)
+  console.debug(ID, `isPermissionPrompt() ${resource} ${state}`)
+  return state
 }
 
 const isPermissionDenied = (resource) => {
-  console.debug(ID, 'isPermissionDenied()')
-  return PermissionState.DENIED === getStoredCurrentState(resource)
+  const state = PermissionState.DENIED === getStoredCurrentState(resource)
+  console.debug(ID, `isPermissionDenied() ${resource} ${state}`)
+  return state
 }
 
 const queryPermissionStatus = (resource) => {
-  return isSupported
+  console.debug(ID, `queryPermissionStatus() ${resource}`)
+  return _isSupported
     ? new Promise((resolve, reject) => {
       navigator.permissions.query({ name: resource })
         .then((permissionStatus) => {
           const state = permissionStatus.state
-          const initialState = getStoredInitialState(resource)
-          const currentState = getStoredCurrentState(resource)
+          console.debug(ID, `queryPermissionStatus() resolve ${resource} ${state}`)
 
-          isNull(initialState) && setInitialState(resource, state)
-          !isNull(currentState) && setBeforeCurrentState(resource, currentState)
+          updatePermissionStore(resource, state)
 
-          setCurrentState(resource, state)
-
-          console.debug(ID, `queryPermissionStatus() ${resource} ${state}`)
-
-          isPermissionGranted(resource) && PubSub.publish(PermissionEvent.ON_PERMISSION_GRANTED, state)
-          isPermissionPrompt(resource) && PubSub.publish(PermissionEvent.ON_PERMISSION_PROMPT, state)
-          isPermissionDenied(resource) && PubSub.publish(PermissionEvent.ON_PERMISSION_DENIED, state)
+          isPermissionGranted(resource) && PubSub.publish(PermissionEvent.ON_PERMISSION_GRANTED, { resource, state })
+          isPermissionPrompt(resource) && PubSub.publish(PermissionEvent.ON_PERMISSION_PROMPT, { resource, state })
+          isPermissionDenied(resource) && PubSub.publish(PermissionEvent.ON_PERMISSION_DENIED, { resource, state })
 
           resolve(permissionStatus)
         })
-        .catch((error) => {
-          console.error(ID, `queryPermissionStatus() ${resource} ${error}`)
-          reject(error)
+        .catch((err) => {
+          console.error(ID, `queryPermissionStatus() reject ${resource} ${err}`)
+          reject(err)
         })
     })
-    : new Promise((resolve, reject) => {
-      reject(new Error('Permission API not supported'))
-    })
+    : Promise.reject(new Error(WebAPIError.PERMISSIONS_NOT_SUPPORTED))
 }
 
-const queryPermissionState = (resource) => {
-  console.debug(ID, 'queryPermissionState()', resource)
-  return new Promise((resolve, reject) => {
-    queryPermissionStatus(resource)
-      .then((permissionStatus) => {
-        resolve(permissionStatus.state)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
-const queryPermissionHandler = (resource) => {
-  console.debug(ID, 'queryPermissionHandler()', resource)
-  return new Promise((resolve, reject) => {
-    queryPermissionStatus(resource)
-      .then((permissionStatus) => {
-        resolve(permissionStatus.onchange)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
-const setPermissionHandler = (resource, handler) => {
-  console.debug(ID, 'setPermissionHandler()', resource)
-  return new Promise((resolve, reject) => {
-    queryPermissionStatus(resource)
-      .then((permissionStatus) => {
-        permissionStatus.onchange = handler
-        resolve()
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
-const isSupported = isPermissionsSupported()
+const _isSupported = isPermissionsSupported()
 
 export {
   isPermissionsSupported,
@@ -121,7 +69,4 @@ export {
   isPermissionPrompt,
   isPermissionDenied,
   queryPermissionStatus,
-  queryPermissionState,
-  queryPermissionHandler,
-  setPermissionHandler,
 }
