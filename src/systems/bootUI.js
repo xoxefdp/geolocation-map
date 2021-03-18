@@ -1,7 +1,9 @@
+// EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
-import { BootEvent } from 'systems/Events'
 import Vue from 'vue'
+// LOCAL IMPORTS
+import { BootEvent } from 'systems/Events'
 import App from 'components/App'
 
 const ID = 'bootUI'

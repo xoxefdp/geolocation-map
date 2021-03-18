@@ -1,4 +1,6 @@
+// EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
+// LOCAL IMPORTS
 import { getFromStore, setToStore } from 'systems/store'
 import { initializeResourceStore } from 'permissions/store'
 
@@ -53,7 +55,7 @@ const setBeforeCurrentPosition = (position) => {
  */
 const getStoredTrackingWatcher = () => {
   const trackingWatcher = getFromStore(`${STORE_NAME}.trackingWatcher`)
-  console.debug(ID, `getStoredTrackingWatcher() ${trackingWatcher}`)
+  console.debug(ID, 'getStoredTrackingWatcher()', trackingWatcher)
   return trackingWatcher
 }
 
@@ -62,7 +64,7 @@ const getStoredTrackingWatcher = () => {
  */
 const getStoredInitialPosition = () => {
   const initialPosition = getFromStore(`${STORE_NAME}.initialPosition`)
-  console.debug(ID, `getStoredInitialPosition() ${initialPosition}`)
+  console.debug(ID, 'getStoredInitialPosition()', initialPosition)
   return initialPosition
 }
 
@@ -71,7 +73,7 @@ const getStoredInitialPosition = () => {
  */
 const getStoredCurrentPosition = () => {
   const currentPosition = getFromStore(`${STORE_NAME}.currentPosition`)
-  console.debug(ID, `getStoredCurrentPosition() ${currentPosition}`)
+  console.debug(ID, 'getStoredCurrentPosition()', currentPosition)
   return currentPosition
 }
 
@@ -80,7 +82,7 @@ const getStoredCurrentPosition = () => {
  */
 const getStoredBeforeCurrentPosition = () => {
   const beforeCurrentPosition = getFromStore(`${STORE_NAME}.beforeCurrentPosition`)
-  console.debug(ID, `getStoredBeforeCurrentPosition() ${beforeCurrentPosition}`)
+  console.debug(ID, 'getStoredBeforeCurrentPosition()', beforeCurrentPosition)
   return beforeCurrentPosition
 }
 

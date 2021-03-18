@@ -2,15 +2,15 @@
   <div class="custom-mape-controls">
     <div class="btns-container">
       <div class="btn-box">
-        <button class="btn-gps" v-on:click="trackLocation" :disabled="geoDisabled">
+        <button class="btn-cursor" v-on:click="toggleTrackLocation" v-bind:class="tracking ? 'active' : ''">
           <div style="display:none;">Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-          <img class="image-cursor" :src="cursorImage" alt="gps tracking">
+          <img class="image-cursor" :src="cursorImage" alt="tracking position">
         </button>
       </div>
       <div class="btn-box">
-        <button class="btn-gps" v-on:click="checkLocation" :disabled="geoDisabled">
+        <button class="btn-gps" v-on:click="checkLocation">
           <div style="display:none;">Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
-          <img class="image-gps" :src="gpsImage" alt="gps position">
+          <img class="image-gps" :src="gpsImage" alt="current position">
         </button>
       </div>
     </div>
@@ -18,13 +18,14 @@
 </template>
 
 <script>
+// EXTERNAL IMPORTS
+import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
-import { PermissionEvent } from 'systems/Events'
+// LOCAL IMPORTS
 import cursorImage from 'assets/img/cursor-24.png'
 import gpsImage from 'assets/img/gps-24.png'
-import { startTracking, renewCurrentPosition } from 'geolocation/geolocation'
-import { STORE_NAME as GeoStore } from 'geolocation/store'
-import { isPermissionDenied, isPermissionPrompt } from 'permissions/permissions'
+import { startTracking, renewCurrentPosition, stopTracking } from 'geolocation/geolocation'
+import { getStoredTrackingWatcher } from 'geolocation/store'
 
 const CustomMapeControls = {
   name: 'CustomMapeControls',
@@ -32,44 +33,32 @@ const CustomMapeControls = {
     return {
       cursorImage: cursorImage,
       gpsImage: gpsImage,
-
-      // input values
-      statusUpdate: null,
-      coordsUpdatedTimes: 0,
-
-      //
-      geoDisabled: null,
     }
   },
+  props: [
+    'tracking',
+  ],
   methods: {
-    // MAP EVENTS
-    trackLocation () {
-      startTracking().then(() => PubSub.publish('onTrackMap'))
+    toggleTrackLocation () {
+      const trackingWatcher = getStoredTrackingWatcher()
+      if (isNull(trackingWatcher)) {
+        startTracking()
+      } else {
+        stopTracking()
+      }
     },
     checkLocation () {
-      renewCurrentPosition().then(() => PubSub.publish('onCenterMap'))
-    },
-    // PERMISION EVENTS
-    _onPermissionChanged () {
-      this.geoDisabled = isPermissionPrompt(GeoStore) || isPermissionDenied(GeoStore)
+      renewCurrentPosition().finally(PubSub.publish('onCenterMap'))
     },
   },
   mounted: function() {
     console.debug(CustomMapeControls.name, 'mounted')
-
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this._onPermissionChanged)
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this._onPermissionChanged)
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this._onPermissionChanged)
   },
   updated: function() {
     console.debug(CustomMapeControls.name, 'updated')
   },
   beforeDestroy: function() {
     console.debug(CustomMapeControls.name, 'beforeDestroy')
-
-    PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_GRANTED)
-    PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_PROMPT)
-    PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_DENIED)
   },
 }
 
@@ -122,15 +111,21 @@ export default CustomMapeControls
     align-self: auto;
   }
 
-  .btn-gps {
+  .btn-gps, .btn-cursor {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
     border: none;
+    background-color: white;
+    cursor: pointer;
   }
 
-  .image-gps {
+  .image-gps, .image-cursor {
     vertical-align: middle;
+  }
+
+  .active {
+    background-color: #90EE90;
   }
 </style>
