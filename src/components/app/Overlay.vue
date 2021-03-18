@@ -5,7 +5,7 @@
     <h1 class="permission-prompt" v-show="permissionState === 'prompt'">Waiting for Geolocation permission prompt</h1>
     </div>
     <div class="overlay-box" v-show="permissionState === 'prompt'">
-      <button v-on:click="requestTracking">Prompt</button>
+      <button v-on:click="requestTracking">Authorize</button>
     </div>
   </div>
 </template>

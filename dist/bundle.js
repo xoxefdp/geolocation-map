@@ -19278,7 +19278,11 @@ var render = function() {
         ],
         staticClass: "overlay-box"
       },
-      [_c("button", { on: { click: _vm.requestTracking } }, [_vm._v("Prompt")])]
+      [
+        _c("button", { on: { click: _vm.requestTracking } }, [
+          _vm._v("Authorize")
+        ])
+      ]
     )
   ])
 }
@@ -44997,12 +45001,18 @@ const ID = 'geolocation'
  * @param {Position} position
  */
 const _successPositionUpdate = (position) => {
+  if (Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionDenied"])(ID) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionPrompt"])(ID)) {
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_3__["PermissionState"].GRANTED })
+  }
   console.debug(ID, '_successPositionUpdate() position', position)
   position && Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["updateGeolocationStore"])(position)
   position && pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
 }
 
 const _successTrackingStarted = () => {
+  if (Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionDenied"])(ID) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionPrompt"])(ID)) {
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_3__["PermissionState"].GRANTED })
+  }
   const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["getStoredTrackingWatcher"])()
   console.debug(ID, `_successTrackingStarted() trackingWatcher ${trackingWatcher}`)
   pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
