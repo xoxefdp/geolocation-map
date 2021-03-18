@@ -11,7 +11,9 @@
 </template>
 
 <script>
+// EXTERNAL IMPORTS
 import PubSub from 'pubsub-js'
+// LOCAL IMPORTS
 import { renewCurrentPosition } from 'geolocation/geolocation'
 
 const Overlay = {
