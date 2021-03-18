@@ -1,10 +1,12 @@
+// EXTERNAL IMPORTS
+import PubSub from 'pubsub-js'
+// LOCAL IMPORTS
 import {
   getStoredCurrentState,
   updatePermissionStore,
 } from 'permissions/store'
 import { PermissionEvent } from 'systems/Events'
 import { PermissionState, WebAPIError } from 'systems/Constants'
-import PubSub from 'pubsub-js'
 
 const ID = 'permissions'
 

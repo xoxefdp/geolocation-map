@@ -1,4 +1,6 @@
+// EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
+// LOCAL IMPORTS
 import { getFromStore, setToStore, setValuesToStore } from 'systems/store'
 
 const ID = 'StorePermission'
