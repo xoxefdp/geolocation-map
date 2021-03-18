@@ -122,7 +122,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.custom-mape-controls {\n  position: absolute;\n  bottom: 110px;\n  right: 22px;\n  z-index: 1000;\n}\n.btns-container {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: flex-start;\n  -ms-flex-pack: start;\n  justify-content: flex-start;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  align-content: center;\n  -webkit-align-items: flex-start;\n  -ms-flex-align: start;\n  align-items: flex-start;\n}\n.btn-box {\n  width: 30px;\n  height: 30px;\n  border: 2px solid rgba(0,0,0,0.2);\n  border-radius: 4px;\n  margin-top: 7px;\n  -webkit-order: 0;\n  -ms-flex-order: 0;\n  order: 0;\n  -webkit-flex: 0 1 auto;\n  -ms-flex: 0 1 auto;\n  flex: 0 1 auto;\n  -webkit-align-self: auto;\n  -ms-flex-item-align: auto;\n  align-self: auto;\n}\n.btn-gps {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  border: none;\n}\n.image-gps {\n  vertical-align: middle;\n}\n", ""]);
+exports.push([module.i, "\n.custom-mape-controls {\n  position: absolute;\n  bottom: 110px;\n  right: 22px;\n  z-index: 1000;\n}\n.btns-container {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: flex-start;\n  -ms-flex-pack: start;\n  justify-content: flex-start;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  align-content: center;\n  -webkit-align-items: flex-start;\n  -ms-flex-align: start;\n  align-items: flex-start;\n}\n.btn-box {\n  width: 30px;\n  height: 30px;\n  border: 2px solid rgba(0,0,0,0.2);\n  border-radius: 4px;\n  margin-top: 7px;\n  -webkit-order: 0;\n  -ms-flex-order: 0;\n  order: 0;\n  -webkit-flex: 0 1 auto;\n  -ms-flex: 0 1 auto;\n  flex: 0 1 auto;\n  -webkit-align-self: auto;\n  -ms-flex-item-align: auto;\n  align-self: auto;\n}\n.btn-gps, .btn-cursor {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  border: none;\n  background-color: white;\n  cursor: pointer;\n}\n.image-gps, .image-cursor {\n  vertical-align: middle;\n}\n.active {\n  background-color: #90EE90;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -18627,15 +18627,17 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var components_app_Mape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! components/app/Mape */ "./src/components/app/Mape.vue");
-/* harmony import */ var components_app_CustomMapeControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! components/app/CustomMapeControls */ "./src/components/app/CustomMapeControls.vue");
-/* harmony import */ var components_app_Overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/app/Overlay */ "./src/components/app/Overlay.vue");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
-/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var components_app_Mape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/app/Mape */ "./src/components/app/Mape.vue");
+/* harmony import */ var components_app_CustomMapeControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! components/app/CustomMapeControls */ "./src/components/app/CustomMapeControls.vue");
+/* harmony import */ var components_app_Overlay__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/app/Overlay */ "./src/components/app/Overlay.vue");
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
 //
 //
 //
@@ -18645,7 +18647,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+// EXTERNAL IMPORTS
 
+
+// LOCAL IMPORTS
 
 
 
@@ -18656,39 +18661,57 @@ __webpack_require__.r(__webpack_exports__);
 
 const App = {
   name: 'App',
-  components: { Mape: components_app_Mape__WEBPACK_IMPORTED_MODULE_0__["default"], CustomMapeControls: components_app_CustomMapeControls__WEBPACK_IMPORTED_MODULE_1__["default"], Overlay: components_app_Overlay__WEBPACK_IMPORTED_MODULE_2__["default"] },
+  components: { Mape: components_app_Mape__WEBPACK_IMPORTED_MODULE_2__["default"], CustomMapeControls: components_app_CustomMapeControls__WEBPACK_IMPORTED_MODULE_3__["default"], Overlay: components_app_Overlay__WEBPACK_IMPORTED_MODULE_4__["default"] },
   data: function() {
     return {
-      overlay: !Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_7__["isPermissionGranted"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"]),
-      permissionState: Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["getStoredCurrentState"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"]),
+      overlay: !Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_8__["isPermissionGranted"])(geolocation_store__WEBPACK_IMPORTED_MODULE_6__["STORE_NAME"]),
+      permissionState: Object(permissions_store__WEBPACK_IMPORTED_MODULE_7__["getStoredCurrentState"])(geolocation_store__WEBPACK_IMPORTED_MODULE_6__["STORE_NAME"]),
+      tracking: false,
     }
   },
   methods: {
-    _onPermissionChanged (message, data) {
-      console.debug(`_onPermissionChanged() ${message} ${data.resource} ${data.state}`)
-      Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["updatePermissionStore"])(data.resource, data.state)
-      this.overlay = !Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_7__["isPermissionGranted"])(data.resource)
-      this.permissionState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["getStoredCurrentState"])(data.resource)
+    onPermissionChanged (message, data) {
+      console.debug(App.name, `onPermissionChanged() ${message} ${data.resource} ${data.state}`)
+      Object(permissions_store__WEBPACK_IMPORTED_MODULE_7__["updatePermissionStore"])(data.resource, data.state)
+      this.overlay = !Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_8__["isPermissionGranted"])(data.resource)
+      this.permissionState = Object(permissions_store__WEBPACK_IMPORTED_MODULE_7__["getStoredCurrentState"])(data.resource)
+    },
+    onTrackingChanged (message, data) {
+      console.debug(App.name, `onTrackingChanged() message ${message}`)
+      console.debug(App.name, 'onTrackingChanged() data', data)
+      console.debug(App.name, 'onTrackingChanged() tracking', this.tracking)
+
+      const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_6__["getStoredTrackingWatcher"])()
+      if (Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
+        this.tracking = false
+      } else {
+        this.tracking = true
+      }
     },
   },
   mounted: function() {
     console.debug(App.name, 'mounted')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_GRANTED, this._onPermissionChanged)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_PROMPT, this._onPermissionChanged)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_DENIED, this._onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["PermissionEvent"].ON_PERMISSION_GRANTED, this.onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["PermissionEvent"].ON_PERMISSION_PROMPT, this.onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["PermissionEvent"].ON_PERMISSION_DENIED, this.onPermissionChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, this.onTrackingChanged)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED, this.onTrackingChanged)
   },
   updated: function() {
     console.debug(App.name, 'updated')
     console.debug(App.name, `overlay: ${this.overlay}`)
     console.debug(App.name, `permissionState: ${this.permissionState}`)
+    console.debug(App.name, `tracking: ${this.tracking}`)
   },
   beforeDestroy: function() {
     console.debug(App.name, 'beforeDestroy')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_GRANTED)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_PROMPT)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["PermissionEvent"].ON_PERMISSION_DENIED)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["PermissionEvent"].ON_PERMISSION_GRANTED)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["PermissionEvent"].ON_PERMISSION_PROMPT)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["PermissionEvent"].ON_PERMISSION_DENIED)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_5__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED)
   },
 }
 
@@ -18706,16 +18729,16 @@ const App = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
+/* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/img/cursor-24.png */ "./src/assets/img/cursor-24.png");
 /* harmony import */ var assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! assets/img/gps-24.png */ "./src/assets/img/gps-24.png");
 /* harmony import */ var assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! geolocation/geolocation */ "./src/systems/geolocation/geolocation.js");
 /* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
 //
 //
 //
@@ -18736,9 +18759,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+// EXTERNAL IMPORTS
 
 
-
+// LOCAL IMPORTS
 
 
 
@@ -18750,44 +18774,32 @@ const CustomMapeControls = {
     return {
       cursorImage: assets_img_cursor_24_png__WEBPACK_IMPORTED_MODULE_2___default.a,
       gpsImage: assets_img_gps_24_png__WEBPACK_IMPORTED_MODULE_3___default.a,
-
-      // input values
-      statusUpdate: null,
-      coordsUpdatedTimes: 0,
-
-      //
-      geoDisabled: null,
     }
   },
+  props: [
+    'tracking',
+  ],
   methods: {
-    // MAP EVENTS
-    trackLocation () {
-      Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["startTracking"])().then(() => pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish('onTrackMap'))
+    toggleTrackLocation () {
+      const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["getStoredTrackingWatcher"])()
+      if (Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
+        Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["startTracking"])()
+      } else {
+        Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["stopTracking"])()
+      }
     },
     checkLocation () {
-      Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["renewCurrentPosition"])().then(() => pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish('onCenterMap'))
-    },
-    // PERMISION EVENTS
-    _onPermissionChanged () {
-      this.geoDisabled = Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_6__["isPermissionPrompt"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"]) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_6__["isPermissionDenied"])(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["STORE_NAME"])
+      Object(geolocation_geolocation__WEBPACK_IMPORTED_MODULE_4__["renewCurrentPosition"])().finally(pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish('onCenterMap'))
     },
   },
   mounted: function() {
     console.debug(CustomMapeControls.name, 'mounted')
-
-    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, this._onPermissionChanged)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, this._onPermissionChanged)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, this._onPermissionChanged)
   },
   updated: function() {
     console.debug(CustomMapeControls.name, 'updated')
   },
   beforeDestroy: function() {
     console.debug(CustomMapeControls.name, 'beforeDestroy')
-
-    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED)
   },
 }
 
@@ -18807,13 +18819,13 @@ const CustomMapeControls = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
 //
 //
 //
@@ -18826,17 +18838,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+// EXTERNAL IMPORTS
 
 
 
 
+// LOCAL IMPORTS
 
 
 
 // Workaround for missing marker icon using leaflet with webapack
 // https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
-leaflet__WEBPACK_IMPORTED_MODULE_4__["Icon"].Default.imagePath = '/'
-leaflet__WEBPACK_IMPORTED_MODULE_4__["Icon"].Default.mergeOptions({
+leaflet__WEBPACK_IMPORTED_MODULE_2__["Icon"].Default.imagePath = '/'
+leaflet__WEBPACK_IMPORTED_MODULE_2__["Icon"].Default.mergeOptions({
   iconRetinaUrl: __webpack_require__(/*! leaflet/dist/images/marker-icon-2x.png */ "./node_modules/leaflet/dist/images/marker-icon-2x.png"),
   iconUrl: __webpack_require__(/*! leaflet/dist/images/marker-icon.png */ "./node_modules/leaflet/dist/images/marker-icon.png"),
   shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "./node_modules/leaflet/dist/images/marker-shadow.png"),
@@ -18844,13 +18858,14 @@ leaflet__WEBPACK_IMPORTED_MODULE_4__["Icon"].Default.mergeOptions({
 
 const Mape = {
   name: 'Mape',
-  components: { LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LMap"], LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LTileLayer"], LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LMarker"], LControlScale: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LControlScale"], LControlZoom: vue2_leaflet__WEBPACK_IMPORTED_MODULE_5__["LControlZoom"] },
+  components: { LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMap"], LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LTileLayer"], LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMarker"], LControlScale: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LControlScale"], LControlZoom: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LControlZoom"] },
   data: function() {
     return {
       mape: null,
+      centerMap: false,
       // leaflet config
       zoom: 17,
-      center: leaflet__WEBPACK_IMPORTED_MODULE_4__["latLng"](10.471654, -68.020949),
+      center: leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"](10.471654, -68.020949),
       coordinates: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>
@@ -18859,28 +18874,39 @@ const Mape = {
   },
   props: [
     'overlay',
+    'tracking',
   ],
   methods: {
     setCenter (coords) {
       this.center = coords
     },
-    setCoordinates (coordinates) {
-      this.coordinates = coordinates
-    },
-    getCoordinates () {
-      return this.coordinates
+    setCoordinates (position) {
+      const newCoords = leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"](position.coords.latitude, position.coords.longitude)
+      this.coordinates = newCoords
     },
     setCenterCoordinates () {
-      this.setCenter(this.coordinates)
-      this.mape.setView(this.coordinates) // sets map view to coordinates
+      console.debug(Mape.name, 'setCenterCoordinates() coordinates', this.coordinates)
+      this.coordinates && this.setCenter(this.coordinates)
+      this.coordinates && this.mape.setView(this.coordinates) // sets map view to coordinates
     },
-    onCurrentPositionUpdate () {
-      const positionUpdate = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_2__["getStoredCurrentPosition"])()
-      console.debug(Mape.name, 'onCurrentPositionUpdate()', positionUpdate)
-      if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(positionUpdate)) {
-        const coords = leaflet__WEBPACK_IMPORTED_MODULE_4__["latLng"](positionUpdate.coords.latitude, positionUpdate.coords.longitude)
-        this.setCoordinates(coords)
+    onCurrentPositionUpdate (message, data) {
+      const currentPosition = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_5__["getStoredCurrentPosition"])()
+      console.debug(Mape.name, 'onCurrentPositionUpdate() message', message)
+      console.debug(Mape.name, 'onCurrentPositionUpdate() data', data)
+      console.debug(Mape.name, 'onCurrentPositionUpdate() currentPosition', currentPosition)
+
+      if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(currentPosition)) {
+        this.setCoordinates(currentPosition)
+        if (this.tracking) {
+          this.setCenterCoordinates()
+        } else if (this.centerMap) {
+          this.setCenterCoordinates()
+          this.centerMap = false
+        }
       }
+    },
+    onCenterMap () {
+      this.centerMap = true
     },
   },
   beforeMount: function() {
@@ -18899,9 +18925,8 @@ const Mape = {
       this.mape = this.$refs.mape.mapObject
     })
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe('onTrackMap', this.setCenterCoordinates)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.subscribe('onCenterMap', this.setCenterCoordinates)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe('onCenterMap', this.onCenterMap)
   },
   updated: function() {
     console.debug(Mape.name, 'updated')
@@ -18909,9 +18934,8 @@ const Mape = {
   beforeDestroy: function() {
     console.debug(Mape.name, 'beforeDestroy')
 
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe('onTrackMap')
-    pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.unsubscribe('onCenterMap')
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe(systems_Events__WEBPACK_IMPORTED_MODULE_4__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.unsubscribe('onCenterMap')
   },
 }
 
@@ -18945,7 +18969,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+// EXTERNAL IMPORTS
 
+// LOCAL IMPORTS
 
 
 const Overlay = {
@@ -18988,7 +19014,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("Mape", { attrs: { overlay: _vm.overlay } }),
+      _c("Mape", { attrs: { overlay: _vm.overlay, tracking: _vm.tracking } }),
       _vm._v(" "),
       _c("CustomMapeControls", {
         directives: [
@@ -18998,7 +19024,8 @@ var render = function() {
             value: !_vm.overlay,
             expression: "!overlay"
           }
-        ]
+        ],
+        attrs: { tracking: _vm.tracking }
       }),
       _vm._v(" "),
       _c("Overlay", {
@@ -19044,16 +19071,16 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn-gps",
-            attrs: { disabled: _vm.geoDisabled },
-            on: { click: _vm.trackLocation }
+            staticClass: "btn-cursor",
+            class: _vm.tracking ? "active" : "",
+            on: { click: _vm.toggleTrackLocation }
           },
           [
             _vm._m(0),
             _vm._v(" "),
             _c("img", {
               staticClass: "image-cursor",
-              attrs: { src: _vm.cursorImage, alt: "gps tracking" }
+              attrs: { src: _vm.cursorImage, alt: "tracking position" }
             })
           ]
         )
@@ -19062,17 +19089,13 @@ var render = function() {
       _c("div", { staticClass: "btn-box" }, [
         _c(
           "button",
-          {
-            staticClass: "btn-gps",
-            attrs: { disabled: _vm.geoDisabled },
-            on: { click: _vm.checkLocation }
-          },
+          { staticClass: "btn-gps", on: { click: _vm.checkLocation } },
           [
             _vm._m(1),
             _vm._v(" "),
             _c("img", {
               staticClass: "image-gps",
-              attrs: { src: _vm.gpsImage, alt: "gps position" }
+              attrs: { src: _vm.gpsImage, alt: "current position" }
             })
           ]
         )
@@ -44864,13 +44887,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
 /* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
 /* harmony import */ var components_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/App */ "./src/components/App.vue");
+// EXTERNAL IMPORTS
 
 
 
+// LOCAL IMPORTS
 
 
 
@@ -44886,13 +44911,13 @@ const _uiExist = () => {
 const createUI = () => {
   console.debug(ID, 'createUI()')
 
-  ui = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
+  ui = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
     el: '#root',
     components: { App: components_App__WEBPACK_IMPORTED_MODULE_4__["default"] },
     template: '<App />',
   })
 
-  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["BootEvent"].ON_APP_INITIATED)
+  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_3__["BootEvent"].ON_APP_INITIATED)
 }
 
 const _destroyRootElement = () => {
@@ -44913,14 +44938,14 @@ const destroyUI = () => {
   _destroyRootElement()
   _createAppendRootElement()
 
-  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["BootEvent"].ON_APP_DESTROYED)
+  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_3__["BootEvent"].ON_APP_DESTROYED)
 }
 
 const rebootUI = () => {
   console.debug(ID, 'rebootUI()')
   _uiExist() && destroyUI()
   createUI()
-  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["BootEvent"].ON_APP_REBOOTED)
+  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_3__["BootEvent"].ON_APP_REBOOTED)
 }
 
 const getUI = () => {
@@ -44949,15 +44974,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stopTracking", function() { return stopTracking; });
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
-/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
-/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
+/* harmony import */ var geolocation_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! geolocation/store */ "./src/systems/geolocation/store.js");
+/* harmony import */ var permissions_permissions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! permissions/permissions */ "./src/systems/permissions/permissions.js");
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+// EXTERNAL IMPORTS
 
 
+// LOCAL IMPORTS
 
 
 
@@ -44969,30 +44996,57 @@ const ID = 'geolocation'
 /**
  * @param {Position} position
  */
-const _successTracking = (position) => {
-  console.debug(ID, '_successTracking() position', position)
-  Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["updateGeolocationStore"])(position)
-  pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
+const _successPositionUpdate = (position) => {
+  console.debug(ID, '_successPositionUpdate() position', position)
+  position && Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["updateGeolocationStore"])(position)
+  position && pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
+}
+
+const _successTrackingStarted = () => {
+  const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["getStoredTrackingWatcher"])()
+  console.debug(ID, `_successTrackingStarted() trackingWatcher ${trackingWatcher}`)
+  pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
 }
 
 /**
  * @param {PositionError} error
  */
-const _errorTracking = (error) => {
-  console.error(ID, '_errorTracking()', error)
+const _errorGeolocation = (error) => {
+  console.error(ID, '_errorGeolocation()', error)
 
   switch (error.code) {
-  case systems_Constants__WEBPACK_IMPORTED_MODULE_2__["GeolocationError"].PERMISSION_DENIED:
-    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, error)
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_3__["GeolocationError"].PERMISSION_DENIED:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, error)
     break
-  case systems_Constants__WEBPACK_IMPORTED_MODULE_2__["GeolocationError"].POSITION_UNAVAILABLE:
-    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_POSITION_UNAVAILABLE, error)
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_3__["GeolocationError"].POSITION_UNAVAILABLE:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_POSITION_UNAVAILABLE, error)
     break
-  case systems_Constants__WEBPACK_IMPORTED_MODULE_2__["GeolocationError"].TIMEOUT:
-    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TIMEOUT, error)
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_3__["GeolocationError"].TIMEOUT:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TIMEOUT, error)
     break
   default:
-    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_UNKNOWN_ERROR, error)
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_UNKNOWN_ERROR, error)
+    break
+  }
+}
+
+const _handleError = (message, data) => {
+  console.error(ID, '_handleError()', message)
+  console.error(ID, '_handleError()', data)
+
+  switch (data.code) {
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_3__["GeolocationError"].PERMISSION_DENIED:
+    pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_3__["PermissionState"].DENIED })
+    stopTracking()
+    break
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_3__["GeolocationError"].POSITION_UNAVAILABLE:
+    //
+    break
+  case systems_Constants__WEBPACK_IMPORTED_MODULE_3__["GeolocationError"].TIMEOUT:
+    //
+    break
+  default:
+    stopTracking()
     break
   }
 }
@@ -45007,7 +45061,7 @@ const isGeolocationSupported = () => {
 }
 
 const isGeolocationDenied = () => {
-  return Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID)
+  return Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionDenied"])(ID)
 }
 
 const handleGeolocationPermission = (event) => {
@@ -45015,18 +45069,18 @@ const handleGeolocationPermission = (event) => {
   const permissionStatus = event.currentTarget
   const state = permissionStatus.state
 
-  Object(permissions_store__WEBPACK_IMPORTED_MODULE_5__["updatePermissionStore"])(ID, state)
+  Object(permissions_store__WEBPACK_IMPORTED_MODULE_6__["updatePermissionStore"])(ID, state)
 
-  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionGranted"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state })
-  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionPrompt"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, { resource: ID, state })
-  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state })
+  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionGranted"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state })
+  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionPrompt"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_PROMPT, { resource: ID, state })
+  Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["isPermissionDenied"])(ID) && pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state })
 }
 
 const initGeoService = () => {
   return _isSupported
     ? new Promise((resolve, reject) => {
       console.debug(ID, `initGeoService() started at ${Date.now()}`)
-      Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["queryPermissionStatus"])(ID)
+      Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_5__["queryPermissionStatus"])(ID)
         .then((permissionStatus) => {
           permissionStatus.onchange = handleGeolocationPermission
           resolve()
@@ -45035,7 +45089,7 @@ const initGeoService = () => {
           reject(err)
         })
     })
-    : Promise.reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED))
+    : Promise.reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_3__["WebAPIError"].GEOLOCATION_NOT_SPPORTED))
 }
 
 /**
@@ -45044,26 +45098,23 @@ const initGeoService = () => {
 const renewCurrentPosition = (options = null) => {
   return new Promise((resolve, reject) => {
     if (_isSupported) {
-      console.debug(ID, `renewCurrentPosition() options ${options}`)
+      console.debug(ID, 'renewCurrentPosition() options', options)
       try {
-        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        navigator.geolocation.getCurrentPosition(_successPositionUpdate, _errorGeolocation, options)
+        resolve()
       } catch (err) {
         console.error(ID, 'renewCurrentPosition()', err)
         reject(err)
       }
     } else {
-      const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
+      const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_3__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
       console.error(ID, 'renewCurrentPosition()', err)
       reject(err)
     }
   }).then((result) => {
-    if (Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionPrompt"])(ID) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID)) {
-      pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].GRANTED })
-    }
-    _successTracking(result)
+    _successPositionUpdate(result)
   }).catch((err) => {
-    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].DENIED })
-    _errorTracking(err)
+    _errorGeolocation(err)
   })
 }
 
@@ -45071,31 +45122,34 @@ const renewCurrentPosition = (options = null) => {
  * @param {PositionOptions} options
  */
 const startTracking = (options = null) => {
-  console.debug(ID, `startTracking() options ${options}`)
+  console.debug(ID, 'startTracking() options', options)
   return new Promise((resolve, reject) => {
+    let trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["getStoredTrackingWatcher"])()
     if (_isSupported) {
-      let trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["getStoredTrackingWatcher"])()
       if (Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
-        trackingWatcher = navigator.geolocation.watchPosition(resolve, reject, options)
-        Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["setTrackingWatcher"])(trackingWatcher)
-        console.debug(ID, `startTracking() trackingWatcher ${trackingWatcher}`)
-        pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
+        try {
+          trackingWatcher = navigator.geolocation.watchPosition(_successPositionUpdate, _errorGeolocation, options)
+          Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["setTrackingWatcher"])(trackingWatcher)
+          resolve()
+        } catch (err) {
+          console.error(ID, 'startTracking()', err)
+          reject(err)
+        }
       } else {
-        console.debug(ID, `startTracking() trackingWatcher found ${trackingWatcher}`)
+        const message = `trackingWatcher found ${trackingWatcher}`
+        const err = new Error(message)
+        console.error(ID, 'startTracking()', err)
+        reject(err)
       }
     } else {
-      const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
+      const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_3__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
       console.error(ID, 'startTracking()', err)
       reject(err)
     }
-  }).then((result) => {
-    if (Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionPrompt"])(ID) || Object(permissions_permissions__WEBPACK_IMPORTED_MODULE_4__["isPermissionDenied"])(ID)) {
-      pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].GRANTED })
-    }
-    _successTracking(result)
+  }).then(() => {
+    _successTrackingStarted()
   }).catch((error) => {
-    pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource: ID, state: systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].DENIED })
-    _errorTracking(error)
+    _errorGeolocation(error)
   })
 }
 
@@ -45103,17 +45157,18 @@ const startTracking = (options = null) => {
  */
 const stopTracking = () => {
   if (_isSupported) {
-    const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["getStoredTrackingWatcher"])()
+    const trackingWatcher = Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["getStoredTrackingWatcher"])()
     if (!Object(the_type_validator__WEBPACK_IMPORTED_MODULE_0__["isNull"])(trackingWatcher)) {
-      navigator.geolocation.clearWatch(trackingWatcher)
-      Object(geolocation_store__WEBPACK_IMPORTED_MODULE_3__["setTrackingWatcher"])(null)
       console.debug(ID, `stopTracking() trackingWatcher ${trackingWatcher}`)
-      pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
+      navigator.geolocation.clearWatch(trackingWatcher)
+      Object(geolocation_store__WEBPACK_IMPORTED_MODULE_4__["setTrackingWatcher"])(null)
+      pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
     } else {
-      console.debug(ID, `stopTracking() no trackingWatcher found`)
+      const message = 'no trackingWatcher found'
+      console.error(ID, 'stopTracking()', message)
     }
   } else {
-    const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
+    const err = new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_3__["WebAPIError"].GEOLOCATION_NOT_SPPORTED)
     console.error(ID, 'stopTracking()', err)
   }
 }
@@ -45121,10 +45176,8 @@ const stopTracking = () => {
 const _isSupported = isGeolocationSupported()
 
 // Error Handling
-pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, stopTracking)
-pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_POSITION_UNAVAILABLE, stopTracking)
-pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_TIMEOUT, stopTracking)
-pubsub_js__WEBPACK_IMPORTED_MODULE_6___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_1__["GeolocationEvent"].ON_GEOLOCATION_UNKNOWN_ERROR, stopTracking)
+pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_PERMISSION_DENIED, _handleError)
+pubsub_js__WEBPACK_IMPORTED_MODULE_1___default.a.subscribe(systems_Events__WEBPACK_IMPORTED_MODULE_2__["GeolocationEvent"].ON_GEOLOCATION_UNKNOWN_ERROR, _handleError)
 
 
 
@@ -45154,7 +45207,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var systems_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/store */ "./src/systems/store.js");
 /* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+// EXTERNAL IMPORTS
 
+// LOCAL IMPORTS
 
 
 
@@ -45209,7 +45264,7 @@ const setBeforeCurrentPosition = (position) => {
  */
 const getStoredTrackingWatcher = () => {
   const trackingWatcher = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.trackingWatcher`)
-  console.debug(ID, `getStoredTrackingWatcher() ${trackingWatcher}`)
+  console.debug(ID, 'getStoredTrackingWatcher()', trackingWatcher)
   return trackingWatcher
 }
 
@@ -45218,7 +45273,7 @@ const getStoredTrackingWatcher = () => {
  */
 const getStoredInitialPosition = () => {
   const initialPosition = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.initialPosition`)
-  console.debug(ID, `getStoredInitialPosition() ${initialPosition}`)
+  console.debug(ID, 'getStoredInitialPosition()', initialPosition)
   return initialPosition
 }
 
@@ -45227,7 +45282,7 @@ const getStoredInitialPosition = () => {
  */
 const getStoredCurrentPosition = () => {
   const currentPosition = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.currentPosition`)
-  console.debug(ID, `getStoredCurrentPosition() ${currentPosition}`)
+  console.debug(ID, 'getStoredCurrentPosition()', currentPosition)
   return currentPosition
 }
 
@@ -45236,7 +45291,7 @@ const getStoredCurrentPosition = () => {
  */
 const getStoredBeforeCurrentPosition = () => {
   const beforeCurrentPosition = Object(systems_store__WEBPACK_IMPORTED_MODULE_1__["getFromStore"])(`${STORE_NAME}.beforeCurrentPosition`)
-  console.debug(ID, `getStoredBeforeCurrentPosition() ${beforeCurrentPosition}`)
+  console.debug(ID, 'getStoredBeforeCurrentPosition()', beforeCurrentPosition)
   return beforeCurrentPosition
 }
 
@@ -45270,12 +45325,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPermissionPrompt", function() { return isPermissionPrompt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPermissionDenied", function() { return isPermissionDenied; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryPermissionStatus", function() { return queryPermissionStatus; });
-/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
-/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
-/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var permissions_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! permissions/store */ "./src/systems/permissions/store.js");
+/* harmony import */ var systems_Events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! systems/Events */ "./src/systems/Events.js");
+/* harmony import */ var systems_Constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! systems/Constants */ "./src/systems/Constants.js");
+// EXTERNAL IMPORTS
 
+// LOCAL IMPORTS
 
 
 
@@ -45292,19 +45349,19 @@ const isPermissionsSupported = () => {
 }
 
 const isPermissionGranted = (resource) => {
-  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].GRANTED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["getStoredCurrentState"])(resource)
+  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_3__["PermissionState"].GRANTED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
   console.debug(ID, `isPermissionGranted() ${resource} ${state}`)
   return state
 }
 
 const isPermissionPrompt = (resource) => {
-  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].PROMPT === Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["getStoredCurrentState"])(resource)
+  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_3__["PermissionState"].PROMPT === Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
   console.debug(ID, `isPermissionPrompt() ${resource} ${state}`)
   return state
 }
 
 const isPermissionDenied = (resource) => {
-  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_2__["PermissionState"].DENIED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["getStoredCurrentState"])(resource)
+  const state = systems_Constants__WEBPACK_IMPORTED_MODULE_3__["PermissionState"].DENIED === Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["getStoredCurrentState"])(resource)
   console.debug(ID, `isPermissionDenied() ${resource} ${state}`)
   return state
 }
@@ -45318,11 +45375,11 @@ const queryPermissionStatus = (resource) => {
           const state = permissionStatus.state
           console.debug(ID, `queryPermissionStatus() resolve ${resource} ${state}`)
 
-          Object(permissions_store__WEBPACK_IMPORTED_MODULE_0__["updatePermissionStore"])(resource, state)
+          Object(permissions_store__WEBPACK_IMPORTED_MODULE_1__["updatePermissionStore"])(resource, state)
 
-          isPermissionGranted(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource, state })
-          isPermissionPrompt(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_PROMPT, { resource, state })
-          isPermissionDenied(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_3___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_1__["PermissionEvent"].ON_PERMISSION_DENIED, { resource, state })
+          isPermissionGranted(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_GRANTED, { resource, state })
+          isPermissionPrompt(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_PROMPT, { resource, state })
+          isPermissionDenied(resource) && pubsub_js__WEBPACK_IMPORTED_MODULE_0___default.a.publish(systems_Events__WEBPACK_IMPORTED_MODULE_2__["PermissionEvent"].ON_PERMISSION_DENIED, { resource, state })
 
           resolve(permissionStatus)
         })
@@ -45331,7 +45388,7 @@ const queryPermissionStatus = (resource) => {
           reject(err)
         })
     })
-    : Promise.reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_2__["WebAPIError"].PERMISSIONS_NOT_SUPPORTED))
+    : Promise.reject(new Error(systems_Constants__WEBPACK_IMPORTED_MODULE_3__["WebAPIError"].PERMISSIONS_NOT_SUPPORTED))
 }
 
 const _isSupported = isPermissionsSupported()
@@ -45362,7 +45419,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! the-type-validator */ "./node_modules/the-type-validator/dist/main.js");
 /* harmony import */ var the_type_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(the_type_validator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var systems_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! systems/store */ "./src/systems/store.js");
+// EXTERNAL IMPORTS
 
+// LOCAL IMPORTS
 
 
 const ID = 'StorePermission'
