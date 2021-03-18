@@ -10,12 +10,14 @@
 </template>
 
 <script>
+// EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
-import { GeolocationEvent } from 'systems/Events'
-import { getStoredCurrentPosition } from 'geolocation/store'
 import PubSub from 'pubsub-js'
 import * as L from 'leaflet'
 import { LMap, LTileLayer, LMarker, LControlScale, LControlZoom } from 'vue2-leaflet'
+// LOCAL IMPORTS
+import { GeolocationEvent } from 'systems/Events'
+import { getStoredCurrentPosition } from 'geolocation/store'
 
 // Workaround for missing marker icon using leaflet with webapack
 // https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
@@ -32,6 +34,7 @@ const Mape = {
   data: function() {
     return {
       mape: null,
+      centerMap: false,
       // leaflet config
       zoom: 17,
       center: L.latLng(10.471654, -68.020949),
@@ -43,28 +46,39 @@ const Mape = {
   },
   props: [
     'overlay',
+    'tracking',
   ],
   methods: {
     setCenter (coords) {
       this.center = coords
     },
-    setCoordinates (coordinates) {
-      this.coordinates = coordinates
-    },
-    getCoordinates () {
-      return this.coordinates
+    setCoordinates (position) {
+      const newCoords = L.latLng(position.coords.latitude, position.coords.longitude)
+      this.coordinates = newCoords
     },
     setCenterCoordinates () {
-      this.setCenter(this.coordinates)
-      this.mape.setView(this.coordinates) // sets map view to coordinates
+      console.debug(Mape.name, 'setCenterCoordinates() coordinates', this.coordinates)
+      this.coordinates && this.setCenter(this.coordinates)
+      this.coordinates && this.mape.setView(this.coordinates) // sets map view to coordinates
     },
-    onCurrentPositionUpdate () {
-      const positionUpdate = getStoredCurrentPosition()
-      console.debug(Mape.name, 'onCurrentPositionUpdate()', positionUpdate)
-      if (!isNull(positionUpdate)) {
-        const coords = L.latLng(positionUpdate.coords.latitude, positionUpdate.coords.longitude)
-        this.setCoordinates(coords)
+    onCurrentPositionUpdate (message, data) {
+      const currentPosition = getStoredCurrentPosition()
+      console.debug(Mape.name, 'onCurrentPositionUpdate() message', message)
+      console.debug(Mape.name, 'onCurrentPositionUpdate() data', data)
+      console.debug(Mape.name, 'onCurrentPositionUpdate() currentPosition', currentPosition)
+
+      if (!isNull(currentPosition)) {
+        this.setCoordinates(currentPosition)
+        if (this.tracking) {
+          this.setCenterCoordinates()
+        } else if (this.centerMap) {
+          this.setCenterCoordinates()
+          this.centerMap = false
+        }
       }
+    },
+    onCenterMap () {
+      this.centerMap = true
     },
   },
   beforeMount: function() {
@@ -84,8 +98,7 @@ const Mape = {
     })
 
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
-    PubSub.subscribe('onTrackMap', this.setCenterCoordinates)
-    PubSub.subscribe('onCenterMap', this.setCenterCoordinates)
+    PubSub.subscribe('onCenterMap', this.onCenterMap)
   },
   updated: function() {
     console.debug(Mape.name, 'updated')
@@ -94,7 +107,6 @@ const Mape = {
     console.debug(Mape.name, 'beforeDestroy')
 
     PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
-    PubSub.unsubscribe('onTrackMap')
     PubSub.unsubscribe('onCenterMap')
   },
 }

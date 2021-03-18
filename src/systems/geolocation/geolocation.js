@@ -1,4 +1,7 @@
+// EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
+import PubSub from 'pubsub-js'
+// LOCAL IMPORTS
 import { GeolocationEvent, PermissionEvent } from 'systems/Events'
 import { GeolocationError, PermissionState, WebAPIError } from 'systems/Constants'
 import {
@@ -15,24 +18,29 @@ import {
 import {
   updatePermissionStore,
 } from 'permissions/store'
-import PubSub from 'pubsub-js'
 
 const ID = 'geolocation'
 
 /**
  * @param {Position} position
  */
-const _successTracking = (position) => {
-  console.debug(ID, '_successTracking() position', position)
-  updateGeolocationStore(position)
-  PubSub.publish(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
+const _successPositionUpdate = (position) => {
+  console.debug(ID, '_successPositionUpdate() position', position)
+  position && updateGeolocationStore(position)
+  position && PubSub.publish(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
+}
+
+const _successTrackingStarted = () => {
+  const trackingWatcher = getStoredTrackingWatcher()
+  console.debug(ID, `_successTrackingStarted() trackingWatcher ${trackingWatcher}`)
+  PubSub.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
 }
 
 /**
  * @param {PositionError} error
  */
-const _errorTracking = (error) => {
-  console.error(ID, '_errorTracking()', error)
+const _errorGeolocation = (error) => {
+  console.error(ID, '_errorGeolocation()', error)
 
   switch (error.code) {
   case GeolocationError.PERMISSION_DENIED:
@@ -46,6 +54,27 @@ const _errorTracking = (error) => {
     break
   default:
     PubSub.publish(GeolocationEvent.ON_GEOLOCATION_UNKNOWN_ERROR, error)
+    break
+  }
+}
+
+const _handleError = (message, data) => {
+  console.error(ID, '_handleError()', message)
+  console.error(ID, '_handleError()', data)
+
+  switch (data.code) {
+  case GeolocationError.PERMISSION_DENIED:
+    PubSub.publish(PermissionEvent.ON_PERMISSION_DENIED, { resource: ID, state: PermissionState.DENIED })
+    stopTracking()
+    break
+  case GeolocationError.POSITION_UNAVAILABLE:
+    //
+    break
+  case GeolocationError.TIMEOUT:
+    //
+    break
+  default:
+    stopTracking()
     break
   }
 }
@@ -97,9 +126,10 @@ const initGeoService = () => {
 const renewCurrentPosition = (options = null) => {
   return new Promise((resolve, reject) => {
     if (_isSupported) {
-      console.debug(ID, `renewCurrentPosition() options ${options}`)
+      console.debug(ID, 'renewCurrentPosition() options', options)
       try {
-        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        navigator.geolocation.getCurrentPosition(_successPositionUpdate, _errorGeolocation, options)
+        resolve()
       } catch (err) {
         console.error(ID, 'renewCurrentPosition()', err)
         reject(err)
@@ -110,13 +140,9 @@ const renewCurrentPosition = (options = null) => {
       reject(err)
     }
   }).then((result) => {
-    if (isPermissionPrompt(ID) || isPermissionDenied(ID)) {
-      PubSub.publish(PermissionEvent.ON_PERMISSION_GRANTED, { resource: ID, state: PermissionState.GRANTED })
-    }
-    _successTracking(result)
+    _successPositionUpdate(result)
   }).catch((err) => {
-    PubSub.publish(PermissionEvent.ON_PERMISSION_DENIED, { resource: ID, state: PermissionState.DENIED })
-    _errorTracking(err)
+    _errorGeolocation(err)
   })
 }
 
@@ -124,31 +150,34 @@ const renewCurrentPosition = (options = null) => {
  * @param {PositionOptions} options
  */
 const startTracking = (options = null) => {
-  console.debug(ID, `startTracking() options ${options}`)
+  console.debug(ID, 'startTracking() options', options)
   return new Promise((resolve, reject) => {
+    let trackingWatcher = getStoredTrackingWatcher()
     if (_isSupported) {
-      let trackingWatcher = getStoredTrackingWatcher()
       if (isNull(trackingWatcher)) {
-        trackingWatcher = navigator.geolocation.watchPosition(resolve, reject, options)
-        setTrackingWatcher(trackingWatcher)
-        console.debug(ID, `startTracking() trackingWatcher ${trackingWatcher}`)
-        PubSub.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
+        try {
+          trackingWatcher = navigator.geolocation.watchPosition(_successPositionUpdate, _errorGeolocation, options)
+          setTrackingWatcher(trackingWatcher)
+          resolve()
+        } catch (err) {
+          console.error(ID, 'startTracking()', err)
+          reject(err)
+        }
       } else {
-        console.debug(ID, `startTracking() trackingWatcher found ${trackingWatcher}`)
+        const message = `trackingWatcher found ${trackingWatcher}`
+        const err = new Error(message)
+        console.error(ID, 'startTracking()', err)
+        reject(err)
       }
     } else {
       const err = new Error(WebAPIError.GEOLOCATION_NOT_SPPORTED)
       console.error(ID, 'startTracking()', err)
       reject(err)
     }
-  }).then((result) => {
-    if (isPermissionPrompt(ID) || isPermissionDenied(ID)) {
-      PubSub.publish(PermissionEvent.ON_PERMISSION_GRANTED, { resource: ID, state: PermissionState.GRANTED })
-    }
-    _successTracking(result)
+  }).then(() => {
+    _successTrackingStarted()
   }).catch((error) => {
-    PubSub.publish(PermissionEvent.ON_PERMISSION_DENIED, { resource: ID, state: PermissionState.DENIED })
-    _errorTracking(error)
+    _errorGeolocation(error)
   })
 }
 
@@ -158,12 +187,13 @@ const stopTracking = () => {
   if (_isSupported) {
     const trackingWatcher = getStoredTrackingWatcher()
     if (!isNull(trackingWatcher)) {
+      console.debug(ID, `stopTracking() trackingWatcher ${trackingWatcher}`)
       navigator.geolocation.clearWatch(trackingWatcher)
       setTrackingWatcher(null)
-      console.debug(ID, `stopTracking() trackingWatcher ${trackingWatcher}`)
       PubSub.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, trackingWatcher)
     } else {
-      console.debug(ID, `stopTracking() no trackingWatcher found`)
+      const message = 'no trackingWatcher found'
+      console.error(ID, 'stopTracking()', message)
     }
   } else {
     const err = new Error(WebAPIError.GEOLOCATION_NOT_SPPORTED)
@@ -174,10 +204,8 @@ const stopTracking = () => {
 const _isSupported = isGeolocationSupported()
 
 // Error Handling
-PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_PERMISSION_DENIED, stopTracking)
-PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_POSITION_UNAVAILABLE, stopTracking)
-PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TIMEOUT, stopTracking)
-PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_UNKNOWN_ERROR, stopTracking)
+PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_PERMISSION_DENIED, _handleError)
+PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_UNKNOWN_ERROR, _handleError)
 
 export {
   isGeolocationSupported,
