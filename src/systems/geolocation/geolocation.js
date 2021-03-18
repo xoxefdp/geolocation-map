@@ -25,12 +25,18 @@ const ID = 'geolocation'
  * @param {Position} position
  */
 const _successPositionUpdate = (position) => {
+  if (isPermissionDenied(ID) || isPermissionPrompt(ID)) {
+    PubSub.publish(PermissionEvent.ON_PERMISSION_GRANTED, { resource: ID, state: PermissionState.GRANTED })
+  }
   console.debug(ID, '_successPositionUpdate() position', position)
   position && updateGeolocationStore(position)
   position && PubSub.publish(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, position)
 }
 
 const _successTrackingStarted = () => {
+  if (isPermissionDenied(ID) || isPermissionPrompt(ID)) {
+    PubSub.publish(PermissionEvent.ON_PERMISSION_GRANTED, { resource: ID, state: PermissionState.GRANTED })
+  }
   const trackingWatcher = getStoredTrackingWatcher()
   console.debug(ID, `_successTrackingStarted() trackingWatcher ${trackingWatcher}`)
   PubSub.publish(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, trackingWatcher)
