@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchBar />
+    <SearchBar v-show="!overlay" />
     <Mape :overlay="overlay" :tracking="tracking" />
     <CustomMapeControls v-show="!overlay" :tracking="tracking" />
     <Overlay v-show="overlay" :permissionState="permissionState" />
