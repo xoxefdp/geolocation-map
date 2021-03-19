@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SearchBar />
     <Mape :overlay="overlay" :tracking="tracking" />
     <CustomMapeControls v-show="!overlay" :tracking="tracking" />
     <Overlay v-show="overlay" :permissionState="permissionState" />
@@ -14,6 +15,7 @@ import PubSub from 'pubsub-js'
 import Mape from 'components/app/Mape'
 import CustomMapeControls from 'components/app/CustomMapeControls'
 import Overlay from 'components/app/Overlay'
+import SearchBar from 'components/app/SearchBar'
 import { GeolocationEvent, PermissionEvent } from 'systems/Events'
 import { STORE_NAME as GeoStore, getStoredTrackingWatcher } from 'geolocation/store'
 import { getStoredCurrentState, updatePermissionStore } from 'permissions/store'
@@ -21,7 +23,7 @@ import { isPermissionGranted } from 'permissions/permissions'
 
 const App = {
   name: 'App',
-  components: { Mape, CustomMapeControls, Overlay },
+  components: { Mape, CustomMapeControls, Overlay, SearchBar },
   data: function() {
     return {
       overlay: !isPermissionGranted(GeoStore),
