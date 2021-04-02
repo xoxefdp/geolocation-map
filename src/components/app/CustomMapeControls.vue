@@ -48,7 +48,10 @@ const CustomMapeControls = {
       }
     },
     checkLocation () {
-      renewCurrentPosition().finally(PubSub.publish('onCenterMap'))
+      renewCurrentPosition().finally(() => {
+        PubSub.publish('fillAddress')
+        PubSub.publish('onCenterMap')
+      })
     },
   },
   mounted: function() {
@@ -69,7 +72,7 @@ export default CustomMapeControls
   .custom-mape-controls {
     position: absolute;
     bottom: 110px;
-    right: 22px;
+    right: 14px;
     z-index: 1000;
   }
 

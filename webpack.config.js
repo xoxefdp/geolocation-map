@@ -49,7 +49,8 @@ const config = {
   entry: `${SRC_DIR}/main.js`,
   output: {
     path: DIST_DIR,
-    filename: 'bundle.js',
+    filename: '[name].js',
+    sourceMapFilename: '[name].map',
   },
   resolve: {
     extensions: ['.js', '.vue'],
@@ -98,14 +99,22 @@ const config = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/i,
-        use: ['file-loader'],
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets/img'
+        }
       },
     ],
   },
   devServer: {
     hot: true,
-    port: 9000,
+    port: 3000,
     host: '0.0.0.0',
+    // disableHostCheck: true, // through proxy with domain
+    watchOptions: {
+      poll: true,
+      ignored: ['**/node_modules', '**/dist'],
+    }
   },
 }
 if (!isDev) {
