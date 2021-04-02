@@ -36,11 +36,11 @@ const Mape = {
       mape: null,
       centerMap: false,
       // leaflet config
-      zoom: 17,
+      zoom: 15,
       center: L.latLng(10.471654, -68.020949),
       coordinates: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>
+      attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> |
         Powered by <a href="https://xisco.dev" target="_blank">xiscodev</a>`,
     }
   },
@@ -80,6 +80,11 @@ const Mape = {
     onCenterMap () {
       this.centerMap = true
     },
+    onLocatePosition (message, data) {
+      console.debug(Mape.name, `onLocatePosition() message: ${message}, data: ${data}`)
+      this.setCoordinates(data);
+      this.setCenterCoordinates();
+    }
   },
   beforeMount: function() {
     console.debug(Mape.name, 'beforeMount')
@@ -99,6 +104,7 @@ const Mape = {
 
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
     PubSub.subscribe('onCenterMap', this.onCenterMap)
+    PubSub.subscribe('locatePosition', this.onLocatePosition)
   },
   updated: function() {
     console.debug(Mape.name, 'updated')
@@ -108,6 +114,7 @@ const Mape = {
 
     PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
     PubSub.unsubscribe('onCenterMap')
+    PubSub.unsubscribe('locatePosition')
   },
 }
 
