@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="app">
     <SearchBar v-show="!overlay" />
     <Mape :overlay="overlay" :tracking="tracking" />
     <CustomMapeControls v-show="!overlay" :tracking="tracking" />
-    <Overlay v-show="overlay" :permissionState="permissionState" />
+    <Overlay v-show="overlay" :permissionState="permissionState" :isLoading="isLoading" />
   </div>
 </template>
 
@@ -29,6 +29,7 @@ const App = {
       overlay: !isPermissionGranted(GeoStore),
       permissionState: getStoredCurrentState(GeoStore),
       tracking: false,
+      isLoading: false,
     }
   },
   methods: {
@@ -50,32 +51,44 @@ const App = {
         this.tracking = true
       }
     },
+    onToggleLoading (message, data) {
+      console.debug(App.name, `toggleLoading() ${message} ${data}`)
+      this.isLoading = data
+      this.overlay = data
+    }
   },
   mounted: function() {
     console.debug(App.name, 'mounted')
-
     PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this.onPermissionChanged)
     PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this.onPermissionChanged)
     PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this.onPermissionChanged)
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this.onTrackingChanged)
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this.onTrackingChanged)
+    PubSub.subscribe('toggleLoading', this.onToggleLoading)
   },
   updated: function() {
     console.debug(App.name, 'updated')
     console.debug(App.name, `overlay: ${this.overlay}`)
     console.debug(App.name, `permissionState: ${this.permissionState}`)
     console.debug(App.name, `tracking: ${this.tracking}`)
+    console.debug(App.name, `isLoading: ${this.isLoading}`)
   },
   beforeDestroy: function() {
     console.debug(App.name, 'beforeDestroy')
-
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_GRANTED)
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_PROMPT)
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_DENIED)
     PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED)
     PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED)
+    PubSub.unsubscribe('toggleLoading')
   },
 }
 
 export default App
 </script>
+
+<style>
+  .app {
+    position: relative;
+  }
+</style>
