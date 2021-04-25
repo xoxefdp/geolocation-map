@@ -55,12 +55,12 @@ const SearchBar = {
           .then(response => response.json())
           .then((data) => {
             console.log(data)
-            this.latitude = data[0].latitude;
-            this.longitude = data[0].longitude;
+            this.latitude = data[0].latitude
+            this.longitude = data[0].longitude
           }).catch((error) => {
             console.log(error)
           }).finally(() => {
-            PubSub.publish('locatePosition', { coords: {latitude: this.latitude, longitude: this.longitude}});
+            PubSub.publish('locatePosition', { coords: { latitude: this.latitude, longitude: this.longitude } })
             PubSub.publish('toggleLoading', false)
           })
       }
@@ -76,7 +76,7 @@ const SearchBar = {
           }).catch((error) => {
             console.log(error)
           }).finally(() => {
-            PubSub.publish('locatePosition', { coords: {latitude: this.latitude, longitude: this.longitude}});
+            PubSub.publish('locatePosition', { coords: { latitude: this.latitude, longitude: this.longitude } })
             PubSub.publish('toggleLoading', false)
           })
       }

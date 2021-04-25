@@ -101,8 +101,8 @@ const config = {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/i,
         loader: 'file-loader',
         options: {
-          outputPath: 'assets/img'
-        }
+          outputPath: 'assets/img',
+        },
       },
     ],
   },
@@ -114,7 +114,7 @@ const config = {
     watchOptions: {
       poll: true,
       ignored: ['**/node_modules', '**/dist'],
-    }
+    },
   },
 }
 if (!isDev) {
