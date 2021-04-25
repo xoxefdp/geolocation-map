@@ -1,4 +1,6 @@
-FROM node:14.16.0-alpine3.13
+ARG NODE_VERSION=lts-alpine
+
+FROM node:${NODE_VERSION}
 
 # Set working directory
 WORKDIR /var/www
@@ -6,7 +8,7 @@ WORKDIR /var/www
 # Update base image
 RUN set -xe && \
   apk add --no-cache --update && \
-  rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*
+  rm -rf /tmp/* /var/cache/apk/*
 
 # ENTRYPOINT [ "npm", "run", "serve:commonjs:dev" ]
 CMD [ "npm", "run", "serve:commonjs:dev" ]
