@@ -55,7 +55,7 @@ const App = {
       console.debug(App.name, `toggleLoading() ${message} ${data}`)
       this.isLoading = data
       this.overlay = data
-    }
+    },
   },
   mounted: function() {
     console.debug(App.name, 'mounted')

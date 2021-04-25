@@ -82,9 +82,9 @@ const Mape = {
     },
     onLocatePosition (message, data) {
       console.debug(Mape.name, `onLocatePosition() message: ${message}, data: ${data}`)
-      this.setCoordinates(data);
-      this.setCenterCoordinates();
-    }
+      this.setCoordinates(data)
+      this.setCenterCoordinates()
+    },
   },
   beforeMount: function() {
     console.debug(Mape.name, 'beforeMount')

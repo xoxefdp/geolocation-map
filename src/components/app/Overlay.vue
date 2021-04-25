@@ -21,7 +21,7 @@ const Overlay = {
   name: 'Overlay',
   props: [
     'permissionState',
-    'isLoading'
+    'isLoading',
   ],
   methods: {
     requestTracking () {
