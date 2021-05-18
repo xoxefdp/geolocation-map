@@ -19,7 +19,7 @@ WORKDIR /var/www
 # Update base image
 RUN set -xe && \
   apk add --no-cache --update && \
-  rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*
+  rm -rf /tmp/* /var/cache/apk/*
 
 # Install server dependencies
 RUN npm install express morgan --loglevel silly
