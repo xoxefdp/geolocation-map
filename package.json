@@ -51,6 +51,7 @@
     "lodash.unset": "^4.5.2",
     "morgan": "^1.10.0",
     "pubsub-js": "^1.9.3",
+    "store-and-pubsub": "^1.1.1",
     "the-type-validator": "^1.1.0",
     "vue": "^2.6.10",
     "vue2-leaflet": "^2.4.1"
