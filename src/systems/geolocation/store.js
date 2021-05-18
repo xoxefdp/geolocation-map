@@ -1,7 +1,7 @@
 // EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
 // LOCAL IMPORTS
-import { getFromStore, setToStore } from 'systems/store'
+import { pullFrom, pushTo } from 'store-and-pubsub'
 import { initializeResourceStore } from 'permissions/store'
 
 const ID = 'StoreGeolocation'
@@ -15,7 +15,7 @@ const state = {
 }
 
 console.debug(ID, 'initializeStore()')
-setToStore(STORE_NAME, state)
+pushTo(STORE_NAME, state)
 initializeResourceStore(STORE_NAME)
 
 /**
@@ -23,7 +23,7 @@ initializeResourceStore(STORE_NAME)
  */
 const setTrackingWatcher = (trackingWatcher) => {
   console.debug(ID, 'setTrackingWatcher()', trackingWatcher)
-  setToStore(`${STORE_NAME}.trackingWatcher`, trackingWatcher)
+  pushTo(`${STORE_NAME}.trackingWatcher`, trackingWatcher)
 }
 
 /**
@@ -31,7 +31,7 @@ const setTrackingWatcher = (trackingWatcher) => {
  */
 const setInitialPosition = (position) => {
   console.debug(ID, 'setInitialPosition()', position)
-  setToStore(`${STORE_NAME}.initialPosition`, position)
+  pushTo(`${STORE_NAME}.initialPosition`, position)
 }
 
 /**
@@ -39,7 +39,7 @@ const setInitialPosition = (position) => {
  */
 const setCurrentPosition = (position) => {
   console.debug(ID, 'setCurrentPosition()', position)
-  setToStore(`${STORE_NAME}.currentPosition`, position)
+  pushTo(`${STORE_NAME}.currentPosition`, position)
 }
 
 /**
@@ -47,14 +47,14 @@ const setCurrentPosition = (position) => {
  */
 const setBeforeCurrentPosition = (position) => {
   console.debug(ID, 'setBeforeCurrentPosition()', position)
-  setToStore(`${STORE_NAME}.beforeCurrentPosition`, position)
+  pushTo(`${STORE_NAME}.beforeCurrentPosition`, position)
 }
 
 /**
  * @returns {number}
  */
 const getStoredTrackingWatcher = () => {
-  const trackingWatcher = getFromStore(`${STORE_NAME}.trackingWatcher`)
+  const trackingWatcher = pullFrom(`${STORE_NAME}.trackingWatcher`)
   console.debug(ID, 'getStoredTrackingWatcher()', trackingWatcher)
   return trackingWatcher
 }
@@ -63,7 +63,7 @@ const getStoredTrackingWatcher = () => {
  * @returns {Position}
  */
 const getStoredInitialPosition = () => {
-  const initialPosition = getFromStore(`${STORE_NAME}.initialPosition`)
+  const initialPosition = pullFrom(`${STORE_NAME}.initialPosition`)
   console.debug(ID, 'getStoredInitialPosition()', initialPosition)
   return initialPosition
 }
@@ -72,7 +72,7 @@ const getStoredInitialPosition = () => {
  * @returns {Position}
  */
 const getStoredCurrentPosition = () => {
-  const currentPosition = getFromStore(`${STORE_NAME}.currentPosition`)
+  const currentPosition = pullFrom(`${STORE_NAME}.currentPosition`)
   console.debug(ID, 'getStoredCurrentPosition()', currentPosition)
   return currentPosition
 }
@@ -81,7 +81,7 @@ const getStoredCurrentPosition = () => {
  * @returns {Position}
  */
 const getStoredBeforeCurrentPosition = () => {
-  const beforeCurrentPosition = getFromStore(`${STORE_NAME}.beforeCurrentPosition`)
+  const beforeCurrentPosition = pullFrom(`${STORE_NAME}.beforeCurrentPosition`)
   console.debug(ID, 'getStoredBeforeCurrentPosition()', beforeCurrentPosition)
   return beforeCurrentPosition
 }

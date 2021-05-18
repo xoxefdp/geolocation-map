@@ -1,7 +1,7 @@
 // EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
 // LOCAL IMPORTS
-import { getFromStore, setToStore, setValuesToStore } from 'systems/store'
+import { pullFrom, pushTo, pushValuesTo } from 'store-and-pubsub'
 
 const ID = 'StorePermission'
 const STORE_NAME = 'permissions'
@@ -13,43 +13,43 @@ const resourceStoreState = {
 }
 
 console.debug(ID, 'initializeStore()')
-setToStore(STORE_NAME, {})
+pushTo(STORE_NAME, {})
 
 const initializeResourceStore = (resource) => {
   console.debug(ID, resource, 'initializeResourceStore()')
-  setToStore(STORE_NAME, resource)
-  setValuesToStore(`${STORE_NAME}.${resource}`, resourceStoreState)
+  pushTo(STORE_NAME, resource)
+  pushValuesTo(`${STORE_NAME}.${resource}`, resourceStoreState)
 }
 
 const setInitialState = (resource, state) => {
   console.debug(ID, 'setInitialState()', state)
-  setToStore(`${STORE_NAME}.${resource}.initialState`, state)
+  pushTo(`${STORE_NAME}.${resource}.initialState`, state)
 }
 
 const setCurrentState = (resource, state) => {
   console.debug(ID, 'setCurrentState()', state)
-  setToStore(`${STORE_NAME}.${resource}.currentState`, state)
+  pushTo(`${STORE_NAME}.${resource}.currentState`, state)
 }
 
 const setBeforeCurrentState = (resource, state) => {
   console.debug(ID, 'setBeforeCurrentState()', state)
-  setToStore(`${STORE_NAME}.${resource}.beforeCurrentState`, state)
+  pushTo(`${STORE_NAME}.${resource}.beforeCurrentState`, state)
 }
 
 const getStoredInitialState = (resource) => {
-  const initialState = getFromStore(`${STORE_NAME}.${resource}.initialState`)
+  const initialState = pullFrom(`${STORE_NAME}.${resource}.initialState`)
   console.debug(ID, `getStoredInitialState() ${initialState}`)
   return initialState
 }
 
 const getStoredCurrentState = (resource) => {
-  const currentState = getFromStore(`${STORE_NAME}.${resource}.currentState`)
+  const currentState = pullFrom(`${STORE_NAME}.${resource}.currentState`)
   console.debug(ID, `getStoredCurrentState() ${currentState}`)
   return currentState
 }
 
 const getStoredBeforeCurrentState = (resource) => {
-  const beforeCurrentState = getFromStore(`${STORE_NAME}.${resource}.beforeCurrentState`)
+  const beforeCurrentState = pullFrom(`${STORE_NAME}.${resource}.beforeCurrentState`)
   console.debug(ID, `getStoredBeforeCurrentState() ${beforeCurrentState}`)
   return beforeCurrentState
 }
