@@ -17,7 +17,7 @@ import * as L from 'leaflet'
 import { LMap, LTileLayer, LMarker, LControlScale, LControlZoom } from 'vue2-leaflet'
 // LOCAL IMPORTS
 import { GeolocationEvent } from 'systems/Events'
-import { getStoredCurrentPosition } from 'geolocation/store'
+import { getStoredInitialPosition, getStoredCurrentPosition } from 'geolocation/store'
 
 // Workaround for missing marker icon using leaflet with webapack
 // https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
@@ -36,8 +36,8 @@ const Mape = {
       mape: null,
       centerMap: false,
       // leaflet config
-      zoom: 15,
-      center: L.latLng(10.471654, -68.020949),
+      zoom: null,
+      center: null,
       coordinates: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: `&copy <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> |
@@ -52,8 +52,21 @@ const Mape = {
     setCenter (coords) {
       this.center = coords
     },
+    setInitialMapPosition () {
+      const initialPosition = getStoredInitialPosition()
+      console.debug(Mape.name, initialPosition)
+      if (!isNull(initialPosition)) {
+        const initialCoords = L.latLng(initialPosition.coords.latitude, initialPosition.coords.longitude)
+        this.zoom = 6
+        this.setCoordinates(initialCoords)
+        this.setCenter(initialCoords)
+      }
+    },
     setCoordinates (position) {
       const newCoords = L.latLng(position.coords.latitude, position.coords.longitude)
+      if (this.zoom !== 16) {
+        this.zoom = 16
+      }
       this.coordinates = newCoords
     },
     setCenterCoordinates () {
@@ -85,6 +98,10 @@ const Mape = {
       this.setCoordinates(data)
       this.setCenterCoordinates()
     },
+  },
+  created: function() {
+    console.debug(Mape.name, 'created')
+    this.setInitialMapPosition()
   },
   beforeMount: function() {
     console.debug(Mape.name, 'beforeMount')
