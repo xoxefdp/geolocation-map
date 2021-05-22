@@ -58,7 +58,7 @@ const Mape = {
       if (!isNull(initialPosition)) {
         const initialCoords = L.latLng(initialPosition.coords.latitude, initialPosition.coords.longitude)
         this.zoom = 6
-        this.setCoordinates(initialCoords)
+        this.setCoordinates(initialPosition)
         this.setCenter(initialCoords)
       }
     },
