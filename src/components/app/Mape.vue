@@ -64,9 +64,6 @@ const Mape = {
     },
     setCoordinates (position) {
       const newCoords = L.latLng(position.coords.latitude, position.coords.longitude)
-      if (this.zoom !== 16) {
-        this.zoom = 16
-      }
       this.coordinates = newCoords
     },
     setCenterCoordinates () {
@@ -81,6 +78,9 @@ const Mape = {
       console.debug(Mape.name, 'onCurrentPositionUpdate() currentPosition', currentPosition)
 
       if (!isNull(currentPosition)) {
+        if (this.zoom !== 16) {
+          this.zoom = 16
+        }
         this.setCoordinates(currentPosition)
         if (this.tracking) {
           this.setCenterCoordinates()
