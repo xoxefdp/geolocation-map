@@ -72,7 +72,7 @@ export default CustomMapeControls
   .custom-mape-controls {
     position: absolute;
     bottom: 110px;
-    right: 14px;
+    right: 10px;
     z-index: 1000;
   }
 
