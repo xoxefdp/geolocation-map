@@ -88,6 +88,14 @@ export default App
 </script>
 
 <style>
+  * {
+    font-size: 12px;
+  }
+
+  body {
+    margin: 0;
+  }
+
   .app {
     position: relative;
   }
