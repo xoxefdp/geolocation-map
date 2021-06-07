@@ -71,30 +71,30 @@ const SearchBar = {
       this.items = []
       PubSub.publish('locatePosition', { coords: { latitude: this.latitude, longitude: this.longitude } })
     },
-    onFillAddress () {
-      const currentPosition = this.getCurrentPosition()
-      if (!isNull(currentPosition)) {
-        fetch(`/api/latlang/${this.latitude}/${this.longitude}`)
-          .then(response => response.json())
-          .then((data) => {
-            console.log(data)
-            this.address = data[0].asciiname
-            this.items = data
-          }).catch((error) => {
-            console.log(error)
-          })
-      }
-    },
+    // onFillAddress () {
+    //   const currentPosition = this.getCurrentPosition()
+    //   if (!isNull(currentPosition)) {
+    //     fetch(`/api/latlang/${this.latitude}/${this.longitude}`)
+    //       .then(response => response.json())
+    //       .then((data) => {
+    //         console.log(data)
+    //         this.address = data[0].asciiname
+    //         this.items = data
+    //       }).catch((error) => {
+    //         console.log(error)
+    //       })
+    //   }
+    // },
   },
   mounted: function() {
     console.debug(SearchBar.name, 'mounted')
 
-    PubSub.subscribe('fillAddress', this.onFillAddress)
+    // PubSub.subscribe('fillAddress', this.onFillAddress)
   },
   beforeDestroy: function() {
     console.debug(SearchBar.name, 'beforeDestroy')
 
-    PubSub.unsubscribe('fillAddress')
+    // PubSub.unsubscribe('fillAddress')
   },
 }
 export default SearchBar

@@ -49,7 +49,7 @@ const CustomMapeControls = {
     },
     checkLocation () {
       renewCurrentPosition().finally(() => {
-        PubSub.publish('fillAddress')
+        // PubSub.publish('fillAddress')
         PubSub.publish('onCenterMap')
       })
     },
