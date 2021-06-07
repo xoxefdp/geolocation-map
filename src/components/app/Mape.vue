@@ -49,22 +49,29 @@ const Mape = {
     'tracking',
   ],
   methods: {
-    setCenter (coords) {
-      this.center = coords
+    _parseToMapCoords (position) {
+      let mapCoords = null
+      if (position instanceof L.LatLng) {
+        mapCoords = position
+      } else if (position instanceof window.GeolocationPosition || (position.coords && position.coords.longitude && position.coords.latitude)) {
+        mapCoords = L.latLng(position.coords.latitude, position.coords.longitude)
+      }
+      return mapCoords
+    },
+    setCenter (position) {
+      this.center = this._parseToMapCoords(position)
     },
     setInitialMapPosition () {
       const initialPosition = getStoredInitialPosition()
       console.debug(Mape.name, initialPosition)
       if (!isNull(initialPosition)) {
-        const initialCoords = L.latLng(initialPosition.coords.latitude, initialPosition.coords.longitude)
         this.zoom = 6
         this.setCoordinates(initialPosition)
-        this.setCenter(initialCoords)
+        this.setCenter(initialPosition)
       }
     },
     setCoordinates (position) {
-      const newCoords = L.latLng(position.coords.latitude, position.coords.longitude)
-      this.coordinates = newCoords
+      this.coordinates = this._parseToMapCoords(position)
     },
     setCenterCoordinates () {
       console.debug(Mape.name, 'setCenterCoordinates() coordinates', this.coordinates)
@@ -78,8 +85,8 @@ const Mape = {
       console.debug(Mape.name, 'onCurrentPositionUpdate() currentPosition', currentPosition)
 
       if (!isNull(currentPosition)) {
-        if (this.zoom !== 16) {
-          this.zoom = 16
+        if (this.zoom < 7) {
+          this.zoom = 12
         }
         this.setCoordinates(currentPosition)
         if (this.tracking) {
@@ -95,6 +102,9 @@ const Mape = {
     },
     onLocatePosition (message, data) {
       console.debug(Mape.name, `onLocatePosition() message: ${message}, data: ${data}`)
+      if (this.zoom < 7) {
+        this.zoom = 12
+      }
       this.setCoordinates(data)
       this.setCenterCoordinates()
     },
@@ -107,8 +117,8 @@ const Mape = {
     console.debug(Mape.name, 'beforeMount')
 
     this.mapStyles = {
-      height: window.innerHeight - 20 + 'px',
-      width: window.innerWidth - 20 + 'px',
+      height: window.innerHeight + 'px',
+      width: window.innerWidth + 'px',
     }
   },
   mounted: function() {
@@ -122,9 +132,6 @@ const Mape = {
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
     PubSub.subscribe('onCenterMap', this.onCenterMap)
     PubSub.subscribe('locatePosition', this.onLocatePosition)
-  },
-  updated: function() {
-    console.debug(Mape.name, 'updated')
   },
   beforeDestroy: function() {
     console.debug(Mape.name, 'beforeDestroy')
