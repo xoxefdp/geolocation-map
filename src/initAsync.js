@@ -8,34 +8,38 @@ const initAsync = () => {
     (resolve, reject) => {
       let promiseGeo
 
+      const position = {
+        coords: {
+          accuracy: null,
+          altitude: null,
+          altitudeAccuracy: null,
+          heading: null,
+          latitude: null,
+          longitude: null,
+          speed: null,
+        },
+        timestamp: null,
+      }
+
       if (isPermissionsSupported()) {
         promiseGeo = initGeoService()
       } else {
         promiseGeo = Promise.reject(new Error(WebAPIError.PERMISSIONS_NOT_SUPPORTED))
       }
 
-      const promiseFetch = fetch('/api/init')
+      const promiseFetch = fetch('/api/home')
         .then(response => response.json())
         .then((data) => {
-          const position = {
-            coords: {
-              accuracy: null,
-              altitude: null,
-              altitudeAccuracy: null,
-              heading: null,
-              latitude: data.latitude,
-              longitude: data.longitude,
-              speed: null,
-            },
-            timestamp: Date.now(),
-          }
-          setInitialPosition(position)
+          position.coords.latitude = data.latitude
+          position.coords.longitude = data.longitude
+          position.timestamp = Date.now()
         })
 
       const allPromise = [promiseGeo, promiseFetch]
 
       Promise.allSettled(allPromise)
         .then(() => {
+          setInitialPosition(position)
           resolve()
         })
     })
