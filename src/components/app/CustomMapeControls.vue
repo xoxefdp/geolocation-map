@@ -4,13 +4,13 @@
       <div class="btn-box">
         <button class="btn-cursor" v-on:click="toggleTrackLocation" v-bind:class="tracking ? 'active' : ''">
           <div style="display:none;">Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-          <img class="image-cursor" :src="cursorImage" alt="tracking position">
+          <img class="image-cursor" v-bind:class="permissionState === 'denied' ? 'disabled' : ''" :src="cursorImage" alt="tracking position" :disabled="permissionState === 'denied'">
         </button>
       </div>
       <div class="btn-box">
         <button class="btn-gps" v-on:click="checkLocation">
           <div style="display:none;">Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
-          <img class="image-gps" :src="gpsImage" alt="current position">
+          <img class="image-gps" v-bind:class="permissionState === 'denied' ? 'disabled' : ''" :src="gpsImage" alt="current position" :disabled="permissionState === 'denied'">
         </button>
       </div>
     </div>
@@ -37,6 +37,7 @@ const CustomMapeControls = {
   },
   props: [
     'tracking',
+    'permissionState',
   ],
   methods: {
     toggleTrackLocation () {
@@ -49,19 +50,9 @@ const CustomMapeControls = {
     },
     checkLocation () {
       renewCurrentPosition().finally(() => {
-        // PubSub.publish('fillAddress')
         PubSub.publish('onCenterMap')
       })
     },
-  },
-  mounted: function() {
-    console.debug(CustomMapeControls.name, 'mounted')
-  },
-  updated: function() {
-    console.debug(CustomMapeControls.name, 'updated')
-  },
-  beforeDestroy: function() {
-    console.debug(CustomMapeControls.name, 'beforeDestroy')
   },
 }
 
@@ -130,5 +121,9 @@ export default CustomMapeControls
 
   .active {
     background-color: #90EE90;
+  }
+
+  .disabled {
+    filter: opacity(0.3);
   }
 </style>

@@ -9,7 +9,7 @@
         <hr>
         <div class="results-box">
           <div class="result-item" v-for="item in items" :key="item.id">
-            <div class="result-address"><span>{{ item.asciiname }} / {{ item.country }} / {{ item.latitude }} / {{ item.longitude }}</span></div>
+            <div class="result-address"><span>{{ item.name }} / {{ item.country }} / {{ item.latitude }} / {{ item.longitude }}</span></div>
             <div class="result-action"><button class="btn btn-primary right" v-on:click="goToAddress(item)">Go</button></div>
           </div>
         </div>
@@ -43,7 +43,7 @@ const SearchBar = {
   methods: {
     getCurrentPosition () {
       const currentPosition = getStoredCurrentPosition()
-      console.debug(SearchBar.name, 'getCurrentPosition()', currentPosition)
+      DEBUG && console.debug(SearchBar.name, 'getCurrentPosition()', currentPosition)
       if (!isNull(currentPosition)) {
         this.latitude = currentPosition.coords.latitude
         this.longitude = currentPosition.coords.longitude
@@ -51,50 +51,36 @@ const SearchBar = {
       return currentPosition
     },
     lookUpAddress () {
+      DEBUG && console.debug(SearchBar.name, `lookUpAddress() ${this.address}`)
       if (this.address) {
         PubSub.publish('toggleLoading', true)
         fetch(`/api/address/${this.address}`)
           .then(response => response.json())
           .then((data) => {
-            console.log(data)
+            DEBUG && console.debug(SearchBar.name, `lookUpAddress() data ${data}`)
             this.items = data
+            PubSub.publish('searchLocation', data)
           }).catch((error) => {
-            console.log(error)
+            console.error(SearchBar.name, `lookUpAddress() error ${error}`)
           }).finally(() => {
             PubSub.publish('toggleLoading', false)
           })
       }
     },
     goToAddress (item) {
+      DEBUG && console.debug(SearchBar.name, `goToAddress() item ${item}`)
       this.latitude = item.latitude
       this.longitude = item.longitude
       this.items = []
       PubSub.publish('locatePosition', { coords: { latitude: this.latitude, longitude: this.longitude } })
     },
-    // onFillAddress () {
-    //   const currentPosition = this.getCurrentPosition()
-    //   if (!isNull(currentPosition)) {
-    //     fetch(`/api/latlang/${this.latitude}/${this.longitude}`)
-    //       .then(response => response.json())
-    //       .then((data) => {
-    //         console.log(data)
-    //         this.address = data[0].asciiname
-    //         this.items = data
-    //       }).catch((error) => {
-    //         console.log(error)
-    //       })
-    //   }
-    // },
   },
-  mounted: function() {
-    console.debug(SearchBar.name, 'mounted')
-
-    // PubSub.subscribe('fillAddress', this.onFillAddress)
-  },
-  beforeDestroy: function() {
-    console.debug(SearchBar.name, 'beforeDestroy')
-
-    // PubSub.unsubscribe('fillAddress')
+  updated: function() {
+    DEBUG && console.debug(SearchBar.name, 'updated')
+    DEBUG && console.debug(SearchBar.name, `address: ${this.address}`)
+    DEBUG && console.debug(SearchBar.name, `latitude: ${this.latitude}`)
+    DEBUG && console.debug(SearchBar.name, `longitude: ${this.longitude}`)
+    DEBUG && console.debug(SearchBar.name, `items: ${this.items}`)
   },
 }
 export default SearchBar

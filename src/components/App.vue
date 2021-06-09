@@ -1,9 +1,9 @@
 <template>
   <div class="app">
-    <SearchBar v-show="!overlay" />
-    <Mape :overlay="overlay" :tracking="tracking" />
-    <CustomMapeControls v-show="!overlay" :tracking="tracking" />
-    <Overlay v-show="overlay" :permissionState="permissionState" :isLoading="isLoading" />
+    <SearchBar />
+    <Mape :tracking="tracking" />
+    <CustomMapeControls :tracking="tracking" :permissionState="permissionState" />
+    <Overlay v-show="isLoading" :isLoading="isLoading" />
   </div>
 </template>
 
@@ -19,14 +19,12 @@ import SearchBar from 'components/app/SearchBar'
 import { GeolocationEvent, PermissionEvent } from 'systems/Events'
 import { STORE_NAME as GeoStore, getStoredTrackingWatcher } from 'geolocation/store'
 import { getStoredCurrentState, updatePermissionStore } from 'permissions/store'
-import { isPermissionGranted } from 'permissions/permissions'
 
 const App = {
   name: 'App',
   components: { Mape, CustomMapeControls, Overlay, SearchBar },
   data: function() {
     return {
-      overlay: !isPermissionGranted(GeoStore),
       permissionState: getStoredCurrentState(GeoStore),
       tracking: false,
       isLoading: false,
@@ -34,15 +32,14 @@ const App = {
   },
   methods: {
     onPermissionChanged (message, data) {
-      console.debug(App.name, `onPermissionChanged() ${message} ${data.resource} ${data.state}`)
+      DEBUG && console.debug(App.name, `onPermissionChanged() ${message} ${data.resource} ${data.state}`)
       updatePermissionStore(data.resource, data.state)
-      this.overlay = !isPermissionGranted(data.resource)
       this.permissionState = getStoredCurrentState(data.resource)
     },
     onTrackingChanged (message, data) {
-      console.debug(App.name, `onTrackingChanged() message ${message}`)
-      console.debug(App.name, 'onTrackingChanged() data', data)
-      console.debug(App.name, 'onTrackingChanged() tracking', this.tracking)
+      DEBUG && console.debug(App.name, `onTrackingChanged() message ${message}`)
+      DEBUG && console.debug(App.name, 'onTrackingChanged() data', data)
+      DEBUG && console.debug(App.name, 'onTrackingChanged() tracking', this.tracking)
 
       const trackingWatcher = getStoredTrackingWatcher()
       if (isNull(trackingWatcher)) {
@@ -52,13 +49,12 @@ const App = {
       }
     },
     onToggleLoading (message, data) {
-      console.debug(App.name, `toggleLoading() ${message} ${data}`)
+      DEBUG && console.debug(App.name, `onToggleLoading() ${message} ${data}`)
       this.isLoading = data
-      this.overlay = data
     },
   },
   mounted: function() {
-    console.debug(App.name, 'mounted')
+    DEBUG && console.debug(App.name, 'mounted')
     PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this.onPermissionChanged)
     PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this.onPermissionChanged)
     PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this.onPermissionChanged)
@@ -66,15 +62,8 @@ const App = {
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this.onTrackingChanged)
     PubSub.subscribe('toggleLoading', this.onToggleLoading)
   },
-  updated: function() {
-    console.debug(App.name, 'updated')
-    console.debug(App.name, `overlay: ${this.overlay}`)
-    console.debug(App.name, `permissionState: ${this.permissionState}`)
-    console.debug(App.name, `tracking: ${this.tracking}`)
-    console.debug(App.name, `isLoading: ${this.isLoading}`)
-  },
   beforeDestroy: function() {
-    console.debug(App.name, 'beforeDestroy')
+    DEBUG && console.debug(App.name, 'beforeDestroy')
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_GRANTED)
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_PROMPT)
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_DENIED)

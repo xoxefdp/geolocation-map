@@ -1,13 +1,13 @@
 <template>
   <div class="overlay-component">
     <div class="overlay-box">
-    <h1 class="permission-denied" v-show="permissionState === 'denied'">Geolocation Denied By User</h1>
-    <h1 class="permission-prompt" v-show="permissionState === 'prompt'">Waiting for Geolocation permission prompt</h1>
+    <!-- <h1 class="permission-denied" v-show="permissionState === 'denied'">Geolocation Denied By User</h1>
+    <h1 class="permission-prompt" v-show="permissionState === 'prompt'">Waiting for Geolocation permission prompt</h1> -->
     <h1 class="permission-prompt" v-show="isLoading">Loading...</h1>
     </div>
-    <div class="overlay-box" v-show="permissionState === 'prompt'">
+    <!-- <div class="overlay-box" v-show="permissionState === 'prompt'">
       <button v-on:click="requestTracking">Authorize</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -27,12 +27,6 @@ const Overlay = {
     requestTracking () {
       renewCurrentPosition().then(() => PubSub.publish('onCenterMap'))
     },
-  },
-  updated: function() {
-    console.debug(Overlay.name, 'updated')
-  },
-  beforeDestroy: function() {
-    console.debug(Overlay.name, 'beforeDestroy')
   },
 }
 export default Overlay

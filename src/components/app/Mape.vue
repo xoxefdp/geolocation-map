@@ -2,7 +2,10 @@
   <div v-bind:style="[ mapStyles ]">
     <l-map ref="mape" :options="{zoomControl: false}" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-marker v-if="!overlay" :lat-lng="center" />
+      <l-circle-marker v-if="tracking || showCircleMarker" :lat-lng="center" :radius="10" :color="'red'" />
+      <div v-if="!overlay">
+        <l-marker v-for="item in items" :key="item.id" :lat-lng="_parseToMapCoords({coords: {latitude: item.latitude, longitude: item.longitude}})" />
+      </div>
       <l-control-scale v-if="!overlay" position="topright" :imperial="true" :metric="true"></l-control-scale>
       <l-control-zoom v-if="!overlay" position="bottomright"></l-control-zoom>
     </l-map>
@@ -14,7 +17,7 @@
 import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
 import * as L from 'leaflet'
-import { LMap, LTileLayer, LMarker, LControlScale, LControlZoom } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker, LCircleMarker, LControlScale, LControlZoom } from 'vue2-leaflet'
 // LOCAL IMPORTS
 import { GeolocationEvent } from 'systems/Events'
 import { getStoredInitialPosition, getStoredCurrentPosition } from 'geolocation/store'
@@ -28,11 +31,15 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 })
 
+const SHOW_POSITION_TME = 2000
+
 const Mape = {
   name: 'Mape',
-  components: { LMap, LTileLayer, LMarker, LControlScale, LControlZoom },
+  components: { LMap, LTileLayer, LMarker, LCircleMarker, LControlScale, LControlZoom },
   data: function() {
     return {
+      showCircleMarker: false,
+      items: [],
       mape: null,
       centerMap: false,
       // leaflet config
@@ -50,6 +57,7 @@ const Mape = {
   ],
   methods: {
     _parseToMapCoords (position) {
+      DEBUG && console.debug(Mape.name, '_parseToMapCoords() position', position)
       let mapCoords = null
       if (position instanceof L.LatLng) {
         mapCoords = position
@@ -59,11 +67,12 @@ const Mape = {
       return mapCoords
     },
     setCenter (position) {
+      DEBUG && console.debug(Mape.name, 'setCenter() position', position)
       this.center = this._parseToMapCoords(position)
     },
     setInitialMapPosition () {
       const initialPosition = getStoredInitialPosition()
-      console.debug(Mape.name, initialPosition)
+      DEBUG && console.debug(Mape.name, initialPosition)
       if (!isNull(initialPosition)) {
         this.zoom = 6
         this.setCoordinates(initialPosition)
@@ -71,18 +80,19 @@ const Mape = {
       }
     },
     setCoordinates (position) {
+      DEBUG && console.debug(Mape.name, 'setCoordinates() position', position)
       this.coordinates = this._parseToMapCoords(position)
     },
     setCenterCoordinates () {
-      console.debug(Mape.name, 'setCenterCoordinates() coordinates', this.coordinates)
+      DEBUG && console.debug(Mape.name, 'setCenterCoordinates() coordinates', this.coordinates)
       this.coordinates && this.setCenter(this.coordinates)
       this.coordinates && this.mape.setView(this.coordinates) // sets map view to coordinates
     },
     onCurrentPositionUpdate (message, data) {
       const currentPosition = getStoredCurrentPosition()
-      console.debug(Mape.name, 'onCurrentPositionUpdate() message', message)
-      console.debug(Mape.name, 'onCurrentPositionUpdate() data', data)
-      console.debug(Mape.name, 'onCurrentPositionUpdate() currentPosition', currentPosition)
+      DEBUG && console.debug(Mape.name, 'onCurrentPositionUpdate() message', message)
+      DEBUG && console.debug(Mape.name, 'onCurrentPositionUpdate() data', data)
+      DEBUG && console.debug(Mape.name, 'onCurrentPositionUpdate() currentPosition', currentPosition)
 
       if (!isNull(currentPosition)) {
         if (this.zoom < 7) {
@@ -99,22 +109,31 @@ const Mape = {
     },
     onCenterMap () {
       this.centerMap = true
+      this.showCircleMarker = true
+
+      setTimeout(() => {
+        this.showCircleMarker = false
+      }, SHOW_POSITION_TME)
     },
     onLocatePosition (message, data) {
-      console.debug(Mape.name, `onLocatePosition() message: ${message}, data: ${data}`)
+      DEBUG && console.debug(Mape.name, `onLocatePosition() message: ${message}, data: ${data} zoom: ${this.zoom}`)
       if (this.zoom < 7) {
         this.zoom = 12
       }
       this.setCoordinates(data)
       this.setCenterCoordinates()
     },
+    onSearchLocation (message, data) {
+      DEBUG && console.debug(Mape.name, `onSearchLocation() message: ${message}, data: ${data}`)
+      this.items = data
+    },
   },
   created: function() {
-    console.debug(Mape.name, 'created')
+    DEBUG && console.debug(Mape.name, 'created')
     this.setInitialMapPosition()
   },
   beforeMount: function() {
-    console.debug(Mape.name, 'beforeMount')
+    DEBUG && console.debug(Mape.name, 'beforeMount')
 
     this.mapStyles = {
       height: window.innerHeight + 'px',
@@ -122,7 +141,7 @@ const Mape = {
     }
   },
   mounted: function() {
-    console.debug(Mape.name, 'mounted')
+    DEBUG && console.debug(Mape.name, 'mounted')
 
     // reference to leaflet map
     this.$nextTick(() => {
@@ -132,13 +151,15 @@ const Mape = {
     PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE, this.onCurrentPositionUpdate)
     PubSub.subscribe('onCenterMap', this.onCenterMap)
     PubSub.subscribe('locatePosition', this.onLocatePosition)
+    PubSub.subscribe('searchLocation', this.onSearchLocation)
   },
   beforeDestroy: function() {
-    console.debug(Mape.name, 'beforeDestroy')
+    DEBUG && console.debug(Mape.name, 'beforeDestroy')
 
     PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
     PubSub.unsubscribe('onCenterMap')
     PubSub.unsubscribe('locatePosition')
+    PubSub.unsubscribe('searchLocation')
   },
 }
 
