@@ -135,8 +135,14 @@ const Mape = {
   beforeMount: function() {
     DEBUG && console.debug(Mape.name, 'beforeMount')
 
+    let height = window.innerHeight
+
+    if (window.innerWidth <= 600) {
+      height = height - 63
+    }
+
     this.mapStyles = {
-      height: window.innerHeight + 'px',
+      height: height + 'px',
       width: window.innerWidth + 'px',
     }
   },

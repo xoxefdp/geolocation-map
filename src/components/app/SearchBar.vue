@@ -5,7 +5,7 @@
        <div class="form-address"><input type="text" class="form-control" placeholder="ADDRESS" name="address" id="address" v-model="address"></div>
        <div class="form-search"><button type="button" class="btn btn-primary" v-on:click="lookUpAddress">Search</button></div>
       </div>
-      <div v-show="items.length > 0">
+      <div class="results-container" v-show="items.length > 0">
         <hr>
         <div class="results-box">
           <div class="result-item" v-for="item in items" :key="item.id">
@@ -211,13 +211,31 @@ export default SearchBar
     align-self: auto;
   }
 
-  /* @media (max-width: 600px) {
+  @media (max-width: 600px) {
     .search-bar {
-      top: unset;
-      left: unset;
-      bottom: 0;
-      margin: 0;
-      padding: 0;
+      background-color: white;
+      max-height: 50px;
+      position: relative;
     }
-  } */
+
+    .results-container {
+      position: absolute;
+      top: 50px;
+      background-color: white;
+      left: -8px;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    .results-info {
+      padding: 0 8px 8px 8px;
+      color: black;
+    }
+  }
+
+  @media (max-width: 300px) {
+    .form-control {
+      width: 140px;
+    }
+  }
 </style>
