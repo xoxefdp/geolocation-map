@@ -216,6 +216,7 @@ export default SearchBar
       background-color: white;
       max-height: 50px;
       position: relative;
+      z-index: 1001;
     }
 
     .results-container {
