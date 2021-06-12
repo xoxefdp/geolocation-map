@@ -2,15 +2,15 @@
   <div class="search-bar">
     <div>
       <div class="form-box">
-       <div class="form-address"><input type="text" class="form-control" placeholder="ADDRESS" name="address" id="address" v-model="address"></div>
-       <div class="form-search"><button type="button" class="btn btn-primary" v-on:click="lookUpAddress">Search</button></div>
+       <div class="form-location"><input type="text" class="form-control" placeholder="LOCATION" name="location" id="location" v-model="location"></div>
+       <div class="form-search"><button type="button" class="btn btn-primary" v-on:click="lookUpLocation">Search</button></div>
       </div>
       <div class="results-container" v-show="items.length > 0">
         <hr>
         <div class="results-box">
           <div class="result-item" v-for="item in items" :key="item.id">
-            <div class="result-address"><span>{{ item.name }} / {{ item.country }} / {{ item.latitude }} / {{ item.longitude }}</span></div>
-            <div class="result-action"><button class="btn btn-primary right" v-on:click="goToAddress(item)">Go</button></div>
+            <div class="result-location"><span>{{ item.name }} / {{ item.country }} / {{ item.latitude }} / {{ item.longitude }}</span></div>
+            <div class="result-action"><button class="btn btn-primary right" v-on:click="goToLocation(item)">Go</button></div>
           </div>
         </div>
         <hr>
@@ -34,7 +34,7 @@ const SearchBar = {
   components: {},
   data: function() {
     return {
-      address: null,
+      location: null,
       latitude: null,
       longitude: null,
       items: [],
@@ -50,25 +50,25 @@ const SearchBar = {
       }
       return currentPosition
     },
-    lookUpAddress () {
-      DEBUG && console.debug(SearchBar.name, `lookUpAddress() ${this.address}`)
-      if (this.address) {
+    lookUpLocation () {
+      DEBUG && console.debug(SearchBar.name, `lookUpLocation() ${this.location}`)
+      if (this.location) {
         PubSub.publish('toggleLoading', true)
-        fetch(`/api/address/${this.address}`)
+        fetch(`/api/location/${this.location}`)
           .then(response => response.json())
           .then((data) => {
-            DEBUG && console.debug(SearchBar.name, `lookUpAddress() data ${data}`)
+            DEBUG && console.debug(SearchBar.name, `lookUpLocation() data ${data}`)
             this.items = data
             PubSub.publish('searchLocation', data)
           }).catch((error) => {
-            console.error(SearchBar.name, `lookUpAddress() error ${error}`)
+            console.error(SearchBar.name, `lookUpLocation() error ${error}`)
           }).finally(() => {
             PubSub.publish('toggleLoading', false)
           })
       }
     },
-    goToAddress (item) {
-      DEBUG && console.debug(SearchBar.name, `goToAddress() item ${item}`)
+    goToLocation (item) {
+      DEBUG && console.debug(SearchBar.name, `goToLocation() item ${item}`)
       this.latitude = item.latitude
       this.longitude = item.longitude
       this.items = []
@@ -77,7 +77,7 @@ const SearchBar = {
   },
   updated: function() {
     DEBUG && console.debug(SearchBar.name, 'updated')
-    DEBUG && console.debug(SearchBar.name, `address: ${this.address}`)
+    DEBUG && console.debug(SearchBar.name, `location: ${this.location}`)
     DEBUG && console.debug(SearchBar.name, `latitude: ${this.latitude}`)
     DEBUG && console.debug(SearchBar.name, `longitude: ${this.longitude}`)
     DEBUG && console.debug(SearchBar.name, `items: ${this.items}`)
@@ -147,7 +147,7 @@ export default SearchBar
     background-color: lightgray;
   }
 
-  .result-address {
+  .result-location {
     padding-left: 8px;
   }
 
@@ -191,14 +191,14 @@ export default SearchBar
     line-height: 1.42857143;
   }
 
-  .form-address,
-  .result-address {
+  .form-location,
+  .result-location {
     margin-right: 8px;
   }
 
-  .form-address,
+  .form-location,
   .form-search,
-  .result-address,
+  .result-location,
   .result-action {
     -webkit-order: 0;
     -ms-flex-order: 0;
