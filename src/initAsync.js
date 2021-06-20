@@ -27,7 +27,7 @@ const initAsync = () => {
         promiseGeo = Promise.reject(new Error(WebAPIError.PERMISSIONS_NOT_SUPPORTED))
       }
 
-      const promiseFetch = fetch('/api/home')
+      const promiseFetch = fetch('/home')
         .then(response => response.json())
         .then((data) => {
           position.coords.latitude = data.latitude
