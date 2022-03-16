@@ -1,8 +1,8 @@
 // EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
-// LOCAL IMPORTS
 import { pullFrom, pushTo } from 'store-and-pubsub'
-import { initializeResourceStore } from 'permissions/store'
+// LOCAL IMPORTS
+import { initializeResourceStore as permissionStoreInit } from 'permissions/store'
 
 const ID = 'StoreGeolocation'
 const STORE_NAME = 'geolocation'
@@ -16,7 +16,7 @@ const state = {
 
 console.debug(ID, 'initializeStore()')
 pushTo(STORE_NAME, state)
-initializeResourceStore(STORE_NAME)
+permissionStoreInit(STORE_NAME)
 
 /**
  * @param {number} trackingWatcher

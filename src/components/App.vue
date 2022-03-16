@@ -2,10 +2,27 @@
   <div class="app">
     <SearchBar />
     <Mape :tracking="tracking" />
-    <CustomMapeControls :tracking="tracking" :permissionState="permissionState" />
+    <CustomMapeControls
+      :tracking="tracking"
+      :permissionState="permissionState"
+    />
     <Overlay v-show="isLoading" :isLoading="isLoading" />
   </div>
 </template>
+
+<style>
+* {
+  font-size: 12px;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  position: relative;
+}
+</style>
 
 <script>
 // EXTERNAL IMPORTS
@@ -17,8 +34,14 @@ import CustomMapeControls from 'components/app/CustomMapeControls'
 import Overlay from 'components/app/Overlay'
 import SearchBar from 'components/app/SearchBar'
 import { GeolocationEvent, PermissionEvent } from 'systems/Events'
-import { STORE_NAME as GeoStore, getStoredTrackingWatcher } from 'geolocation/store'
-import { getStoredCurrentState, updatePermissionStore } from 'permissions/store'
+import {
+  STORE_NAME as GeoStore,
+  getStoredTrackingWatcher,
+} from 'geolocation/store'
+import {
+  getStoredCurrentState,
+  updatePermissionStore,
+} from 'permissions/store'
 
 const App = {
   name: 'App',
@@ -32,14 +55,20 @@ const App = {
   },
   methods: {
     onPermissionChanged (message, data) {
-      DEBUG && console.debug(App.name, `onPermissionChanged() ${message} ${data.resource} ${data.state}`)
+      DEBUG &&
+        console.debug(
+          App.name,
+          `onPermissionChanged() ${message} ${data.resource} ${data.state}`
+        )
       updatePermissionStore(data.resource, data.state)
       this.permissionState = getStoredCurrentState(data.resource)
     },
     onTrackingChanged (message, data) {
-      DEBUG && console.debug(App.name, `onTrackingChanged() message ${message}`)
+      DEBUG &&
+        console.debug(App.name, `onTrackingChanged() message ${message}`)
       DEBUG && console.debug(App.name, 'onTrackingChanged() data', data)
-      DEBUG && console.debug(App.name, 'onTrackingChanged() tracking', this.tracking)
+      DEBUG &&
+        console.debug(App.name, 'onTrackingChanged() tracking', this.tracking)
 
       const trackingWatcher = getStoredTrackingWatcher()
       if (isNull(trackingWatcher)) {
@@ -55,11 +84,26 @@ const App = {
   },
   mounted: function() {
     DEBUG && console.debug(App.name, 'mounted')
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_GRANTED, this.onPermissionChanged)
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_PROMPT, this.onPermissionChanged)
-    PubSub.subscribe(PermissionEvent.ON_PERMISSION_DENIED, this.onPermissionChanged)
-    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED, this.onTrackingChanged)
-    PubSub.subscribe(GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED, this.onTrackingChanged)
+    PubSub.subscribe(
+      PermissionEvent.ON_PERMISSION_GRANTED,
+      this.onPermissionChanged
+    )
+    PubSub.subscribe(
+      PermissionEvent.ON_PERMISSION_PROMPT,
+      this.onPermissionChanged
+    )
+    PubSub.subscribe(
+      PermissionEvent.ON_PERMISSION_DENIED,
+      this.onPermissionChanged
+    )
+    PubSub.subscribe(
+      GeolocationEvent.ON_GEOLOCATION_TRACKING_STARTED,
+      this.onTrackingChanged
+    )
+    PubSub.subscribe(
+      GeolocationEvent.ON_GEOLOCATION_TRACKING_STOPPED,
+      this.onTrackingChanged
+    )
     PubSub.subscribe('toggleLoading', this.onToggleLoading)
   },
   beforeDestroy: function() {
@@ -75,17 +119,3 @@ const App = {
 
 export default App
 </script>
-
-<style>
-  * {
-    font-size: 12px;
-  }
-
-  body {
-    margin: 0;
-  }
-
-  .app {
-    position: relative;
-  }
-</style>

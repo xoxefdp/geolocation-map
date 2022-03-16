@@ -17,6 +17,57 @@
   </div>
 </template>
 
+<style>
+  .custom-mape-controls {
+    position: absolute;
+    bottom: 110px;
+    right: 10px;
+    z-index: 1000;
+  }
+
+  .btns-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: flex-start;
+  }
+
+  .btn-box {
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    margin-top: 7px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+  }
+
+  .btn-gps, .btn-cursor {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .image-gps, .image-cursor {
+    vertical-align: middle;
+  }
+
+  .active {
+    background-color: #90EE90;
+  }
+
+  .disabled {
+    filter: opacity(0.3);
+  }
+</style>
+
 <script>
 // EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
@@ -58,72 +109,3 @@ const CustomMapeControls = {
 
 export default CustomMapeControls
 </script>
-
-<style>
-  .custom-mape-controls {
-    position: absolute;
-    bottom: 110px;
-    right: 10px;
-    z-index: 1000;
-  }
-
-  .btns-container {
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: center;
-    -ms-flex-line-pack: center;
-    align-content: center;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
-
-  .btn-box {
-    width: 30px;
-    height: 30px;
-    border: 2px solid rgba(0,0,0,0.2);
-    border-radius: 4px;
-    margin-top: 7px;
-    -webkit-order: 0;
-    -ms-flex-order: 0;
-    order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-  }
-
-  .btn-gps, .btn-cursor {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background-color: white;
-    cursor: pointer;
-  }
-
-  .image-gps, .image-cursor {
-    vertical-align: middle;
-  }
-
-  .active {
-    background-color: #90EE90;
-  }
-
-  .disabled {
-    filter: opacity(0.3);
-  }
-</style>

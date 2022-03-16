@@ -1,7 +1,7 @@
 // EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
-// LOCAL IMPORTS
 import { pullFrom, pushTo, pushValuesTo } from 'store-and-pubsub'
+// LOCAL IMPORTS
 
 const ID = 'StorePermission'
 const STORE_NAME = 'permissions'

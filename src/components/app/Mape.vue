@@ -12,6 +12,10 @@
   </div>
 </template>
 
+<style>
+  @import "~leaflet/dist/leaflet.css";
+</style>
+
 <script>
 // EXTERNAL IMPORTS
 import { isNull } from 'the-type-validator'
@@ -171,7 +175,3 @@ const Mape = {
 
 export default Mape
 </script>
-
-<style>
-  @import "~leaflet/dist/leaflet.css";
-</style>

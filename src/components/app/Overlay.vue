@@ -11,6 +11,39 @@
   </div>
 </template>
 
+<style>
+  .overlay-component {
+    position: absolute;
+    background-color: rgba(255,255,255,0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+  }
+
+  .overlay-box {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+  }
+
+  .permission-denied {
+    color: red;
+  }
+
+  .permission-prompt {
+    color: black;
+  }
+</style>
+
 <script>
 // EXTERNAL IMPORTS
 import PubSub from 'pubsub-js'
@@ -31,53 +64,3 @@ const Overlay = {
 }
 export default Overlay
 </script>
-
-<style>
-  .overlay-component {
-    position: absolute;
-    background-color: rgba(255,255,255,0.7);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
-
-  .overlay-box {
-    -webkit-order: 0;
-    -ms-flex-order: 0;
-    order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-  }
-
-  .permission-denied {
-    color: red;
-  }
-
-  .permission-prompt {
-    color: black;
-  }
-</style>
