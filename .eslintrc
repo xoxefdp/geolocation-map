@@ -16,10 +16,9 @@
     "vue"
   ],
   "extends": [
+    "vue",
     "standard",
-    "eslint:recommended",
     "plugin:vue/essential"
-    // "plugin:jsdoc/recommended"
   ],
   "globals": {
     "BUILD_TYPE": true,
@@ -27,6 +26,22 @@
     "process": true,
     "require": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "path": [
+          "src"
+        ]
+      }
+    },
+    "import/extensions": [
+      ".js"
+    ],
+    "import/ignore": [
+      "node_modules"
+    ]
+  },
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
@@ -56,11 +71,5 @@
       "functions": "never"
     }],
     "no-prototype-builtins": "off"
-  },
-  "settings": {
-    "import/resolver": {"node": {"path": ["src"] }},
-    "import/extensions": [".js"],
-    "import/ignore": ["node_modules"]
-  },
-  "ignorePatterns": "*.spec.js"
+  }
 }

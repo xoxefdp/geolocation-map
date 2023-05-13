@@ -3,70 +3,53 @@
     <div>
       <div class="form-box">
         <div class="form-location">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="LOCATION"
-            name="location"
-            id="location"
-            v-model="location"
-          />
+          <input type="text" class="form-control" placeholder="LOCATION" name="location" id="location" v-model="location"
+            @keyup="keyboardHandler" />
         </div>
         <div class="form-search">
-          <button
-            type="button"
-            class="btn btn-primary"
-            v-on:click="lookUpLocation"
-          >
+          <button type="button" class="btn btn-primary" @click="lookUpLocation">
             Search
           </button>
         </div>
       </div>
-      <div class="results-container" v-show="items.length > 0">
+      <div class="results-container" v-show="items?.data?.length > 0">
         <hr />
         <div class="results-box">
-          <div class="result-item" v-for="item in items" :key="item.id">
+          <div class="result-item" v-for="item in items.data" :key="item.id">
             <div class="result-location">
-              <span
-                >{{ item.name }} / {{ item.country }} / {{ item.latitude }} /
-                {{ item.longitude }}</span
-              >
+              <span>{{ item.name }} / {{ item.country }} / {{ item.latitude }} /
+                {{ item.longitude }}</span>
             </div>
             <div class="result-action">
-              <button
-                class="btn btn-primary right"
-                v-on:click="goToLocation(item)"
-              >
+              <button class="btn btn-primary right" @click="goToLocation(item)">
                 Go
               </button>
             </div>
           </div>
         </div>
         <hr />
-        <div class="results-info">
-          <span>RESULTS: {{ items.length }}</span>
-        </div>
+        <Pagination :items="items" :hasConfig="true" />
       </div>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .search-bar {
   top: 0;
   left: 0;
   position: absolute;
-  background-color: slategray;
-  color: black;
-  margin: 8px;
+  background-color: var(--color-lightslategray);
+  color: var(--color-black);
   padding: 8px;
+  margin: 8px;
   z-index: 1000;
   font-family: sans-serif;
 }
 
 .form-control {
-  color: #555555;
-  background-color: #ffffff;
+  color: var(--color-gray);
+  background-color: var(--color-white);
   background-image: none;
   border: 1px solid #e7e7e7;
   box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
@@ -89,20 +72,25 @@
 }
 
 .btn-primary {
-  background-color: #0078a8;
-  border-color: #0078a8;
-  color: #ffffff;
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-white);
 }
 
 .results-box {
   overflow: auto;
   max-height: 200px;
-  background-color: white;
+  background-color: var(--color-white)
 }
 
 .result-item {
   margin: 8px;
-  background-color: lightgray;
+  background-color: var(--color-lightgray);
+}
+
+.result-item:hover,
+.result-item:focus {
+  background-color: var(--color-salmon);
 }
 
 .result-location {
@@ -110,7 +98,7 @@
 }
 
 .results-info {
-  color: white;
+  color: var(--color-white)
 }
 
 .search-bar,
@@ -152,25 +140,58 @@
 }
 
 @media (max-width: 600px) {
+  .form-control {
+    background-color: var(--color-lightslategray);
+    color: var(--color-white);
+  }
+
+  .form-control::placeholder {
+    color: var(--color-yellow);
+  }
+
   .search-bar {
-    background-color: white;
+    background-color: var(--color-white);
     max-height: 50px;
+    padding: 16px;
+    margin: 0;
     position: relative;
     z-index: 1001;
   }
 
   .results-container {
+    top: 56px;
+    left: 0;
     position: absolute;
-    top: 50px;
-    background-color: white;
-    left: -8px;
+    background-color: var(--color-white);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
   }
 
+  .results-container>hr:first-child,
+  .results-container>hr:nth-child(3) {
+    background-color: var(--color-lightslategray);
+  }
+
+  .results-container>hr:first-child {
+    margin-bottom: 0;
+    padding-bottom: 7px;
+    border: 1px;
+  }
+
+  .results-container>hr:nth-child(3) {
+    margin-top: 0;
+    padding-top: 7px;
+    border: 1px;
+  }
+
+  .results-box {
+    background-color: var(--color-lightslategray);
+    border-radius: 0;
+  }
+
   .results-info {
     padding: 0 8px 8px 8px;
-    color: black;
+    color: var(--color-black);
   }
 }
 
@@ -186,21 +207,23 @@
 import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
 // LOCAL IMPORTS
+import '../styles/colors.css'
 import { getStoredCurrentPosition } from 'geolocation/store'
+import Pagination from 'components/common/Pagination'
 
 const SearchBar = {
   name: 'SearchBar',
-  components: {},
-  data: function() {
+  components: { Pagination },
+  data: function () {
     return {
       location: null,
       latitude: null,
       longitude: null,
-      items: [],
+      items: {},
     }
   },
   methods: {
-    getCurrentPosition () {
+    getCurrentPosition() {
       const currentPosition = getStoredCurrentPosition()
       DEBUG &&
         console.debug(SearchBar.name, 'getCurrentPosition()', currentPosition)
@@ -210,20 +233,31 @@ const SearchBar = {
       }
       return currentPosition
     },
-    lookUpLocation () {
+    lookUpLocation(message, data) {
       DEBUG &&
         console.debug(SearchBar.name, `lookUpLocation() ${this.location}`)
       if (this.location) {
         PubSub.publish('toggleLoading', true)
-        fetch(`/api/location/${this.location}`)
+
+        let promise
+
+        if (data) {
+          promise = fetch(`/api/v1/location/${this.location}?page=${data}`)
+        } else {
+          promise = fetch(`/api/v1/location/${this.location}`)
+        }
+
+        promise
           .then((response) => response.json())
-          .then((data) => {
-            DEBUG &&
-              console.debug(SearchBar.name, `lookUpLocation() data ${data}`)
-            this.items = data
-            PubSub.publish('searchLocation', data)
+          .then((locations) => {
+            if (locations.data.length > 0) {
+              this.items = locations
+            }
+            DEBUG && console.debug(SearchBar.name, `lookUpLocation() data ${locations.data}`)
+            PubSub.publish('searchLocation', locations.data)
           })
           .catch((error) => {
+            this.items = []
             console.error(SearchBar.name, `lookUpLocation() error ${error}`)
           })
           .finally(() => {
@@ -231,22 +265,26 @@ const SearchBar = {
           })
       }
     },
-    goToLocation (item) {
+    goToLocation(item) {
       DEBUG && console.debug(SearchBar.name, `goToLocation() item ${item}`)
       this.latitude = item.latitude
       this.longitude = item.longitude
-      this.items = []
+      this.items = {}
       PubSub.publish('locatePosition', {
         coords: { latitude: this.latitude, longitude: this.longitude },
       })
     },
+    keyboardHandler(event) {
+      if (event.key === 'Enter') {
+        this.lookUpLocation()
+      }
+    }
   },
-  updated: function() {
-    DEBUG && console.debug(SearchBar.name, 'updated')
-    DEBUG && console.debug(SearchBar.name, `location: ${this.location}`)
-    DEBUG && console.debug(SearchBar.name, `latitude: ${this.latitude}`)
-    DEBUG && console.debug(SearchBar.name, `longitude: ${this.longitude}`)
-    DEBUG && console.debug(SearchBar.name, `items: ${this.items}`)
+  mounted: function () {
+    PubSub.subscribe('paginate', this.lookUpLocation)
+  },
+  beforeDestroy: function () {
+    PubSub.unsubscribe('paginate')
   },
 }
 export default SearchBar

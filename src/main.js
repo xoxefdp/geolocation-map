@@ -5,7 +5,7 @@ const ID = 'main'
 
 initAsync().finally(
   () => {
-    console.debug(ID, 'initAsync()')
+    DEBUG && console.log(ID, 'initAsync()')
     createUI()
   }
 )

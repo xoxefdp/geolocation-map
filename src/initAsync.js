@@ -33,12 +33,16 @@ const initAsync = () => {
           position.coords.latitude = data.latitude
           position.coords.longitude = data.longitude
           position.timestamp = Date.now()
+        }).catch((_error) => {
+          position.coords.latitude = 38.8445
+          position.coords.longitude = 0.1115
         })
 
       const allPromise = [promiseGeo, promiseFetch]
 
       Promise.allSettled(allPromise)
-        .then(() => {
+        .then((results) => {
+          console.log(results)
           setInitialPosition(position)
           resolve()
         })

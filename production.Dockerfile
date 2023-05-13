@@ -1,6 +1,6 @@
-ARG NODE_VERSION=lts-alpine
+ARG NODE_IMAGE_VERSION=lts-alpine
 
-FROM node:${NODE_VERSION} as BUILDER
+FROM node:${NODE_IMAGE_VERSION} as BUILDER
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ COPY . ./
 RUN npm run build:commonjs:dev
 
 
-FROM node:${NODE_VERSION}
+FROM node:${NODE_IMAGE_VERSION}
 
 WORKDIR /var/www
 

@@ -2,10 +2,7 @@
   <div class="app">
     <SearchBar />
     <Mape :tracking="tracking" />
-    <CustomMapeControls
-      :tracking="tracking"
-      :permissionState="permissionState"
-    />
+    <CustomMapeControls :tracking="tracking" :permissionState="permissionState" />
     <Overlay v-show="isLoading" :isLoading="isLoading" />
   </div>
 </template>
@@ -15,12 +12,25 @@
   font-size: 12px;
 }
 
+hr {
+  margin-block-start: 7px;
+  margin-block-end: 7px;
+}
+
 body {
   margin: 0;
 }
 
 .app {
   position: relative;
+}
+
+.leaflet-control-zoom-in {
+  background-color: var(--color-white) !important;
+}
+
+.leaflet-control-zoom-out {
+  background-color: var(--color-white) !important;
 }
 </style>
 
@@ -29,10 +39,11 @@ body {
 import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
 // LOCAL IMPORTS
-import Mape from 'components/app/Mape'
-import CustomMapeControls from 'components/app/CustomMapeControls'
-import Overlay from 'components/app/Overlay'
-import SearchBar from 'components/app/SearchBar'
+import '../styles/colors.css'
+import Mape from 'components/Mape'
+import CustomMapeControls from 'components/CustomMapeControls'
+import Overlay from 'components/Overlay'
+import SearchBar from 'components/SearchBar'
 import { GeolocationEvent, PermissionEvent } from 'systems/Events'
 import {
   STORE_NAME as GeoStore,
@@ -46,7 +57,7 @@ import {
 const App = {
   name: 'App',
   components: { Mape, CustomMapeControls, Overlay, SearchBar },
-  data: function() {
+  data: function () {
     return {
       permissionState: getStoredCurrentState(GeoStore),
       tracking: false,
@@ -54,7 +65,7 @@ const App = {
     }
   },
   methods: {
-    onPermissionChanged (message, data) {
+    onPermissionChanged(message, data) {
       DEBUG &&
         console.debug(
           App.name,
@@ -63,7 +74,7 @@ const App = {
       updatePermissionStore(data.resource, data.state)
       this.permissionState = getStoredCurrentState(data.resource)
     },
-    onTrackingChanged (message, data) {
+    onTrackingChanged(message, data) {
       DEBUG &&
         console.debug(App.name, `onTrackingChanged() message ${message}`)
       DEBUG && console.debug(App.name, 'onTrackingChanged() data', data)
@@ -77,12 +88,12 @@ const App = {
         this.tracking = true
       }
     },
-    onToggleLoading (message, data) {
+    onToggleLoading(message, data) {
       DEBUG && console.debug(App.name, `onToggleLoading() ${message} ${data}`)
       this.isLoading = data
     },
   },
-  mounted: function() {
+  mounted: function () {
     DEBUG && console.debug(App.name, 'mounted')
     PubSub.subscribe(
       PermissionEvent.ON_PERMISSION_GRANTED,
@@ -106,7 +117,7 @@ const App = {
     )
     PubSub.subscribe('toggleLoading', this.onToggleLoading)
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     DEBUG && console.debug(App.name, 'beforeDestroy')
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_GRANTED)
     PubSub.unsubscribe(PermissionEvent.ON_PERMISSION_PROMPT)

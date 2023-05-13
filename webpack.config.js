@@ -49,8 +49,8 @@ const config = {
   entry: `${SRC_DIR}/main.js`,
   output: {
     path: DIST_DIR,
-    filename: '[name].js',
-    sourceMapFilename: '[name].map',
+    filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[hash:8].chunk.js',
   },
   resolve: {
     extensions: ['.js', '.vue'],
@@ -80,28 +80,41 @@ const config = {
     rules: [
       {
         test: /\.vue$/i,
-        use: ['vue-loader'],
+        use: [
+          { loader: 'vue-loader' },
+        ],
         exclude: [
-          /\.spec\.js/,
+          /node_modules/,
         ],
       },
       {
         test: /\.js$/i,
-        use: ['eslint-loader'],
+        use: [
+          { loader: 'babel-loader' },
+          { loader: 'eslint-loader' },
+        ],
         exclude: [
           /node_modules/,
-          /\.spec\.js/,
         ],
       },
       {
         test: /\.css$/i,
-        use: ['vue-style-loader', 'style-loader', 'css-loader'],
+        use: [
+          { loader: 'vue-style-loader' },
+          { loader: 'css-loader' }, // appends require to css files
+          // { loader: 'style-loader' }, // inserts css styles on html
+          { loader: 'postcss-loader' },
+        ],
+        exclude: [
+          /node_modules/,
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/i,
         loader: 'file-loader',
         options: {
           outputPath: 'assets/img',
+          esModule: false,
         },
       },
     ],
@@ -111,9 +124,12 @@ const config = {
     port: 3000,
     host: '0.0.0.0',
     // disableHostCheck: true, // through proxy with domain
-    watchOptions: {
-      poll: true,
-      ignored: ['**/node_modules', '**/dist'],
+    static: {
+      directory: SRC_DIR,
+      watch: {
+        usePolling: true,
+        ignored: ['**/node_modules', '**/dist'],
+      },
     },
   },
 }

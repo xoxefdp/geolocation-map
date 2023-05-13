@@ -1,10 +1,13 @@
 <template>
-  <div v-bind:style="[ mapStyles ]">
-    <l-map ref="mape" :options="{zoomControl: false}" :zoom="zoom" :center="center">
+  <div :style="[mapStyles]">
+    <l-map ref="mape" :options="{ zoomControl: false }" :zoom="zoom" :center="center" @ready="onReady"
+      @update:zoom="zoomUpdated" @update:center="centerUpdated" @update:bounds="boundsUpdated">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+      <l-geo-json :geojson="geojson"></l-geo-json>
       <l-circle-marker v-if="tracking || showCircleMarker" :lat-lng="center" :radius="10" :color="'red'" />
       <div v-if="!overlay">
-        <l-marker v-for="item in items" :key="item.id" :lat-lng="_parseToMapCoords({coords: {latitude: item.latitude, longitude: item.longitude}})" />
+        <l-marker v-for="item in items" :key="item.id"
+          :lat-lng="_parseToMapCoords({ coords: { latitude: item.latitude, longitude: item.longitude } })" />
       </div>
       <l-control-scale v-if="!overlay" position="topright" :imperial="true" :metric="true"></l-control-scale>
       <l-control-zoom v-if="!overlay" position="bottomright"></l-control-zoom>
@@ -13,7 +16,7 @@
 </template>
 
 <style>
-  @import "~leaflet/dist/leaflet.css";
+@import "~leaflet/dist/leaflet.css";
 </style>
 
 <script>
@@ -21,14 +24,14 @@
 import { isNull } from 'the-type-validator'
 import PubSub from 'pubsub-js'
 import * as L from 'leaflet'
-import { LMap, LTileLayer, LMarker, LCircleMarker, LControlScale, LControlZoom } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker, LGeoJson, LCircleMarker, LControlScale, LControlZoom } from 'vue2-leaflet'
 // LOCAL IMPORTS
 import { GeolocationEvent } from 'systems/Events'
 import { getStoredInitialPosition, getStoredCurrentPosition } from 'geolocation/store'
 
 // Workaround for missing marker icon using leaflet with webapack
-// https://github.com/vue-leaflet/Vue2Leaflet/issues/28#issuecomment-299042726
-L.Icon.Default.imagePath = '/'
+// https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing
+delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
@@ -36,16 +39,18 @@ L.Icon.Default.mergeOptions({
 })
 
 const SHOW_POSITION_TME = 2000
+const DEFAULT_ZOOM = 7
 
 const Mape = {
   name: 'Mape',
-  components: { LMap, LTileLayer, LMarker, LCircleMarker, LControlScale, LControlZoom },
-  data: function() {
+  components: { LMap, LTileLayer, LMarker, LGeoJson, LCircleMarker, LControlScale, LControlZoom },
+  data: function () {
     return {
       showCircleMarker: false,
       items: [],
       mape: null,
       centerMap: false,
+      geojson: null,
       // leaflet config
       zoom: null,
       center: null,
@@ -60,8 +65,8 @@ const Mape = {
     'tracking',
   ],
   methods: {
-    _parseToMapCoords (position) {
-      DEBUG && console.debug(Mape.name, '_parseToMapCoords() position', position)
+    _parseToMapCoords(position) {
+      // DEBUG && console.debug(Mape.name, '_parseToMapCoords() position', position)
       let mapCoords = null
       if (position instanceof L.LatLng) {
         mapCoords = position
@@ -70,29 +75,30 @@ const Mape = {
       }
       return mapCoords
     },
-    setCenter (position) {
+    setCenter(position) {
       DEBUG && console.debug(Mape.name, 'setCenter() position', position)
       this.center = this._parseToMapCoords(position)
     },
-    setInitialMapPosition () {
+    setInitialMapPosition() {
       const initialPosition = getStoredInitialPosition()
       DEBUG && console.debug(Mape.name, initialPosition)
       if (!isNull(initialPosition)) {
-        this.zoom = 6
+        this.zoom = DEFAULT_ZOOM
         this.setCoordinates(initialPosition)
         this.setCenter(initialPosition)
       }
     },
-    setCoordinates (position) {
+    setCoordinates(position) {
       DEBUG && console.debug(Mape.name, 'setCoordinates() position', position)
       this.coordinates = this._parseToMapCoords(position)
     },
-    setCenterCoordinates () {
+    setCenterCoordinates() {
       DEBUG && console.debug(Mape.name, 'setCenterCoordinates() coordinates', this.coordinates)
       this.coordinates && this.setCenter(this.coordinates)
-      this.coordinates && this.mape.setView(this.coordinates) // sets map view to coordinates
+      // this.coordinates && this.mape.setView(this.coordinates) // sets map view to coordinates
+      this.coordinates && this.mape.flyTo(this.coordinates, DEFAULT_ZOOM, { animate: true, duration: 2 })
     },
-    onCurrentPositionUpdate (message, data) {
+    onCurrentPositionUpdate(message, data) {
       const currentPosition = getStoredCurrentPosition()
       DEBUG && console.debug(Mape.name, 'onCurrentPositionUpdate() message', message)
       DEBUG && console.debug(Mape.name, 'onCurrentPositionUpdate() data', data)
@@ -100,7 +106,7 @@ const Mape = {
 
       if (!isNull(currentPosition)) {
         if (this.zoom < 7) {
-          this.zoom = 12
+          this.zoom = DEFAULT_ZOOM
         }
         this.setCoordinates(currentPosition)
         if (this.tracking) {
@@ -111,7 +117,7 @@ const Mape = {
         }
       }
     },
-    onCenterMap () {
+    onCenterMap() {
       this.centerMap = true
       this.showCircleMarker = true
 
@@ -119,24 +125,52 @@ const Mape = {
         this.showCircleMarker = false
       }, SHOW_POSITION_TME)
     },
-    onLocatePosition (message, data) {
+    onLocatePosition(message, data) {
       DEBUG && console.debug(Mape.name, `onLocatePosition() message: ${message}, data: ${data} zoom: ${this.zoom}`)
       if (this.zoom < 7) {
-        this.zoom = 12
+        this.zoom = DEFAULT_ZOOM
       }
       this.setCoordinates(data)
       this.setCenterCoordinates()
     },
-    onSearchLocation (message, data) {
+    onSearchLocation(message, data) {
       DEBUG && console.debug(Mape.name, `onSearchLocation() message: ${message}, data: ${data}`)
       this.items = data
     },
+    onReady(mapInstance) {
+      DEBUG && console.debug(Mape.name, 'onReady()', mapInstance)
+    },
+    zoomUpdated(newZoom) {
+      DEBUG && console.debug(Mape.name, 'zoomUpdated()', newZoom)
+    },
+    centerUpdated(newCenter) {
+      DEBUG && console.debug(Mape.name, 'centerUpdated()', newCenter)
+    },
+    boundsUpdated(newBounds) {
+      DEBUG && console.debug(Mape.name, 'boundsUpdated()', newBounds)
+    },
   },
-  created: function() {
+  created: function () {
     DEBUG && console.debug(Mape.name, 'created')
     this.setInitialMapPosition()
+    // setTimeout(() => {
+    //   PubSub.publish('toggleLoading', true)
+    //   console.debug(Mape.name, 'fetching geojson()')
+    //   fetch('https://datahub.io/core/geo-countries/r/countries.geojson')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       this.geojson = data
+    //     })
+    //     .catch((error) => {
+    //       console.error(Mape.name, `lookUpLocation() error ${error}`)
+    //       this.geojson = null
+    //     })
+    //     .finally(() => {
+    //       PubSub.publish('toggleLoading', false)
+    //     })
+    // }, 3000)
   },
-  beforeMount: function() {
+  beforeMount: function () {
     DEBUG && console.debug(Mape.name, 'beforeMount')
 
     let height = window.innerHeight
@@ -150,7 +184,7 @@ const Mape = {
       width: window.innerWidth + 'px',
     }
   },
-  mounted: function() {
+  mounted: function () {
     DEBUG && console.debug(Mape.name, 'mounted')
 
     // reference to leaflet map
@@ -163,7 +197,7 @@ const Mape = {
     PubSub.subscribe('locatePosition', this.onLocatePosition)
     PubSub.subscribe('searchLocation', this.onSearchLocation)
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     DEBUG && console.debug(Mape.name, 'beforeDestroy')
 
     PubSub.unsubscribe(GeolocationEvent.ON_GEOLOCATION_CURRENT_POSITION_UPDATE)
