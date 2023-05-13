@@ -28,7 +28,7 @@ const vueBuildType = {
 }
 
 const DevtoolLevel = {
-  NONE: 'none',
+  NONE: undefined,
   EVAL: 'eval',
   CHEAP_EVAL_SOURCE_MAP: 'cheap-eval-source-map',
   CHEAP_MODULE_EVAL_SOURCE_MAP: 'cheap-module-eval-source-map',

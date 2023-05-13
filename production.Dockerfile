@@ -5,12 +5,14 @@ FROM node:${NODE_IMAGE_VERSION} as BUILDER
 WORKDIR /app
 
 # Install dependencies
-COPY package*.json ./
+COPY package*.json .eslintrc .eslintignore ./
+RUN set -xe && \
+  apk add --no-cache --update g++ make py3-pip
 RUN npm install --loglevel silly
 
 # Build application
 COPY . ./
-RUN npm run build:commonjs:dev
+RUN npm run build:commonjs:prod
 
 
 FROM node:${NODE_IMAGE_VERSION}

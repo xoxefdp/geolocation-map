@@ -16,7 +16,6 @@
     "vue"
   ],
   "extends": [
-    "vue",
     "standard",
     "plugin:vue/essential"
   ],
