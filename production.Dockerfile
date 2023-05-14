@@ -12,7 +12,7 @@ RUN npm install --loglevel silly
 
 # Build application
 COPY . ./
-RUN npm run build:commonjs:prod
+RUN npm run build:browsers:prod
 
 
 FROM node:${NODE_IMAGE_VERSION}

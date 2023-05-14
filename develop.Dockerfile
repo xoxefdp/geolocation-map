@@ -11,7 +11,7 @@ RUN set -xe && \
   rm -rf /tmp/* /var/cache/apk/*
 
 # ENTRYPOINT [ "npm", "run", "serve:commonjs:dev" ]
-CMD [ "npm", "run", "serve:commonjs:dev" ]
+CMD [ "npm", "run", "serve:browsers:dev" ]
 
 EXPOSE 3000
 

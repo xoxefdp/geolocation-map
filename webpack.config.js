@@ -14,6 +14,7 @@ const SRC_DIR = path.resolve(__dirname, 'src')
 const DIST_DIR = path.resolve(__dirname, 'dist')
 
 const isDev = process.env.NODE_ENV === 'development'
+const DEV_SERVER_PORT = process.env.NODE_HOST_PORT || 3000
 const buildType = process.env.BUILD_TYPE
 
 const vueBuildType = {
@@ -66,6 +67,7 @@ const config = {
     },
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       DEBUG: isDev, // use DEBUG unless process.env.DEBUG is defined
     }),
@@ -120,13 +122,25 @@ const config = {
     ],
   },
   devServer: {
+    allowedHosts: 'all',
+    compress: true,
     hot: true,
-    port: 3000,
-    host: '0.0.0.0',
-    // disableHostCheck: true, // through proxy with domain
+    port: DEV_SERVER_PORT,
+    client: {
+      logging: 'log',
+      overlay: true,
+      webSocketURL: 'ws://0.0.0.0/ws',
+    },
     static: {
       directory: SRC_DIR,
       watch: {
+        usePolling: true,
+        ignored: ['**/node_modules', '**/dist'],
+      },
+    },
+    watchFiles: {
+      paths: [SRC_DIR],
+      options: {
         usePolling: true,
         ignored: ['**/node_modules', '**/dist'],
       },
@@ -146,5 +160,6 @@ console.log('BUILD_TYPE', buildType)
 console.log('NODE_ENV', process.env.NODE_ENV)
 console.log('DEBUG', isDev)
 console.log('devtool', config.devtool)
+console.log('NODE_HOST_PORT', DEV_SERVER_PORT)
 
 module.exports = config
